@@ -12,26 +12,6 @@ import 'package:nova_wheels/features/sign_up/presentation/widgets/otp_verificati
 class RouteGenerator {
   RouteGenerator._();
 
-  // GoRoute _transitionThemedGoRoute({
-  //   required String name,
-  //   required String path,
-  //   required Widget Function(BuildContext, GoRouterState) builder,
-  //   List<RouteBase> routes = const [],
-  // }) =>
-  //     GoRoute(
-  //       routes: routes,
-  //       name: name,
-  //       path: path,
-  //       pageBuilder: (context, state) => CustomTransitionPage(
-  //         key: state.pageKey,
-  //         child: builder(context, state),
-  //         transitionsBuilder: (_, animation, __, child) => FadeTransition(
-  //           opacity: CurveTween(curve: Curves.easeOutCubic).animate(animation),
-  //           child: child,
-  //         ),
-  //       ),
-  //     );
-
   static final GoRouter router = GoRouter(
     errorBuilder: (context, state) {
       return const ErrorPage();

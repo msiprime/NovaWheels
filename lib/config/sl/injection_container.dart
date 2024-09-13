@@ -1,4 +1,7 @@
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get_it/get_it.dart';
+import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
+import 'package:nova_wheels/config/supabase/secret/app_secrets.dart';
 import 'package:nova_wheels/core/base_component/base/base_bloc/base_bloc.dart';
 import 'package:nova_wheels/core/base_component/base/base_bloc/base_state.dart';
 import 'package:nova_wheels/features/landing/presentation/blocs/landing_bloc.dart';
@@ -18,6 +21,8 @@ import 'package:nova_wheels/features/sign_up/domain/use_cases/sign_up_use_case.d
 import 'package:nova_wheels/features/sign_up/presentation/bloc/sign_up_bloc.dart';
 import 'package:nova_wheels/shared/remote_datasource/network/rest_client.dart'
     show RestClient;
+import 'package:nova_wheels/shared/utils/connection_checker/connection_checker.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 part 'bloc.dart';
 part 'data_source.dart';
@@ -44,4 +49,24 @@ Future<void> init() async {
   sl.registerLazySingleton(
     () => restClient,
   );
+
+  await dotenv.load(fileName: '.env');
+
+  final supaBase = await Supabase.initialize(
+    url: AppSecrets.supaBaseUrl,
+    anonKey: AppSecrets.supaAnonKey,
+  );
+
+  /// supabase
+  sl.registerLazySingleton<SupabaseClient>(
+    () => supaBase.client,
+  );
+
+  /// internet connection checker
+  sl.registerFactory<ConnectionChecker>(
+    () => ConnectionCheckerImpl(internetConnection: sl.call()),
+  );
+
+  /// internet connection
+  sl.registerFactory<InternetConnection>(() => InternetConnection());
 }
