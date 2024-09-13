@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:quick_start/shared/utils/extensions/context_extension.dart';
-import 'package:quick_start/shared/values/app_colors.dart';
-import 'package:quick_start/shared/values/app_values.dart';
+import 'package:nova_wheels/shared/utils/extensions/context_extension.dart';
+import 'package:nova_wheels/shared/values/app_colors.dart';
+import 'package:nova_wheels/shared/values/app_values.dart';
 
 class AppPrimaryButton extends StatelessWidget {
   final Function() onPressed;

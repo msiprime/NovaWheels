@@ -1,13 +1,13 @@
 import 'package:go_router/go_router.dart';
-import 'package:quick_start/core/routes/error_screen.dart';
-import 'package:quick_start/core/routes/navbar.dart';
-import 'package:quick_start/core/routes/routes.dart';
-import 'package:quick_start/features/introduction/presentation/pages/introduction_screen.dart';
-import 'package:quick_start/features/landing/presentation/pages/landing_screen.dart';
-import 'package:quick_start/features/settings/presentation/pages/settings_screen.dart';
-import 'package:quick_start/features/sign_in/presentation/pages/sign_in_screen.dart';
-import 'package:quick_start/features/sign_up/presentation/pages/sign_up_screen.dart';
-import 'package:quick_start/features/sign_up/presentation/widgets/otp_verification_widget.dart';
+import 'package:nova_wheels/core/routes/error_screen.dart';
+import 'package:nova_wheels/core/routes/navbar.dart';
+import 'package:nova_wheels/core/routes/routes.dart';
+import 'package:nova_wheels/features/landing/presentation/pages/landing_screen.dart';
+import 'package:nova_wheels/features/onboarding/presentation/pages/onboarding_view.dart';
+import 'package:nova_wheels/features/settings/presentation/pages/settings_screen.dart';
+import 'package:nova_wheels/features/sign_in/presentation/pages/sign_in_screen.dart';
+import 'package:nova_wheels/features/sign_up/presentation/pages/sign_up_screen.dart';
+import 'package:nova_wheels/features/sign_up/presentation/widgets/otp_verification_widget.dart';
 
 class RouteGenerator {
   RouteGenerator._();
@@ -64,7 +64,7 @@ class RouteGenerator {
           GoRoute(
             name: Routes.introduction,
             path: Routes.introduction,
-            builder: (context, state) => const Introduction(),
+            builder: (context, state) => const OnBoardingView(),
           ),
         ],
       ),

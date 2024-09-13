@@ -1,5 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:quick_start/shared/utils/logger.dart';
+import 'package:nova_wheels/shared/utils/logger.dart';
 
 class GlobalBlocObserver extends BlocObserver {
   @override

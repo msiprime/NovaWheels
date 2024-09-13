@@ -1,4 +1,4 @@
-import 'package:quick_start/shared/utils/typedef.dart';
+import 'package:nova_wheels/shared/utils/typedef.dart';
 
 abstract interface class BaseUseCase<Failure, SuccessType, Params> {
   FutureFailureOr<SuccessType> call(Params params);

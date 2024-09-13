@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:quick_start/shared/values/app_colors.dart';
+import 'package:nova_wheels/shared/values/app_colors.dart';
 
 class AppTextField extends HookWidget {
   const AppTextField({

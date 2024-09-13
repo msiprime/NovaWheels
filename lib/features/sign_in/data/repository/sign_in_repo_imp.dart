@@ -1,10 +1,10 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:quick_start/features/sign_in/data/datasource/sign_in_datasource.dart';
-import 'package:quick_start/features/sign_in/data/model/sign_in_model.dart';
-import 'package:quick_start/features/sign_in/domain/entities/sign_in_entity.dart';
-import 'package:quick_start/features/sign_in/domain/repositories/sign_in_repositories.dart';
-import 'package:quick_start/shared/utils/logger.dart';
+import 'package:nova_wheels/features/sign_in/data/datasource/sign_in_datasource.dart';
+import 'package:nova_wheels/features/sign_in/data/model/sign_in_model.dart';
+import 'package:nova_wheels/features/sign_in/domain/entities/sign_in_entity.dart';
+import 'package:nova_wheels/features/sign_in/domain/repositories/sign_in_repositories.dart';
+import 'package:nova_wheels/shared/utils/logger.dart';
 
 class SignInRepoImp implements SignInRepository {
   const SignInRepoImp({required this.signInRemoteDataSource});

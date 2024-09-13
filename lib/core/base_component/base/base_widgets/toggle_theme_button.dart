@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:quick_start/core/base_component/base/base_bloc/base_bloc.dart';
-import 'package:quick_start/core/base_component/base/base_bloc/base_event.dart';
-import 'package:quick_start/core/base_component/base/base_bloc/base_state.dart';
+import 'package:nova_wheels/core/base_component/base/base_bloc/base_bloc.dart';
+import 'package:nova_wheels/core/base_component/base/base_bloc/base_event.dart';
+import 'package:nova_wheels/core/base_component/base/base_bloc/base_state.dart';
 
 class ToggleThemeButton extends StatelessWidget {
   const ToggleThemeButton({super.key});

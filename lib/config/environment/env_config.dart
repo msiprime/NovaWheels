@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
-import 'package:quick_start/shared/values/app_values.dart';
+import 'package:nova_wheels/shared/values/app_values.dart';
 
 class EnvConfig {
   final String appName;

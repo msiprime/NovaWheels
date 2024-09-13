@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
-import 'package:quick_start/shared/utils/extensions/context_extension.dart';
-import 'package:quick_start/shared/utils/utils.dart';
-import 'package:quick_start/shared/values/app_colors.dart';
-import 'package:quick_start/shared/values/app_values.dart';
-import 'package:quick_start/shared/values/text_styles.dart';
+import 'package:nova_wheels/shared/utils/extensions/context_extension.dart';
+import 'package:nova_wheels/shared/utils/utils.dart';
+import 'package:nova_wheels/shared/values/app_colors.dart';
+import 'package:nova_wheels/shared/values/app_values.dart';
+import 'package:nova_wheels/shared/values/text_styles.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class BaseMarkdown extends StatelessWidget {

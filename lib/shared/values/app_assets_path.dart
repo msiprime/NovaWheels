@@ -29,4 +29,12 @@ abstract class AppAssets {
       "lib/features/add_post_property/assets/image/Health.png";
   static const String listing12 =
       "lib/features/add_post_property/assets/image/Major.png";
+
+  // lottie animation
+  static const String lottieOnboarding1 =
+      'lib/features/onboarding/presentation/asset/lottie_animation/onboarding_page_one_lottie.json';
+  static const String lottieOnboarding2 =
+      'lib/features/onboarding/presentation/asset/lottie_animation/onboarding_page_two_lottie.json';
+  static const String lottieOnboarding3 =
+      'lib/features/onboarding/presentation/asset/lottie_animation/onboarding_page_three_lottie.json';
 }

@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
-import 'package:quick_start/features/sign_up/domain/entities/sign_up_entity.dart';
-import 'package:quick_start/features/sign_up/domain/repositories/sign_up_repositories.dart';
+import 'package:nova_wheels/features/sign_up/domain/entities/sign_up_entity.dart';
+import 'package:nova_wheels/features/sign_up/domain/repositories/sign_up_repositories.dart';
 
 class SignUpUseCase {
   const SignUpUseCase({required this.signUpRepository});

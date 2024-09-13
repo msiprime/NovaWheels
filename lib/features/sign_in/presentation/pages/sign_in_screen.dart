@@ -3,17 +3,17 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
-import 'package:quick_start/core/base_component/base/base_widgets/app_primary_button.dart';
-import 'package:quick_start/core/base_component/base/base_widgets/app_spacer.dart';
-import 'package:quick_start/core/base_component/base/base_widgets/app_textfield.dart';
-import 'package:quick_start/core/base_component/base/base_widgets/base_setting_row.dart';
-import 'package:quick_start/core/routes/routes.dart';
-import 'package:quick_start/features/sign_in/presentation/bloc/sign_in_bloc.dart';
-import 'package:quick_start/shared/utils/extensions/context_extension.dart';
-import 'package:quick_start/shared/utils/utils.dart';
-import 'package:quick_start/shared/validators/input_validators.dart';
-import 'package:quick_start/shared/values/app_assets_path.dart';
-import 'package:quick_start/shared/values/app_values.dart';
+import 'package:nova_wheels/core/base_component/base/base_widgets/app_primary_button.dart';
+import 'package:nova_wheels/core/base_component/base/base_widgets/app_spacer.dart';
+import 'package:nova_wheels/core/base_component/base/base_widgets/app_textfield.dart';
+import 'package:nova_wheels/core/base_component/base/base_widgets/base_setting_row.dart';
+import 'package:nova_wheels/core/routes/routes.dart';
+import 'package:nova_wheels/features/sign_in/presentation/bloc/sign_in_bloc.dart';
+import 'package:nova_wheels/shared/utils/extensions/context_extension.dart';
+import 'package:nova_wheels/shared/utils/utils.dart';
+import 'package:nova_wheels/shared/validators/input_validators.dart';
+import 'package:nova_wheels/shared/values/app_assets_path.dart';
+import 'package:nova_wheels/shared/values/app_values.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});

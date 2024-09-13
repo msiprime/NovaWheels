@@ -1,9 +1,9 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:quick_start/features/sign_up/data/data_sources/sign_up_data_source.dart';
-import 'package:quick_start/features/sign_up/data/models/sign_up_model.dart';
-import 'package:quick_start/features/sign_up/domain/entities/sign_up_entity.dart';
-import 'package:quick_start/features/sign_up/domain/repositories/sign_up_repositories.dart';
+import 'package:nova_wheels/features/sign_up/data/data_sources/sign_up_data_source.dart';
+import 'package:nova_wheels/features/sign_up/data/models/sign_up_model.dart';
+import 'package:nova_wheels/features/sign_up/domain/entities/sign_up_entity.dart';
+import 'package:nova_wheels/features/sign_up/domain/repositories/sign_up_repositories.dart';
 
 class SignUpRepositoryImp implements SignUpRepository {
   const SignUpRepositoryImp({required this.signUpDataSource});

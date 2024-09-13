@@ -1,6 +1,6 @@
 {
-    "name": "quick_start",
-    "short_name": "quick_start",
+    "name": "nova_wheels",
+    "short_name": "nova_wheels",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

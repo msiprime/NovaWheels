@@ -2,12 +2,12 @@ import 'dart:io' show File;
 
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
-import 'package:quick_start/config/environment/build_config.dart';
-import 'package:quick_start/shared/local_storage/cache_service.dart';
-import 'package:quick_start/shared/remote_datasource/exceptions/error_model.dart';
-import 'package:quick_start/shared/remote_datasource/exceptions/network_exception.dart';
-import 'package:quick_start/shared/utils/logger.dart';
-import 'package:quick_start/shared/values/app_strings.dart';
+import 'package:nova_wheels/config/environment/build_config.dart';
+import 'package:nova_wheels/shared/local_storage/cache_service.dart';
+import 'package:nova_wheels/shared/remote_datasource/exceptions/error_model.dart';
+import 'package:nova_wheels/shared/remote_datasource/exceptions/network_exception.dart';
+import 'package:nova_wheels/shared/utils/logger.dart';
+import 'package:nova_wheels/shared/values/app_strings.dart';
 
 import 'pretty_dio_logger.dart';
 

@@ -3,8 +3,8 @@ import 'dart:async';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:quick_start/features/sign_up/domain/use_cases/otp_verification_usecase.dart';
-import 'package:quick_start/features/sign_up/domain/use_cases/sign_up_use_case.dart';
+import 'package:nova_wheels/features/sign_up/domain/use_cases/otp_verification_usecase.dart';
+import 'package:nova_wheels/features/sign_up/domain/use_cases/sign_up_use_case.dart';
 
 part 'sign_up_event.dart';
 part 'sign_up_state.dart';

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:logger/logger.dart';
-import 'package:quick_start/config/environment/build_config.dart';
+import 'package:nova_wheels/config/environment/build_config.dart';
 
 mixin BaseWidgetMixin on StatelessWidget {
   late AppLocalizations appLocalization;

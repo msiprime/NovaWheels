@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:quick_start/core/routes/routes.dart';
-import 'package:quick_start/features/landing/presentation/blocs/landing_bloc.dart';
-import 'package:quick_start/features/landing/presentation/blocs/landing_event.dart';
-import 'package:quick_start/features/landing/presentation/blocs/landing_state.dart';
-import 'package:quick_start/shared/values/app_assets_path.dart';
+import 'package:nova_wheels/core/routes/routes.dart';
+import 'package:nova_wheels/features/landing/presentation/blocs/landing_bloc.dart';
+import 'package:nova_wheels/features/landing/presentation/blocs/landing_event.dart';
+import 'package:nova_wheels/features/landing/presentation/blocs/landing_state.dart';
+import 'package:nova_wheels/shared/values/app_assets_path.dart';
 
 class LandingScreen extends StatefulWidget {
   const LandingScreen({super.key});

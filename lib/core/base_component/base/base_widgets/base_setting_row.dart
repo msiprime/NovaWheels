@@ -1,11 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:quick_start/core/base_component/base/base_bloc/base_bloc.dart';
-import 'package:quick_start/core/base_component/base/base_bloc/base_event.dart';
-import 'package:quick_start/core/base_component/base/base_bloc/base_state.dart';
-import 'package:quick_start/shared/values/app_colors.dart';
-import 'package:quick_start/shared/values/app_values.dart';
+import 'package:nova_wheels/core/base_component/base/base_bloc/base_bloc.dart';
+import 'package:nova_wheels/core/base_component/base/base_bloc/base_event.dart';
+import 'package:nova_wheels/core/base_component/base/base_bloc/base_state.dart';
+import 'package:nova_wheels/shared/values/app_colors.dart';
+import 'package:nova_wheels/shared/values/app_values.dart';
 
 class ChangeSetting extends StatelessWidget {
   const ChangeSetting({super.key});

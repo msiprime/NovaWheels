@@ -1,7 +1,7 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:quick_start/features/push_notification/data/data_source/push_notification_data_source.dart';
-import 'package:quick_start/features/push_notification/data/model/push_notification_response.dart';
+import 'package:nova_wheels/features/push_notification/data/data_source/push_notification_data_source.dart';
+import 'package:nova_wheels/features/push_notification/data/model/push_notification_response.dart';
 
 class FirebasePushNotificationDataSource implements PushNotificationDataSource {
   final FirebaseMessaging _messaging = FirebaseMessaging.instance;

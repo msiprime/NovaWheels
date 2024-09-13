@@ -3,16 +3,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
-import 'package:quick_start/core/base_component/base/base_widgets/app_primary_button.dart';
-import 'package:quick_start/core/base_component/base/base_widgets/app_spacer.dart';
-import 'package:quick_start/core/base_component/base/base_widgets/app_textfield.dart';
-import 'package:quick_start/core/routes/routes.dart';
-import 'package:quick_start/features/sign_up/presentation/bloc/sign_up_bloc.dart';
-import 'package:quick_start/shared/utils/utils.dart';
-import 'package:quick_start/shared/validators/input_validators.dart';
-import 'package:quick_start/shared/values/app_assets_path.dart';
-import 'package:quick_start/shared/values/app_colors.dart';
-import 'package:quick_start/shared/values/app_values.dart';
+import 'package:nova_wheels/core/base_component/base/base_widgets/app_primary_button.dart';
+import 'package:nova_wheels/core/base_component/base/base_widgets/app_spacer.dart';
+import 'package:nova_wheels/core/base_component/base/base_widgets/app_textfield.dart';
+import 'package:nova_wheels/core/routes/routes.dart';
+import 'package:nova_wheels/features/sign_up/presentation/bloc/sign_up_bloc.dart';
+import 'package:nova_wheels/shared/utils/utils.dart';
+import 'package:nova_wheels/shared/validators/input_validators.dart';
+import 'package:nova_wheels/shared/values/app_assets_path.dart';
+import 'package:nova_wheels/shared/values/app_colors.dart';
+import 'package:nova_wheels/shared/values/app_values.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});

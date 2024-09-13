@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:quick_start/config/environment/build_config.dart';
+import 'package:nova_wheels/config/environment/build_config.dart';
 
 enum AppStatus { initial, loading, failed, success }
 

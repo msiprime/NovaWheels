@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:quick_start/core/base_component/base/base_bloc/base_bloc.dart';
-import 'package:quick_start/core/base_component/base/base_bloc/base_event.dart';
-import 'package:quick_start/core/base_component/base/base_bloc/base_state.dart';
-import 'package:quick_start/core/base_component/base/base_widgets/base_markdown.dart';
-import 'package:quick_start/shared/values/text_styles.dart';
+import 'package:nova_wheels/core/base_component/base/base_bloc/base_bloc.dart';
+import 'package:nova_wheels/core/base_component/base/base_bloc/base_event.dart';
+import 'package:nova_wheels/core/base_component/base/base_bloc/base_state.dart';
+import 'package:nova_wheels/core/base_component/base/base_widgets/base_markdown.dart';
+import 'package:nova_wheels/shared/values/text_styles.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});

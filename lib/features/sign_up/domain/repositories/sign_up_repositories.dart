@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:quick_start/features/sign_up/domain/entities/sign_up_entity.dart';
+import 'package:nova_wheels/features/sign_up/domain/entities/sign_up_entity.dart';
 
 abstract interface class SignUpRepository {
   Future<Either<String, SignUpEntity>> signUp({

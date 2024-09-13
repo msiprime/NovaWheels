@@ -2,9 +2,9 @@ import 'dart:async';
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:quick_start/features/sign_in/domain/use_cases/sign_in_use_case.dart';
-import 'package:quick_start/shared/local_storage/cache_service.dart';
-import 'package:quick_start/shared/utils/logger.dart';
+import 'package:nova_wheels/features/sign_in/domain/use_cases/sign_in_use_case.dart';
+import 'package:nova_wheels/shared/local_storage/cache_service.dart';
+import 'package:nova_wheels/shared/utils/logger.dart';
 
 part 'sign_in_event.dart';
 part 'sign_in_state.dart';

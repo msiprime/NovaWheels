@@ -1,9 +1,9 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:quick_start/config/sl/injection_container.dart' as di;
-import 'package:quick_start/core/base_component/base/base_bloc/base_bloc.dart';
-import 'package:quick_start/features/landing/presentation/blocs/landing_bloc.dart';
-import 'package:quick_start/features/sign_in/presentation/bloc/sign_in_bloc.dart';
-import 'package:quick_start/features/sign_up/presentation/bloc/sign_up_bloc.dart';
+import 'package:nova_wheels/config/sl/injection_container.dart' as di;
+import 'package:nova_wheels/core/base_component/base/base_bloc/base_bloc.dart';
+import 'package:nova_wheels/features/landing/presentation/blocs/landing_bloc.dart';
+import 'package:nova_wheels/features/sign_in/presentation/bloc/sign_in_bloc.dart';
+import 'package:nova_wheels/features/sign_up/presentation/bloc/sign_up_bloc.dart';
 
 class GlobalBlocProviders {
   dynamic providers = [

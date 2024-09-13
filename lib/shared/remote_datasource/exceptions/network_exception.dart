@@ -1,4 +1,4 @@
-import 'package:quick_start/shared/remote_datasource/exceptions/error_model.dart';
+import 'package:nova_wheels/shared/remote_datasource/exceptions/error_model.dart';
 
 class NetworkExceptionV2 implements Exception {
   NetworkExceptionV2({this.errorModel, this.errorResponseModel});

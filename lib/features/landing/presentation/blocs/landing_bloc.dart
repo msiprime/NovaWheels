@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:quick_start/shared/local_storage/cache_service.dart';
+import 'package:nova_wheels/shared/local_storage/cache_service.dart';
 
 import 'landing_event.dart';
 import 'landing_state.dart';

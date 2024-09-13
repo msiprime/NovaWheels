@@ -1,4 +1,4 @@
-name: quick_start
+name: nova_wheels
 description: A new Flutter project.
 
 publish_to: "none"
@@ -11,6 +11,11 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+
+  app_ui:
+    path: packages/app_ui
+  shared:
+    path: packages/shared
 
   flutter_local_notifications: ^17.2.1+2
   cupertino_icons: ^1.0.8
@@ -31,15 +36,29 @@ dependencies:
   image_picker: ^1.1.2
   flutter_hooks: ^0.20.5
   gap: ^3.0.1
+  geolocator: ^12.0.0
   permission_handler: ^11.3.1
   dropdown_button2: ^2.3.9
-  geolocator: ^12.0.0
-  google_maps_flutter: ^2.7.1
+  google_maps_flutter: ^2.9.0
   geocoding: ^3.0.0
   firebase_messaging: ^15.0.4
   internet_connection_checker_plus: ^2.5.1
   flutter_dotenv: ^5.1.0
   flutter_animate: ^4.5.0
+  supabase_flutter: ^2.5.11
+  jiffy: ^6.3.1
+  blurhash: ^1.1.1
+  flutter_image_compress: ^2.3.0
+  timeago: ^3.7.0
+  google_nav_bar: ^5.0.6
+  firebase_core: ^3.3.0
+  google_sign_in: ^6.2.1
+  smooth_page_indicator: ^1.2.0+3
+  carousel_slider: ^5.0.0
+  cached_network_image: ^3.4.0
+  flutter_cache_manager: ^3.4.1
+  sqflite: ^2.3.3+1
+  lottie: ^3.1.2
 
 dev_dependencies:
   flutter_test:

@@ -1,5 +1,5 @@
-import 'package:quick_start/config/environment/env_config.dart';
-import 'package:quick_start/config/environment/environment.dart';
+import 'package:nova_wheels/config/environment/env_config.dart';
+import 'package:nova_wheels/config/environment/environment.dart';
 
 class BuildConfig {
   late final Environment environment;

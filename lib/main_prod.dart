@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:quick_start/config/environment/build_config.dart';
-import 'package:quick_start/config/environment/env_config.dart';
-import 'package:quick_start/config/environment/environment.dart';
-import "package:quick_start/config/sl/injection_container.dart" as di;
-import 'package:quick_start/core/application/my_app.dart';
-import 'package:quick_start/shared/local_storage/cache_service.dart';
-import 'package:quick_start/shared/utils/bloc_observer.dart';
+import 'package:nova_wheels/config/environment/build_config.dart';
+import 'package:nova_wheels/config/environment/env_config.dart';
+import 'package:nova_wheels/config/environment/environment.dart';
+import "package:nova_wheels/config/sl/injection_container.dart" as di;
+import 'package:nova_wheels/core/application/my_app.dart';
+import 'package:nova_wheels/shared/local_storage/cache_service.dart';
+import 'package:nova_wheels/shared/utils/bloc_observer.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

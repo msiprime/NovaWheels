@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:quick_start/shared/remote_datasource/network/api_end_points.dart';
-import 'package:quick_start/shared/remote_datasource/network/rest_client.dart';
+import 'package:nova_wheels/shared/remote_datasource/network/api_end_points.dart';
+import 'package:nova_wheels/shared/remote_datasource/network/rest_client.dart';
 
 import 'sign_up_data_source.dart';
 
