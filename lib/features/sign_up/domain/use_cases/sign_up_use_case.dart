@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:nova_wheels/features/sign_up/domain/entities/sign_up_entity.dart';
+import 'package:nova_wheels/core/base_component/failure/failures.dart';
 import 'package:nova_wheels/features/sign_up/domain/repositories/sign_up_repositories.dart';
 
 class SignUpUseCase {
@@ -7,7 +7,7 @@ class SignUpUseCase {
 
   final SignUpRepository signUpRepository;
 
-  Future<Either<String, SignUpEntity>> call({
+  Future<Either<Failure, String>> call({
     required Map<String, dynamic> requestBody,
   }) async {
     return await signUpRepository.signUp(

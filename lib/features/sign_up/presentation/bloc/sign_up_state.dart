@@ -4,8 +4,7 @@ enum SignUpStatus { initial, success, failure, loading, verifyOTP }
 
 class SignUpState extends Equatable {
   final SignUpStatus status;
-  final String firstName;
-  final String lastName;
+  final String fullName;
   final String email;
   final String password;
   final String phoneNumber;
@@ -17,8 +16,7 @@ class SignUpState extends Equatable {
 
   const SignUpState(
       {this.status = SignUpStatus.initial,
-      this.firstName = '',
-      this.lastName = '',
+      this.fullName = '',
       this.email = '',
       this.password = '',
       this.birthdate = '',
@@ -30,8 +28,7 @@ class SignUpState extends Equatable {
 
   const SignUpState.initial()
       : status = SignUpStatus.initial,
-        firstName = '',
-        lastName = '',
+        fullName = '',
         email = '',
         password = '',
         phoneNumber = '',
@@ -43,8 +40,7 @@ class SignUpState extends Equatable {
 
   SignUpState copyWith(
       {SignUpStatus? status,
-      String? firstName,
-      String? lastName,
+      String? fullName,
       String? email,
       String? password,
       String? phoneNumber,
@@ -55,8 +51,7 @@ class SignUpState extends Equatable {
       String? otp}) {
     return SignUpState(
         status: status ?? this.status,
-        firstName: firstName ?? this.firstName,
-        lastName: lastName ?? this.lastName,
+        fullName: fullName ?? this.fullName,
         email: email ?? this.email,
         password: password ?? this.password,
         birthdate: birthdate ?? this.birthdate,
@@ -70,8 +65,7 @@ class SignUpState extends Equatable {
   @override
   List<Object?> get props => [
         status,
-        firstName,
-        lastName,
+        fullName,
         email,
         password,
         birthdate,

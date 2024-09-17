@@ -24,7 +24,14 @@ class LandingBloc extends Bloc<LandingEvent, LandingState> {
 
   Future<void> _onCountDown(CountDown event, Emitter<LandingState> emit) async {
     final token = await CacheService.instance.retrieveBearerToken();
+    final isFirstTimer = await CacheService.instance.retrieveIfUserFirstTimer();
     await Future.delayed(const Duration(seconds: 2));
-    emit(state.copyWith(landingStatus: LandingStatus.navigate, token: token));
+    emit(
+      state.copyWith(
+        landingStatus: LandingStatus.navigate,
+        token: token,
+        isFirstTimer: isFirstTimer,
+      ),
+    );
   }
 }

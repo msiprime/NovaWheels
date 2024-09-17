@@ -75,16 +75,16 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
             emit(
               state.copyWith(
                 status: SignInStatus.failure,
-                errorMessage: l,
+                errorMessage: l.message,
               ),
             );
           },
           (r) async {
-            CacheService.instance.storeBearerToken((r.token));
+            CacheService.instance.storeBearerToken((r));
             emit(
               state.copyWith(
                 status: SignInStatus.success,
-                fcmToken: r.token,
+                fcmToken: r,
               ),
             );
           },

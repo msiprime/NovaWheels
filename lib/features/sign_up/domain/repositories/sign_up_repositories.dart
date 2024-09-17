@@ -1,12 +1,12 @@
 import 'package:dartz/dartz.dart';
-import 'package:nova_wheels/features/sign_up/domain/entities/sign_up_entity.dart';
+import 'package:nova_wheels/core/base_component/failure/failures.dart';
 
 abstract interface class SignUpRepository {
-  Future<Either<String, SignUpEntity>> signUp({
+  Future<Either<Failure, String>> signUp({
     required Map<String, dynamic> requestBody,
   });
 
-  Future<Either<String, SignUpEntity>> verifyOTP({
+  Future<Either<Failure, String>> verifyOTP({
     required Map<String, dynamic> requestBody,
   });
 }

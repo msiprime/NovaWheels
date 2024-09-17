@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:nova_wheels/shared/local_storage/app_store.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import 'app_store.dart';
 
 class AppStorageImp implements AppStorageI {
   static Future<SharedPreferences> getPrefs() async {
@@ -14,6 +13,19 @@ class AppStorageImp implements AppStorageI {
   static const String _keyFcmToken = 'fcm-token';
   static const String _keyTheme = 'theme';
   static const String _keyLanguage = 'language';
+  static const String _keyIsUserFirstTimer = 'is-user-first-timer';
+
+  @override
+  Future<void> storeIfUserFirstTimer(bool isUserFirstTimer) async {
+    SharedPreferences prefs = await getPrefs();
+    prefs.setBool(_keyIsUserFirstTimer, isUserFirstTimer);
+  }
+
+  @override
+  Future<bool> retrieveIfUserFirstTimer() async {
+    return await getPrefs()
+        .then((prefs) => prefs.getBool(_keyIsUserFirstTimer) ?? true);
+  }
 
   @override
   Future<void> storeBearerToken(String token) async {
@@ -99,5 +111,12 @@ class AppStorageImp implements AppStorageI {
   Future<String?> retrieveTheme() async {
     SharedPreferences prefs = await getPrefs();
     return prefs.getString(_keyTheme);
+  }
+
+  @override
+  Future<void> clearAllToken() async {
+    SharedPreferences prefs = await getPrefs();
+    prefs.remove(_keyBearerToken);
+    prefs.remove(_keyFcmToken);
   }
 }

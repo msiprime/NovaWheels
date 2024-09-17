@@ -2,6 +2,7 @@ import 'package:go_router/go_router.dart';
 import 'package:nova_wheels/core/routes/error_screen.dart';
 import 'package:nova_wheels/core/routes/navbar.dart';
 import 'package:nova_wheels/core/routes/routes.dart';
+import 'package:nova_wheels/features/home/presentation/pages/home_screen.dart';
 import 'package:nova_wheels/features/landing/presentation/pages/landing_screen.dart';
 import 'package:nova_wheels/features/onboarding/presentation/pages/onboarding_view.dart';
 import 'package:nova_wheels/features/settings/presentation/pages/settings_screen.dart';
@@ -25,6 +26,11 @@ class RouteGenerator {
         name: Routes.landing,
         path: '/${Routes.landing}',
         builder: (context, state) => const LandingScreen(),
+      ),
+      GoRoute(
+        name: Routes.onboarding,
+        path: '/${Routes.onboarding}',
+        builder: (context, state) => const OnBoardingView(),
       ),
       GoRoute(
         name: Routes.signIn,
@@ -58,7 +64,7 @@ class RouteGenerator {
               GoRoute(
                 name: Routes.home,
                 path: '/${Routes.home}',
-                builder: (context, state) => const SignInScreen(),
+                builder: (context, state) => const HomeScreen(),
               ),
             ],
           ),

@@ -12,14 +12,6 @@ class FirstNameChangeEvent extends SignUpEvent {
   final String firstName;
 }
 
-class LastNameChangeEvent extends SignUpEvent {
-  const LastNameChangeEvent({
-    required this.lastName,
-  });
-
-  final String lastName;
-}
-
 class EmailChangeEvent extends SignUpEvent {
   const EmailChangeEvent({
     required this.email,
