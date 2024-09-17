@@ -1,34 +1,42 @@
-import 'package:dio/dio.dart';
-import 'package:nova_wheels/shared/remote_datasource/network/api_end_points.dart';
-import 'package:nova_wheels/shared/remote_datasource/network/rest_client.dart';
+import 'package:nova_wheels/shared/utils/logger.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 import 'sign_up_data_source.dart';
 
 class SignUpDataSourceImp implements SignUpDataSource {
-  const SignUpDataSourceImp({required this.restClient});
+  const SignUpDataSourceImp({
+    required this.supabaseClient,
+  });
 
-  final RestClient restClient;
+  final SupabaseClient supabaseClient;
 
   @override
-  Future<Response> signUp({required Map<String, dynamic> requestBody}) async {
-    final response = await restClient.post(
-      APIType.public,
-      ApiEndPoints.signUp,
-      requestBody,
+  Future<AuthResponse> signUp(
+      {required Map<String, dynamic> requestBody}) async {
+    final response = await supabaseClient.auth.signUp(
+      email: requestBody['email'],
+      password: requestBody['password'],
+      data: {
+        'full_name': requestBody['full_name'],
+        'email': requestBody['email'],
+        'phone_number': requestBody['phone_number'],
+      },
     );
+
+    Log.debug(response.toString());
 
     return response;
   }
 
   @override
-  Future<Response> verifyOTP(
-      {required Map<String, dynamic> requestBody}) async {
-    final response = await restClient.post(
-      APIType.public,
-      ApiEndPoints.verifyOtp,
-      requestBody,
+  Future<AuthResponse> verifyOTP({
+    required Map<String, dynamic> requestBody,
+  }) async {
+    final response = await supabaseClient.auth.verifyOTP(
+      type: OtpType.signup,
+      token: requestBody['otp'],
+      email: requestBody['email'],
     );
-
     return response;
   }
 }

@@ -1,17 +1,35 @@
 import 'package:equatable/equatable.dart';
 
-enum LandingStatus { initial, navigate}
+enum LandingStatus { initial, navigate }
 
 class LandingState extends Equatable {
   final LandingStatus landingStatus;
-  final String? token;
+  final String? bearerToken;
+  final bool? isFirstTimer;
 
-  const LandingState({required this.landingStatus,this.token});
+  const LandingState({
+    required this.landingStatus,
+    this.bearerToken,
+    this.isFirstTimer,
+  });
 
-  LandingState copyWith({required LandingStatus? landingStatus,String? token}) {
-    return LandingState(landingStatus: landingStatus ?? this.landingStatus,token: token??this.token);
+  LandingState copyWith({
+    required LandingStatus? landingStatus,
+    String? token,
+    String? fcmToken,
+    bool? isFirstTimer,
+  }) {
+    return LandingState(
+      landingStatus: landingStatus ?? this.landingStatus,
+      bearerToken: token ?? bearerToken,
+      isFirstTimer: isFirstTimer ?? this.isFirstTimer,
+    );
   }
 
   @override
-  List<Object?> get props => [landingStatus];
+  List<Object?> get props => [
+        landingStatus,
+        bearerToken,
+        isFirstTimer,
+      ];
 }

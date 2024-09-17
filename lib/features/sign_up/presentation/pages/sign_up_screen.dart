@@ -24,8 +24,7 @@ class SignUpScreen extends StatefulWidget {
 class _SignUpScreenState extends State<SignUpScreen> {
   final _formKey = GlobalKey<FormState>();
   late AppLocalizations? _appLocalizations;
-  final TextEditingController _firstNameController = TextEditingController();
-  final TextEditingController _lastNameController = TextEditingController();
+  final TextEditingController _fullNameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _birthDateController = TextEditingController();
@@ -38,8 +37,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       body: BlocConsumer<SignUpBloc, SignUpState>(
         listener: (context, state) {
           if (state.status == SignUpStatus.success) {
-            _firstNameController.text = '';
-            _lastNameController.text = '';
+            _fullNameController.text = '';
             _passwordController.text = '';
             _birthDateController.text = '';
             _emailController.text = '';
@@ -74,11 +72,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            _buildFirsNameField(),
+                            _buildFullNameField(),
                             const SizedBox(
                               width: AppValues.margin,
                             ),
-                            _buildLastNameField(),
                           ],
                         ),
                         const SizedBox(
@@ -167,14 +164,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
     );
   }
 
-  Widget _buildFirsNameField() {
+  Widget _buildFullNameField() {
     return Flexible(
       child: ListTile(
         contentPadding: EdgeInsets.zero,
         title: Padding(
           padding: const EdgeInsets.only(left: AppValues.margin_2),
           child: Text(
-            _appLocalizations?.firstNameFormTitle ?? "",
+            _appLocalizations?.fullNameFormTitle ?? "",
           ),
         ),
         subtitle: Padding(
@@ -187,38 +184,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                   );
             },
-            controller: _firstNameController,
+            controller: _fullNameController,
             validator: InputValidators.name,
-            labelText: _appLocalizations?.firstNameFormLabel ?? "",
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildLastNameField() {
-    return Flexible(
-      child: ListTile(
-        contentPadding: EdgeInsets.zero,
-        title: Padding(
-          padding: const EdgeInsets.only(left: AppValues.margin_2),
-          child: Text(
-            _appLocalizations?.lastNameFormTitle ?? "",
-          ),
-        ),
-        subtitle: Padding(
-          padding: const EdgeInsets.only(top: AppValues.smallMargin),
-          child: AppTextField(
-            onChanged: (value) {
-              context.read<SignUpBloc>().add(
-                    LastNameChangeEvent(
-                      lastName: value ?? "",
-                    ),
-                  );
-            },
-            controller: _lastNameController,
-            validator: InputValidators.name,
-            labelText: _appLocalizations?.lastNameFormLabel ?? "",
+            labelText: _appLocalizations?.fullNameFormLabel ?? "",
           ),
         ),
       ),

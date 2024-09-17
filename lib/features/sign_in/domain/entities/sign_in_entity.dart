@@ -1,7 +1,15 @@
-class SignInEntity {
-  String token;
+class User {
+  final String id;
+  final String fullName;
+  final String? email;
+  final String? mobileNumber;
+  final String? avatarImage;
 
-  SignInEntity({
-    required this.token,
+  User({
+    required this.id,
+    required this.fullName,
+    required this.email,
+    this.mobileNumber,
+    this.avatarImage,
   });
 }

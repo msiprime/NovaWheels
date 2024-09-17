@@ -1,11 +1,21 @@
 import 'package:nova_wheels/features/sign_in/domain/entities/sign_in_entity.dart';
 
-class SignInModel extends SignInEntity {
-  SignInModel({
-    required super.token,
+class UserModel extends User {
+  UserModel({
+    required super.id,
+    required super.fullName,
+    required super.email,
+    super.mobileNumber,
+    super.avatarImage,
   });
 
-  factory SignInModel.fromJson(Map<String, dynamic> json) => SignInModel(
-        token: json['token'],
-      );
+  factory UserModel.fromMap(Map<String, dynamic> map) {
+    return UserModel(
+      id: map['id'] as String,
+      fullName: map['full_name'] as String,
+      email: map['email'] as String?,
+      mobileNumber: map['mobile_number'] as String?,
+      avatarImage: map['avatar_url'] as String?,
+    );
+  }
 }

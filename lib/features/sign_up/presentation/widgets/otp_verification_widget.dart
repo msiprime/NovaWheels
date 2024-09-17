@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:go_router/go_router.dart';
 import 'package:nova_wheels/core/base_component/base/base_widgets/app_primary_button.dart';
 import 'package:nova_wheels/core/base_component/base/base_widgets/app_textfield.dart';
-import 'package:nova_wheels/core/routes/routes.dart';
 import 'package:nova_wheels/features/sign_up/presentation/bloc/sign_up_bloc.dart';
 import 'package:nova_wheels/shared/utils/utils.dart';
-import 'package:nova_wheels/shared/validators/input_validators.dart';
 
 class OTPVerificationView extends StatefulWidget {
   const OTPVerificationView({super.key});
@@ -30,7 +27,7 @@ class _OTPVerificationViewState extends State<OTPVerificationView> {
         showSnackBarMessage(
             context, "Successfully Signed Up", SnackBarMessageType.success);
         context.read<SignUpBloc>().add(SignUpStatusChange());
-        context.goNamed(Routes.signIn);
+        // context.goNamed(Routes.home);
       } else if (state.status == SignUpStatus.failure) {
         showSnackBarMessage(
             context, "Something is wrong", SnackBarMessageType.failure);
@@ -54,7 +51,7 @@ class _OTPVerificationViewState extends State<OTPVerificationView> {
                       ),
                       subtitle: AppTextField(
                           controller: _otpEditingController,
-                          validator: InputValidators.otp,
+                          // validator: InputValidators.otp,
                           labelText: _appLocalizations?.fieldTitleOTP ?? "",
                           onChanged: (value) {
                             context

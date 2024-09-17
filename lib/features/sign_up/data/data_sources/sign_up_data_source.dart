@@ -1,6 +1,7 @@
-import 'package:dio/dio.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 abstract interface class SignUpDataSource {
-  Future<Response> signUp({required Map<String, dynamic> requestBody});
-  Future<Response> verifyOTP({required Map<String, dynamic> requestBody});
+  Future<AuthResponse> signUp({required Map<String, dynamic> requestBody});
+
+  Future<AuthResponse> verifyOTP({required Map<String, dynamic> requestBody});
 }

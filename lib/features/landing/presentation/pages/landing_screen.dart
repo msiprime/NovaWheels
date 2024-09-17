@@ -28,10 +28,12 @@ class _LandingScreenState extends State<LandingScreen> {
         if (state.landingStatus == LandingStatus.initial) {
           context.read<LandingBloc>().add(CountDown());
         } else {
-          if (state.token != null) {
-            context.goNamed(Routes.signIn);
-          } else {
+          if (state.isFirstTimer == true) {
+            context.goNamed(Routes.onboarding);
+          } else if (state.bearerToken != null) {
             context.goNamed(Routes.home);
+          } else {
+            context.goNamed(Routes.signIn);
           }
         }
       }, builder: (context, state) {
