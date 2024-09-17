@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:lottie/lottie.dart';
 import 'package:nova_wheels/core/base_component/base/base_widgets/base_setting_row.dart';
 import 'package:nova_wheels/core/routes/routes.dart';
+import 'package:nova_wheels/shared/local_storage/cache_service.dart';
 import 'package:nova_wheels/shared/values/app_assets_path.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -46,6 +47,7 @@ class OnBoardingView extends HookWidget {
                           ),
                         ),
                         onPressed: () {
+                          CacheService.instance.storeIfUserFirstTimer(false);
                           context.goNamed(Routes.signIn);
                         },
                         child: const Text('Next'),
