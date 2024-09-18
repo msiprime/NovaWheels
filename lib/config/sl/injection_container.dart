@@ -1,4 +1,3 @@
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get_it/get_it.dart';
 import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
 import 'package:nova_wheels/config/supabase/secret/app_secrets.dart';
@@ -51,8 +50,6 @@ Future<void> init() async {
   sl.registerLazySingleton(
     () => restClient,
   );
-
-  await dotenv.load(fileName: '.env');
 
   final supaBase = await Supabase.initialize(
     url: AppSecrets.supaBaseUrl,
