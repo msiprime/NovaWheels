@@ -1,5 +1,6 @@
 import 'package:app_ui/app_ui.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:lottie/lottie.dart';
 import 'package:nova_wheels/core/base_component/base/base_widgets/base_setting_row.dart';
 import 'package:nova_wheels/shared/values/app_assets_path.dart';
@@ -13,7 +14,17 @@ class OnBoardingPage1 extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         const ChangeSetting(),
-        Lottie.asset(AppAssets.lottieOnboarding1),
+        SizedBox(
+          height: 350,
+          child: Lottie.asset(
+            height: 350,
+            backgroundLoading: false,
+            AppAssets.novaWheelsLottie,
+            addRepaintBoundary: true,
+            filterQuality: FilterQuality.low,
+            bundle: DefaultAssetBundle.of(context),
+          ),
+        ).animate().fadeIn(duration: 1.seconds),
         const SizedBox(height: 24),
         Text(
           "Welcome to Nova Wheels! Where Quality Deals Spin the Wheels",

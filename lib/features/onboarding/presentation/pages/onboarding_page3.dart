@@ -11,7 +11,7 @@ class OnBoardingPage3 extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Lottie.asset(AppAssets.lottieOnboarding3),
+        Lottie.asset(AppAssets.parkingCarLottie),
         const SizedBox(height: 24),
         Text(
           "For Sellers: Showcase Your Collections to the World",
