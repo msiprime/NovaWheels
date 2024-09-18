@@ -11,30 +11,6 @@ abstract class AppAssets {
       "lib/features/sign_in/presentation/assets/svg/google.svg";
   static const String facebookSVG =
       "lib/features/sign_in/presentation/assets/svg/facebook.svg";
-  static const String listing1 =
-      "lib/features/add_post_property/assets/image/Property Sale.png";
-  static const String listing2 =
-      "lib/features/add_post_property/assets/image/Property Rent.png";
-  static const String listing3 =
-      "lib/features/add_post_property/assets/image/Vehicles.png";
-  static const String listing4 =
-      "lib/features/add_post_property/assets/image/electronics.png";
-  static const String listing5 =
-      "lib/features/add_post_property/assets/image/Jobs.png";
-  static const String listing6 =
-      "lib/features/add_post_property/assets/image/Services.png";
-  static const String listing7 =
-      "lib/features/add_post_property/assets/image/fashions.png";
-  static const String listing8 =
-      "lib/features/add_post_property/assets/image/Furnitures.png";
-  static const String listing9 =
-      "lib/features/add_post_property/assets/image/animals.png";
-  static const String listing10 =
-      "lib/features/add_post_property/assets/image/foods.png";
-  static const String listing11 =
-      "lib/features/add_post_property/assets/image/Health.png";
-  static const String listing12 =
-      "lib/features/add_post_property/assets/image/Major.png";
 
   // lottie animation
   static const String lottieOnboarding1 =
@@ -43,4 +19,11 @@ abstract class AppAssets {
       'lib/features/onboarding/presentation/asset/lottie_animation/onboarding_page_two_lottie.json';
   static const String lottieOnboarding3 =
       'lib/features/onboarding/presentation/asset/lottie_animation/onboarding_page_three_lottie.json';
+
+  static const String manAboveCarLottie =
+      'lib/features/onboarding/presentation/asset/lottie_animation/man_above_car.json';
+  static const String novaWheelsLottie =
+      'lib/features/onboarding/presentation/asset/lottie_animation/nova_wheels.json';
+  static const String parkingCarLottie =
+      'lib/features/onboarding/presentation/asset/lottie_animation/park_car.json';
 }

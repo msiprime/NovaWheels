@@ -23,6 +23,6 @@ class BaseBloc extends Bloc<BaseEvent, BaseState> {
       ChangeLanguageEvent event, Emitter<BaseState> emit) {
     emit((state.copyWith(locale: event.locale)));
     CacheService.instance
-        .changeLanguage(event.locale == const Locale('en') ? 'en' : 'bn');
+        .changeLanguage(event.locale == const Locale('en') ? 'en' : 'en');
   }
 }
