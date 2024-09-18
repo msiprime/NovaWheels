@@ -1,3 +1,5 @@
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:nova_wheels/config/supabase/secret/app_secrets.dart';
 import 'package:nova_wheels/core/base_component/failure/exceptions.dart';
 import 'package:nova_wheels/features/sign_in/data/datasource/sign_in_datasource.dart';
 import 'package:nova_wheels/features/sign_in/data/model/sign_in_model.dart';
@@ -84,5 +86,33 @@ class SignInDataSourceImp implements SignInDataSource {
         e.toString(),
       );
     }
+  }
+
+  @override
+  Future<AuthResponse> googleSignIn() async {
+    final webClientId = AppSecrets.webClientId;
+    final iosClientId = AppSecrets.iosClientId;
+
+    final GoogleSignIn googleSignIn = GoogleSignIn(
+      clientId: iosClientId,
+      serverClientId: webClientId,
+    );
+    final googleUser = await googleSignIn.signIn();
+    final googleAuth = await googleUser!.authentication;
+    final accessToken = googleAuth.accessToken;
+    final idToken = googleAuth.idToken;
+
+    if (accessToken == null) {
+      throw 'No Access Token found.';
+    }
+    if (idToken == null) {
+      throw 'No ID Token found.';
+    }
+
+    return supabaseClient.auth.signInWithIdToken(
+      provider: OAuthProvider.google,
+      idToken: idToken,
+      accessToken: accessToken,
+    );
   }
 }

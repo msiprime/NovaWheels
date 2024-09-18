@@ -6,6 +6,16 @@ Future<void> _initUseCases() async {
       signInRepository: sl.call(),
     ),
   );
+  sl.registerLazySingleton(
+    () => GoogleSignInUseCase(
+      signInRepository: sl.call(),
+    ),
+  );
+  sl.registerLazySingleton(
+    () => SignOutUseCase(
+      signInRepository: sl.call(),
+    ),
+  );
 
   sl.registerLazySingleton(
     () => SignUpUseCase(

@@ -1,6 +1,12 @@
 abstract class AppAssets {
   static const String appLogo =
       'lib/features/landing/presentation/assets/image/app_icon.png';
+  static const String novaWheelsLogo =
+      'lib/features/landing/presentation/assets/image/nova_wheels_logo.png';
+
+  static const String novaWheelsAppLogo =
+      'lib/features/landing/presentation/assets/image/nova_wheels_logo_short.png';
+
   static const String googleSVG =
       "lib/features/sign_in/presentation/assets/svg/google.svg";
   static const String facebookSVG =

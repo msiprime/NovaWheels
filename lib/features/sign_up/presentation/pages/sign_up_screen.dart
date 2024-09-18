@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:nova_wheels/core/base_component/base/base_widgets/app_primary_button.dart';
 import 'package:nova_wheels/core/base_component/base/base_widgets/app_spacer.dart';
 import 'package:nova_wheels/core/base_component/base/base_widgets/app_textfield.dart';
+import 'package:nova_wheels/core/base_component/base/base_widgets/base_setting_row.dart';
 import 'package:nova_wheels/core/routes/routes.dart';
 import 'package:nova_wheels/features/sign_up/presentation/bloc/sign_up_bloc.dart';
 import 'package:nova_wheels/shared/utils/utils.dart';
@@ -64,6 +65,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
+                        const ChangeSetting(),
                         _buildAppHeader(),
                         const SizedBox(
                           height: AppValues.halfPadding,
@@ -220,12 +222,21 @@ class _SignUpScreenState extends State<SignUpScreen> {
     );
   }
 
-  Image _buildAppHeader() {
-    return Image.asset(
-      AppAssets.appLogo,
-      height: 120.0,
-      width: 120.0,
-      fit: BoxFit.scaleDown,
+  Widget _buildAppHeader() {
+    return Column(
+      children: [
+        Image.asset(
+          AppAssets.novaWheelsAppLogo,
+          width: 100,
+        ),
+        Text(
+          'Nova Wheels',
+          style: Theme.of(context).textTheme.displaySmall?.copyWith(
+                color: Colors.grey.shade700,
+                fontWeight: FontWeight.bold,
+              ),
+        ),
+      ],
     );
   }
 

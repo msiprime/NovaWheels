@@ -36,4 +36,9 @@ class AppSecrets {
 
   static String get firebaseIosMessagingSenderId =>
       dotenv.env['FIREBASE_IOS_MESSAGING_SENDER_ID'] ?? 'null';
+
+  // google sign in
+
+  static String get webClientId => dotenv.env['WEB_CLIENT_ID'] ?? 'null';
+  static String get iosClientId => dotenv.env['IOS_CLIENT_ID'] ?? 'null';
 }

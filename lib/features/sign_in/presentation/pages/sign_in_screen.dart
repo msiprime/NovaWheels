@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:nova_wheels/core/base_component/base/base_widgets/app_primary_button.dart';
 import 'package:nova_wheels/core/base_component/base/base_widgets/app_spacer.dart';
 import 'package:nova_wheels/core/base_component/base/base_widgets/app_textfield.dart';
 import 'package:nova_wheels/core/base_component/base/base_widgets/base_setting_row.dart';
+import 'package:nova_wheels/core/base_component/base/base_widgets/google_sign_in_button.dart';
 import 'package:nova_wheels/core/routes/routes.dart';
 import 'package:nova_wheels/features/sign_in/presentation/bloc/sign_in_bloc.dart';
 import 'package:nova_wheels/shared/utils/extensions/context_extension.dart';
@@ -49,35 +49,36 @@ class _SignInScreenState extends State<SignInScreen> {
     }, builder: (context, state) {
       return Scaffold(
         body: SafeArea(
-          child: Center(
-            child: SingleChildScrollView(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Form(
-                  key: formKey,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      const ChangeSetting(),
-                      const AppSpacer(),
-                      _buildAppHeader(),
-                      const AppSpacer(),
-                      _buildEmailTextField(state),
-                      _buildPasswordTextField(state),
-                      const AppSpacer(),
-                      _buildSignInButton(state),
-                      const AppSpacer(
-                        height: AppValues.height_16,
-                      ),
-                      _buildSignInWith(context),
-                      const AppSpacer(
-                        height: AppValues.height_16,
-                      ),
-                      _buildSocialLogIn(context),
-                      _buildDontHaveAccount(),
-                    ],
-                  ),
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Form(
+                key: formKey,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    const SizedBox(height: 10),
+                    const ChangeSetting(),
+                    const SizedBox(height: 20),
+                    const AppSpacer(),
+                    _buildAppHeader(),
+                    const SizedBox(height: 30),
+                    const AppSpacer(),
+                    _buildEmailTextField(state),
+                    _buildPasswordTextField(state),
+                    const AppSpacer(),
+                    _buildSignInButton(state),
+                    const AppSpacer(
+                      height: AppValues.height_16,
+                    ),
+                    _buildSignInWith(context),
+                    const AppSpacer(
+                      height: AppValues.height_16,
+                    ),
+                    _buildSocialLogIn(context),
+                    _buildDontHaveAccount(),
+                  ],
                 ),
               ),
             ),
@@ -87,33 +88,33 @@ class _SignInScreenState extends State<SignInScreen> {
     });
   }
 
-  Image _buildAppHeader() {
-    return Image.asset(
-      AppAssets.appLogo,
-      height: 120.0,
-      width: 120.0,
+  Widget _buildAppHeader() {
+    return Column(
+      children: [
+        Image.asset(
+          AppAssets.novaWheelsAppLogo,
+          width: 100,
+        ),
+        Text(
+          'Nova Wheels',
+          style: Theme.of(context).textTheme.displaySmall?.copyWith(
+                color: Colors.grey.shade700,
+                fontWeight: FontWeight.bold,
+              ),
+        ),
+      ],
     );
   }
 
   Widget _buildSocialLogIn(BuildContext context) {
     return SizedBox(
       width: context.width,
-      child: Row(
+      child: const Row(
         mainAxisSize: MainAxisSize.max,
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          IconButton(
-            icon: SvgPicture.asset(AppAssets.googleSVG),
-            onPressed: () {},
-          ),
-          const AppSpacer(
-            width: AppValues.padding,
-          ),
-          IconButton(
-            icon: SvgPicture.asset(AppAssets.facebookSVG),
-            onPressed: () {},
-          ),
+          GoogleSignInButton(),
         ],
       ),
     );
