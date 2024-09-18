@@ -10,4 +10,6 @@ abstract interface class SignInRepository {
   Future<Either<Failure, String>> signOut();
 
   Future<Either<Failure, User>> currentUser();
+
+  Future<Either<Failure, String>> googleSignIn();
 }
