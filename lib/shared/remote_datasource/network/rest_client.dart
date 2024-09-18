@@ -3,6 +3,7 @@ import 'dart:io' show File;
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:nova_wheels/config/environment/build_config.dart';
+import 'package:nova_wheels/config/supabase/secret/app_secrets.dart';
 import 'package:nova_wheels/shared/local_storage/cache_service.dart';
 import 'package:nova_wheels/shared/remote_datasource/exceptions/error_model.dart';
 import 'package:nova_wheels/shared/remote_datasource/exceptions/network_exception.dart';
@@ -19,6 +20,12 @@ class RestClient {
   RestClient() {
     BaseOptions options = BaseOptions(
       baseUrl: BuildConfig.instance.config.baseUrl,
+      headers: <String, dynamic>{
+        'apikey': AppSecrets.supaAnonKey,
+        'Content-type': 'application/json',
+        'Authorization':
+            'Bearer ${CacheService.instance.retrieveBearerToken()}',
+      },
       connectTimeout: Duration(milliseconds: connectionTimeout),
       receiveTimeout: Duration(milliseconds: receiveTimeout),
     );
