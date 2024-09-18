@@ -9,5 +9,8 @@ Future<void> _initBlocs() async {
     () =>
         SignUpBloc(signUpUseCase: sl.call(), otpVerificationUseCase: sl.call()),
   );
-  sl.registerFactory(() => SignInBloc(signInUseCase: sl.call()));
+  sl.registerFactory(() => SignInBloc(
+      signInUseCase: sl.call(),
+      signOutUseCase: sl.call(),
+      googleSignInUseCase: sl.call()));
 }

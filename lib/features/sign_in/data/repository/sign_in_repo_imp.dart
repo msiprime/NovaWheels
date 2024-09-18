@@ -86,4 +86,25 @@ class SignInRepoImp implements SignInRepository {
       );
     }
   }
+
+  @override
+  Future<Either<Failure, String>> googleSignIn() async {
+    try {
+      final response = await signInRemoteDataSource.googleSignIn();
+
+      final accessToken = response.session?.accessToken;
+
+      if (accessToken == null) {
+        throw const ServerException('User token is null');
+      }
+
+      return right(accessToken);
+    } on ServerException catch (e) {
+      return left(Failure(e.message));
+    } on AuthException catch (e) {
+      return left(Failure(e.message));
+    } catch (e) {
+      return left(Failure(e.toString()));
+    }
+  }
 }

@@ -37,18 +37,24 @@ class _LandingScreenState extends State<LandingScreen> {
           }
         }
       }, builder: (context, state) {
-        return SizedBox(
-          width: MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              SizedBox(
-                width: 150,
-                child: Image.asset(AppAssets.appLogo),
-              ),
-            ],
+        return Scaffold(
+          backgroundColor: Colors.blueGrey,
+          body: SizedBox(
+            width: MediaQuery.of(context).size.width,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                SizedBox(
+                  child: Image.asset(
+                    AppAssets.novaWheelsLogo,
+                    color: Colors.blueGrey,
+                    colorBlendMode: BlendMode.overlay,
+                  ),
+                ),
+              ],
+            ),
           ),
         );
       }),

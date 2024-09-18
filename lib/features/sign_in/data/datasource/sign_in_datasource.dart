@@ -11,5 +11,7 @@ abstract interface class SignInDataSource {
     required String password,
   });
 
+  Future<AuthResponse> googleSignIn();
+
   Future<void> signOut();
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nova_wheels/core/base_component/base/base_widgets/sign_out_button.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -11,6 +12,7 @@ class HomeScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            SignOutButton(),
             //Title
           ],
         ),
