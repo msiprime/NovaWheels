@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:nova_wheels/config/environment/build_config.dart';
 import 'package:nova_wheels/config/environment/env_config.dart';
 import 'package:nova_wheels/config/environment/environment.dart';
@@ -11,6 +12,8 @@ import 'package:nova_wheels/shared/utils/bloc_observer.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await dotenv.load(fileName: ".env");
+
   final themeMode = await CacheService.instance.retrieveTheme();
   final local = await CacheService.instance.retrieveLanguage();
   EnvConfig prodConfig = EnvConfig(
