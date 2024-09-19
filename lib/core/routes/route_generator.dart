@@ -96,7 +96,7 @@ class RouteGenerator {
               GoRoute(
                 name: Routes.profile,
                 path: '/${Routes.profile}',
-                builder: (context, state) => const SignInScreen(),
+                builder: (context, state) => const RequestOtpPage(),
               ),
             ],
           ),

@@ -6,7 +6,6 @@ import 'package:go_router/go_router.dart';
 import 'package:nova_wheels/core/base_component/base/base_widgets/app_primary_button.dart';
 import 'package:nova_wheels/core/base_component/base/base_widgets/app_spacer.dart';
 import 'package:nova_wheels/core/base_component/base/base_widgets/app_textfield.dart';
-import 'package:nova_wheels/core/base_component/base/base_widgets/base_setting_row.dart';
 import 'package:nova_wheels/core/routes/routes.dart';
 import 'package:nova_wheels/features/sign_in/presentation/bloc/sign_in_bloc.dart';
 import 'package:nova_wheels/shared/utils/extensions/context_extension.dart';
@@ -63,7 +62,6 @@ class _RequestOtpPageState extends State<RequestOtpPage> {
                   key: formKey,
                   child: Column(
                     children: [
-                      const ChangeSetting(),
                       _buildAppHeader(),
                       const AppSpacer(),
                       _buildEmailTextField(state),
@@ -88,7 +86,7 @@ class _RequestOtpPageState extends State<RequestOtpPage> {
 
   Image _buildAppHeader() {
     return Image.asset(
-      AppAssets.appLogo,
+      AppAssets.novaWheelsAppLogo,
       height: 120.0,
       width: 120.0,
     );

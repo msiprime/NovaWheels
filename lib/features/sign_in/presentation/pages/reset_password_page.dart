@@ -6,7 +6,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:nova_wheels/core/base_component/base/base_widgets/app_primary_button.dart';
 import 'package:nova_wheels/core/base_component/base/base_widgets/app_spacer.dart';
-import 'package:nova_wheels/core/base_component/base/base_widgets/base_setting_row.dart';
 import 'package:nova_wheels/core/routes/routes.dart';
 import 'package:nova_wheels/features/sign_in/presentation/bloc/sign_in_bloc.dart';
 import 'package:nova_wheels/shared/utils/extensions/context_extension.dart'
@@ -22,9 +21,7 @@ class ResetPasswordPage extends StatefulWidget {
 }
 
 class _ResetPasswordPageState extends State<ResetPasswordPage> {
-  late final TextEditingController _emailController;
   late final TextEditingController _passwordController;
-  late final TextEditingController _otpEditingController;
 
   final formKey = GlobalKey<FormState>();
 
@@ -36,9 +33,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
 
   @override
   void dispose() {
-    _emailController.dispose();
     _passwordController.dispose();
-    _otpEditingController.dispose();
     super.dispose();
   }
 
@@ -68,7 +63,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      const ChangeSetting(),
+                      // const ChangeSetting(),
                       _buildAppHeader(),
                       const AppSpacer(),
                       _buildPasswordTextField(state),
@@ -96,7 +91,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
 
   Image _buildAppHeader() {
     return Image.asset(
-      AppAssets.appLogo,
+      AppAssets.novaWheelsAppLogo,
       height: 120.0,
       width: 120.0,
     );
@@ -185,10 +180,10 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
   Widget _buildPasswordTextField(SignInState state) {
     return ListTile(
       contentPadding: EdgeInsets.zero,
-      title: Padding(
-        padding: const EdgeInsets.only(left: AppValues.margin_2),
+      title: const Padding(
+        padding: EdgeInsets.only(left: AppValues.margin_2),
         child: Text(
-          context.localization?.fieldTitlePassword ?? "",
+          "Enter you new password",
         ),
       ),
       subtitle: Padding(
@@ -196,8 +191,13 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
           top: AppValues.smallMargin,
         ),
         child: AppTextField(
+            contentPadding: const EdgeInsets.all(8.0),
+            border: const OutlineInputBorder(),
             enabled: state.status != SignInStatus.loading,
-            prefix: const Icon(Icons.password_outlined),
+            prefix: const Padding(
+              padding: EdgeInsets.only(right: 8.0),
+              child: Icon(Icons.password_outlined),
+            ),
             textController: _passwordController,
             labelText: "Enter new Password",
             onChanged: (value) {
