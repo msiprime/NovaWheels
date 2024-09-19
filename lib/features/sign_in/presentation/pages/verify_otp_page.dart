@@ -5,7 +5,6 @@ import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:nova_wheels/core/base_component/base/base_widgets/app_primary_button.dart';
 import 'package:nova_wheels/core/base_component/base/base_widgets/app_spacer.dart';
-import 'package:nova_wheels/core/base_component/base/base_widgets/base_setting_row.dart';
 import 'package:nova_wheels/core/routes/routes.dart';
 import 'package:nova_wheels/features/sign_in/presentation/bloc/sign_in_bloc.dart';
 import 'package:nova_wheels/shared/utils/extensions/context_extension.dart';
@@ -64,7 +63,6 @@ class _VerifyOtpPageState extends State<VerifyOtpPage> {
                   key: formKey,
                   child: Column(
                     children: [
-                      const ChangeSetting(),
                       _buildAppHeader(),
                       const AppSpacer(),
                       _buildOtpTextField(state),
@@ -86,7 +84,7 @@ class _VerifyOtpPageState extends State<VerifyOtpPage> {
 
   Image _buildAppHeader() {
     return Image.asset(
-      AppAssets.appLogo,
+      AppAssets.novaWheelsAppLogo,
       height: 120.0,
       width: 120.0,
     );
@@ -126,19 +124,18 @@ class _VerifyOtpPageState extends State<VerifyOtpPage> {
   Widget _buildOtpTextField(SignInState state) {
     return ListTile(
       contentPadding: EdgeInsets.zero,
-      title: Padding(
-        padding: const EdgeInsets.only(
+      title: const Padding(
+        padding: EdgeInsets.only(
           left: AppValues.margin_2,
         ),
-        child: Text(
-          context.localization?.fieldTitleEmail ?? "",
-        ),
+        child: Text("Enter the OTP below"),
       ),
       subtitle: Padding(
         padding: const EdgeInsets.only(top: AppValues.smallMargin),
         child: AppTextField(
+          contentPadding: const EdgeInsets.all(8.0),
+          border: const OutlineInputBorder(),
           enabled: state.status != SignInStatus.loading,
-          prefix: const Icon(Icons.email_outlined),
           textController: _otpController,
           labelText: "",
           onChanged: (value) {},
