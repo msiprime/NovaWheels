@@ -78,6 +78,12 @@ class _SignInScreenState extends State<SignInScreen> {
                     ),
                     _buildSocialLogIn(context),
                     _buildDontHaveAccount(),
+                    FilledButton(
+                      onPressed: () {
+                        context.goNamed(Routes.requestOtpPage);
+                      },
+                      child: const Text('Forgot Password?'),
+                    ),
                   ],
                 ),
               ),

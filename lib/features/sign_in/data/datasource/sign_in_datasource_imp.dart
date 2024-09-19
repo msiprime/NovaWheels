@@ -75,19 +75,6 @@ class SignInDataSourceImp implements SignInDataSource {
     }
   }
 
-  Future<void> forgetPassword() async {
-    try {
-      final result = await supabaseClient.auth.resetPasswordForEmail(
-        'msisakib958@gmail.com',
-      );
-      return result;
-    } catch (e) {
-      throw ServerException(
-        e.toString(),
-      );
-    }
-  }
-
   @override
   Future<AuthResponse> googleSignIn() async {
     final webClientId = AppSecrets.webClientId;
@@ -114,5 +101,47 @@ class SignInDataSourceImp implements SignInDataSource {
       idToken: idToken,
       accessToken: accessToken,
     );
+  }
+
+  @override
+  Future<AuthResponse> verifyOTP({
+    required Map<String, dynamic> requestBody,
+  }) async {
+    final response = await supabaseClient.auth.verifyOTP(
+      type: OtpType.recovery,
+      token: requestBody['otp'],
+      email: requestBody['email'],
+    );
+    return response;
+  }
+
+  @override
+  Future<UserResponse> resetPassword(
+      {required Map<String, dynamic> requestBody}) {
+    try {
+      final res = supabaseClient.auth.updateUser(
+        UserAttributes(password: requestBody['password']),
+      );
+      return res;
+    } catch (e) {
+      throw ServerException(
+        e.toString(),
+      );
+    }
+  }
+
+  @override
+  Future<void> requestOtpForForgetPassword(
+      {required Map<String, dynamic> requestBody}) async {
+    try {
+      final res = await supabaseClient.auth.resetPasswordForEmail(
+        requestBody['email'],
+      );
+      return res;
+    } catch (e) {
+      throw ServerException(
+        e.toString(),
+      );
+    }
   }
 }

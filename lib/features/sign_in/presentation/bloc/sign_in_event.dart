@@ -12,12 +12,28 @@ class EmailChangeEvent extends SignInEvent {
   final String email;
 }
 
+class OtpChangeEvent extends SignInEvent {
+  const OtpChangeEvent({
+    required this.otp,
+  });
+
+  final String otp;
+}
+
 class PasswordChangeEvent extends SignInEvent {
   const PasswordChangeEvent({
     required this.password,
   });
 
   final String password;
+}
+
+class NewPasswordChangeEvent extends SignInEvent {
+  const NewPasswordChangeEvent({
+    required this.newPassword,
+  });
+
+  final String newPassword;
 }
 
 class PhoneNumberChangeEvent extends SignInEvent {
@@ -36,4 +52,22 @@ class GoogleSignInSubmitted extends SignInEvent {
 
 class SignOutSubmitted extends SignInEvent {
   const SignOutSubmitted();
+}
+
+class RequestOtpSubmitted extends SignInEvent {
+  final String email;
+
+  const RequestOtpSubmitted({required this.email});
+}
+
+class VerifyOtpSubmitted extends SignInEvent {
+  final String otp;
+
+  const VerifyOtpSubmitted({required this.otp});
+}
+
+class ResetPasswordSubmitted extends SignInEvent {
+  final String password;
+
+  const ResetPasswordSubmitted({required this.password});
 }

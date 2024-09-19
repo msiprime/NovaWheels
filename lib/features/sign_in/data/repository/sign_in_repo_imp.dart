@@ -6,6 +6,7 @@ import 'package:nova_wheels/features/sign_in/data/model/sign_in_model.dart';
 import 'package:nova_wheels/features/sign_in/domain/repositories/sign_in_repositories.dart';
 import 'package:nova_wheels/shared/local_storage/cache_service.dart';
 import 'package:nova_wheels/shared/utils/connection_checker/connection_checker.dart';
+import 'package:nova_wheels/shared/utils/logger.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class SignInRepoImp implements SignInRepository {
@@ -99,6 +100,59 @@ class SignInRepoImp implements SignInRepository {
       }
 
       return right(accessToken);
+    } on ServerException catch (e) {
+      return left(Failure(e.message));
+    } on AuthException catch (e) {
+      return left(Failure(e.message));
+    } catch (e) {
+      return left(Failure(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, String>> requestOtpForForgetPassword(
+      {required Map<String, dynamic> requestBody}) async {
+    try {
+      await signInRemoteDataSource.requestOtpForForgetPassword(
+          requestBody: requestBody);
+      return const Right('OTP sent successfully');
+    } on ServerException catch (e) {
+      return left(Failure(e.message));
+    } on AuthException catch (e) {
+      return left(Failure(e.message));
+    } catch (e) {
+      return left(Failure(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, String>> verifyOTP(
+      {required Map<String, dynamic> requestBody}) async {
+    try {
+      final AuthResponse response =
+          await signInRemoteDataSource.verifyOTP(requestBody: requestBody);
+
+      String? accessToken = response.session?.accessToken;
+      if (accessToken == null) {
+        return Left(Failure('User access token is null'));
+      }
+      Log.debug(accessToken);
+      return Right(accessToken);
+    } catch (e) {
+      return Left(Failure(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, String>> resetPassword(
+      {required Map<String, dynamic> requestBody}) async {
+    try {
+      final UserResponse user =
+          await signInRemoteDataSource.resetPassword(requestBody: requestBody);
+      if (user.user == null) {
+        return left(Failure('User not found'));
+      }
+      return const Right('Password reset successfully');
     } on ServerException catch (e) {
       return left(Failure(e.message));
     } on AuthException catch (e) {
