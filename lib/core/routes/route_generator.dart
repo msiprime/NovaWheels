@@ -6,7 +6,10 @@ import 'package:nova_wheels/features/home/presentation/pages/home_screen.dart';
 import 'package:nova_wheels/features/landing/presentation/pages/landing_screen.dart';
 import 'package:nova_wheels/features/onboarding/presentation/pages/onboarding_view.dart';
 import 'package:nova_wheels/features/settings/presentation/pages/settings_screen.dart';
+import 'package:nova_wheels/features/sign_in/presentation/pages/request_otp_page.dart';
+import 'package:nova_wheels/features/sign_in/presentation/pages/reset_password_page.dart';
 import 'package:nova_wheels/features/sign_in/presentation/pages/sign_in_screen.dart';
+import 'package:nova_wheels/features/sign_in/presentation/pages/verify_otp_page.dart';
 import 'package:nova_wheels/features/sign_up/presentation/pages/sign_up_screen.dart';
 import 'package:nova_wheels/features/sign_up/presentation/widgets/otp_verification_widget.dart';
 
@@ -37,6 +40,26 @@ class RouteGenerator {
         path: '/${Routes.signIn}',
         builder: (context, state) => const SignInScreen(),
         routes: [
+          // Forget password / Reset password / password recovery
+          GoRoute(
+            name: Routes.requestOtpPage,
+            path: Routes.requestOtpPage,
+            builder: (context, state) => const RequestOtpPage(),
+            routes: [
+              GoRoute(
+                name: Routes.verifyOtpPage,
+                path: Routes.verifyOtpPage,
+                builder: (context, state) => const VerifyOtpPage(),
+                routes: [
+                  GoRoute(
+                    name: Routes.resetPasswordPage,
+                    path: Routes.resetPasswordPage,
+                    builder: (context, state) => const ResetPasswordPage(),
+                  ),
+                ],
+              ),
+            ],
+          ),
           GoRoute(
             name: Routes.signUp,
             path: Routes.signUp,

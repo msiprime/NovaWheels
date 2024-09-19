@@ -6,8 +6,7 @@ import 'package:nova_wheels/core/base_component/base/base_bloc/base_bloc.dart';
 import 'package:nova_wheels/core/base_component/base/base_bloc/base_state.dart';
 import 'package:nova_wheels/core/localization.dart';
 import 'package:nova_wheels/core/routes/route_generator.dart';
-import 'package:nova_wheels/core/theme/color.schema.dart';
-import 'package:nova_wheels/shared/utils/transitions.dart';
+import 'package:nova_wheels/core/theme/app_theme_instance.dart';
 
 class Application extends StatelessWidget {
   const Application({super.key});
@@ -23,16 +22,9 @@ class Application extends StatelessWidget {
             localizationsDelegates: AppLocalizations.localizationsDelegates,
             locale: state.locale,
             debugShowCheckedModeBanner: false,
-            themeMode: state.themeMode,
-            theme: ThemeData(
-              useMaterial3: true,
-              colorScheme: lightColorScheme,
-              pageTransitionsTheme: pageTransitionsTheme,
-            ),
-            darkTheme: ThemeData(
-              useMaterial3: true,
-              colorScheme: darkColorScheme,
-              pageTransitionsTheme: pageTransitionsTheme,
+            theme: AppThemeInstance.instance.computeTheme(
+              mode: state.themeMode,
+              seedColor: Colors.teal,
             ),
             routerConfig: RouteGenerator.router,
           );

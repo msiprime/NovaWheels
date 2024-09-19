@@ -12,4 +12,10 @@ class Routes {
   static const String listing = 'listing';
   static const String location = 'location';
   static const String package = 'package';
+
+  //auth
+
+  static const String requestOtpPage = 'request_otp_page';
+  static const String resetPasswordPage = 'reset_password_page';
+  static const String verifyOtpPage = 'verify_otp_page';
 }

@@ -5,6 +5,9 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nova_wheels/core/base_component/usecase/base_use_case.dart';
 import 'package:nova_wheels/features/sign_in/domain/use_cases/google_sign_in_usecase.dart';
+import 'package:nova_wheels/features/sign_in/domain/use_cases/otp_verification_usecase.dart';
+import 'package:nova_wheels/features/sign_in/domain/use_cases/request_otp_usecase.dart';
+import 'package:nova_wheels/features/sign_in/domain/use_cases/reset_password_usecase.dart';
 import 'package:nova_wheels/features/sign_in/domain/use_cases/sign_in_use_case.dart';
 import 'package:nova_wheels/features/sign_in/domain/use_cases/user_signout_usecase.dart';
 import 'package:nova_wheels/shared/local_storage/cache_service.dart';
@@ -18,6 +21,9 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
     required this.signInUseCase,
     required this.signOutUseCase,
     required this.googleSignInUseCase,
+    required this.resetPasswordUseCase,
+    required this.requestOtpUseCase,
+    required this.passResetOTPVerificationUseCase,
   }) : super(const SignInState()) {
     on<EmailChangeEvent>(_onEmailChangeEvent);
     on<PasswordChangeEvent>(_onPasswordChangeEvent);
@@ -25,11 +31,17 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
     on<SignInSubmitted>(_onSignInSubmittedEvent);
     on<SignOutSubmitted>(_onSignOutSubmittedEvent);
     on<GoogleSignInSubmitted>(_onGoogleSignInSubmittedEvent);
+    on<RequestOtpSubmitted>(_onRequestOtpSubmittedEvent);
+    on<VerifyOtpSubmitted>(_onVerifyOtpSubmittedEvent);
+    on<ResetPasswordSubmitted>(_onResetPasswordSubmittedEvent);
   }
 
   final SignInUseCase signInUseCase;
   final SignOutUseCase signOutUseCase;
   final GoogleSignInUseCase googleSignInUseCase;
+  final ResetPasswordUseCase resetPasswordUseCase;
+  final RequestOtpUseCase requestOtpUseCase;
+  final PassResetOTPVerificationUseCase passResetOTPVerificationUseCase;
 
   FutureOr<void> _onEmailChangeEvent(
     EmailChangeEvent event,
@@ -176,5 +188,111 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
         );
       }
     }
+  }
+
+  FutureOr<void> _onRequestOtpSubmittedEvent(
+      RequestOtpSubmitted event, Emitter<SignInState> emit) async {
+    try {
+      emit(state.copyWith(status: SignInStatus.loading));
+      final response = await requestOtpUseCase.call(event.email);
+      response.fold(
+        (l) {
+          emit(
+            state.copyWith(
+              status: SignInStatus.failure,
+              errorMessage: l.message,
+            ),
+          );
+        },
+        (r) async {
+          emit(
+            state.copyWith(
+              status: SignInStatus.otpSent,
+            ),
+          );
+        },
+      );
+    } catch (e) {
+      emit(
+        state.copyWith(
+          status: SignInStatus.failure,
+          errorMessage: e.toString(),
+        ),
+      );
+    }
+  }
+
+  FutureOr<void> _onVerifyOtpSubmittedEvent(
+      VerifyOtpSubmitted event, Emitter<SignInState> emit) async {
+    emit(state.copyWith(status: SignInStatus.loading));
+    try {
+      final response = await passResetOTPVerificationUseCase.call(requestBody: {
+        "otp": event.otp,
+        "email": state.email,
+      });
+
+      response.fold(
+        (l) {
+          emit(
+            state.copyWith(
+              status: SignInStatus.failure,
+              errorMessage: l.message,
+            ),
+          );
+        },
+        (r) async {
+          emit(
+            state.copyWith(
+              status: SignInStatus.otpVerified,
+            ),
+          );
+        },
+      );
+    } catch (e) {
+      emit(
+        state.copyWith(
+          status: SignInStatus.failure,
+          errorMessage: e.toString(),
+        ),
+      );
+    }
+  }
+
+  Future<void> _onResetPasswordSubmittedEvent(
+      ResetPasswordSubmitted event, Emitter<SignInState> emit) async {
+    emit(state.copyWith(status: SignInStatus.loading));
+    try {
+      final response = await resetPasswordUseCase.call(event.password);
+      response.fold(
+        (l) {
+          emit(
+            state.copyWith(
+              status: SignInStatus.failure,
+              errorMessage: l.message,
+            ),
+          );
+        },
+        (r) {
+          Log.error(r);
+          emit(
+            state.copyWith(
+              status: SignInStatus.success,
+            ),
+          );
+        },
+      );
+    } catch (e) {
+      emit(
+        state.copyWith(
+          status: SignInStatus.failure,
+          errorMessage: e.toString(),
+        ),
+      );
+    }
+  }
+
+  FutureOr<void> _onOtpChangeEvent(
+      OtpChangeEvent event, Emitter<SignInState> emit) {
+    emit(state.copyWith(otp: event.otp));
   }
 }

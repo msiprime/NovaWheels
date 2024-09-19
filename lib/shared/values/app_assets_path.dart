@@ -12,14 +12,7 @@ abstract class AppAssets {
   static const String facebookSVG =
       "lib/features/sign_in/presentation/assets/svg/facebook.svg";
 
-  // lottie animation
-  static const String lottieOnboarding1 =
-      'lib/features/onboarding/presentation/asset/lottie_animation/onboarding_page_one_lottie.json';
-  static const String lottieOnboarding2 =
-      'lib/features/onboarding/presentation/asset/lottie_animation/onboarding_page_two_lottie.json';
-  static const String lottieOnboarding3 =
-      'lib/features/onboarding/presentation/asset/lottie_animation/onboarding_page_three_lottie.json';
-
+  // lottie animations
   static const String manAboveCarLottie =
       'lib/features/onboarding/presentation/asset/lottie_animation/man_above_car.json';
   static const String novaWheelsLottie =

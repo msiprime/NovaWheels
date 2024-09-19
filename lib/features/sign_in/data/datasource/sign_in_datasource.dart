@@ -14,4 +14,14 @@ abstract interface class SignInDataSource {
   Future<AuthResponse> googleSignIn();
 
   Future<void> signOut();
+
+  Future<void> requestOtpForForgetPassword({
+    required Map<String, dynamic> requestBody,
+  });
+
+  Future<UserResponse> resetPassword({
+    required Map<String, dynamic> requestBody,
+  });
+
+  Future<AuthResponse> verifyOTP({required Map<String, dynamic> requestBody});
 }

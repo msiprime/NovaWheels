@@ -12,4 +12,16 @@ abstract interface class SignInRepository {
   Future<Either<Failure, User>> currentUser();
 
   Future<Either<Failure, String>> googleSignIn();
+
+  Future<Either<Failure, String>> requestOtpForForgetPassword({
+    required Map<String, dynamic> requestBody,
+  });
+
+  Future<Either<Failure, String>> verifyOTP({
+    required Map<String, dynamic> requestBody,
+  });
+
+  Future<Either<Failure, String>> resetPassword({
+    required Map<String, dynamic> requestBody,
+  });
 }

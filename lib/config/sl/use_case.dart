@@ -27,4 +27,20 @@ Future<void> _initUseCases() async {
       signUpRepository: sl.call(),
     ),
   );
+  sl.registerLazySingleton(
+    () => RequestOtpUseCase(
+      sl.call(),
+    ),
+  );
+
+  sl.registerLazySingleton(
+    () => ResetPasswordUseCase(
+      sl.call(),
+    ),
+  );
+  sl.registerLazySingleton(
+    () => PassResetOTPVerificationUseCase(
+      repository: sl.call(),
+    ),
+  );
 }

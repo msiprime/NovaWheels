@@ -10,6 +10,9 @@ import 'package:nova_wheels/features/sign_in/data/datasource/sign_in_datasource_
 import 'package:nova_wheels/features/sign_in/data/repository/sign_in_repo_imp.dart';
 import 'package:nova_wheels/features/sign_in/domain/repositories/sign_in_repositories.dart';
 import 'package:nova_wheels/features/sign_in/domain/use_cases/google_sign_in_usecase.dart';
+import 'package:nova_wheels/features/sign_in/domain/use_cases/otp_verification_usecase.dart';
+import 'package:nova_wheels/features/sign_in/domain/use_cases/request_otp_usecase.dart';
+import 'package:nova_wheels/features/sign_in/domain/use_cases/reset_password_usecase.dart';
 import 'package:nova_wheels/features/sign_in/domain/use_cases/sign_in_use_case.dart';
 import 'package:nova_wheels/features/sign_in/domain/use_cases/user_signout_usecase.dart';
 import 'package:nova_wheels/features/sign_in/presentation/bloc/sign_in_bloc.dart';
