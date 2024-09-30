@@ -167,7 +167,7 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
           emit(
             state.copyWith(
               status: SignUpStatus.failure,
-              errorMessage: l.toString(),
+              errorMessage: l.message,
             ),
           );
         },

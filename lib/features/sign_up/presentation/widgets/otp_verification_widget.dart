@@ -30,7 +30,7 @@ class _OTPVerificationViewState extends State<OTPVerificationView> {
         // context.goNamed(Routes.home);
       } else if (state.status == SignUpStatus.failure) {
         showSnackBarMessage(
-            context, "Something is wrong", SnackBarMessageType.failure);
+            context, state.errorMessage, SnackBarMessageType.failure);
       }
     }, builder: (context, state) {
       return Scaffold(
