@@ -52,6 +52,7 @@ class SignUpRepositoryImp implements SignUpRepository {
       Log.debug(accessToken);
       return Right(accessToken);
     } catch (e) {
+      Log.debug(e.toString());
       return Left(Failure(e.toString()));
     }
   }
