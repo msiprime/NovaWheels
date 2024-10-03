@@ -3,12 +3,13 @@ import 'package:nova_wheels/core/base_component/failure/exceptions.dart';
 import 'package:nova_wheels/core/base_component/failure/failures.dart';
 import 'package:nova_wheels/features/sign_up/data/data_sources/sign_up_data_source.dart';
 import 'package:nova_wheels/features/sign_up/domain/repositories/sign_up_repositories.dart';
+import 'package:nova_wheels/shared/utils/logger.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-import '../../../../shared/utils/logger.dart';
-
 class SignUpRepositoryImp implements SignUpRepository {
-  const SignUpRepositoryImp({required this.signUpDataSource});
+  const SignUpRepositoryImp({
+    required this.signUpDataSource,
+  });
 
   final SignUpDataSource signUpDataSource;
 

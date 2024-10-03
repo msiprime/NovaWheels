@@ -95,20 +95,9 @@ class _SignInScreenState extends State<SignInScreen> {
   }
 
   Widget _buildAppHeader() {
-    return Column(
-      children: [
-        Image.asset(
-          AppAssets.novaWheelsAppLogo,
-          width: 100,
-        ),
-        Text(
-          'Nova Wheels',
-          style: Theme.of(context).textTheme.displaySmall?.copyWith(
-                color: Colors.grey.shade700,
-                fontWeight: FontWeight.bold,
-              ),
-        ),
-      ],
+    return Image.asset(
+      AppAssets.circleLogoNoBackGroundPng,
+      width: 220,
     );
   }
 

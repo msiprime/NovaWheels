@@ -69,7 +69,7 @@ dev_dependencies:
   flutter_localizations:
     sdk: flutter
 
-  flutter_lints: ^4.0.0
+  flutter_lints: ^5.0.0
 
 flutter:
   generate: true
@@ -80,5 +80,7 @@ flutter:
     - lib/features/landing/presentation/assets/image/
     - lib/features/sign_in/presentation/assets/svg/
     - lib/features/onboarding/presentation/asset/lottie_animation/
+    - lib/core/base_component/logo/png/
+    - lib/core/base_component/logo/svg/
 
 

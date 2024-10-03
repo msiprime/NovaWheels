@@ -66,6 +66,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         const ChangeSetting(),
+                        const SizedBox(
+                          height: AppValues.halfPadding,
+                        ),
                         _buildAppHeader(),
                         const SizedBox(
                           height: AppValues.halfPadding,
@@ -223,20 +226,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
   }
 
   Widget _buildAppHeader() {
-    return Column(
-      children: [
-        Image.asset(
-          AppAssets.novaWheelsAppLogo,
-          width: 100,
-        ),
-        Text(
-          'Nova Wheels',
-          style: Theme.of(context).textTheme.displaySmall?.copyWith(
-                color: Colors.grey.shade700,
-                fontWeight: FontWeight.bold,
-              ),
-        ),
-      ],
+    return Image.asset(
+      AppAssets.circleLogoNoBackGroundPng,
+      width: 220,
     );
   }
 

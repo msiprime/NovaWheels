@@ -1,11 +1,19 @@
 abstract class AppAssets {
-  static const String appLogo =
-      'lib/features/landing/presentation/assets/image/app_icon.png';
-  static const String novaWheelsLogo =
-      'lib/features/landing/presentation/assets/image/nova_wheels_logo.png';
+  /// logo for nova wheels
 
-  static const String novaWheelsAppLogo =
-      'lib/features/landing/presentation/assets/image/nova_wheels_logo_short.png';
+  /// png
+  static const String logoNoBackGroundPng =
+      'lib/core/base_component/logo/png/logo-no-background.png';
+  static const String circleLogoNoBackGroundPng =
+      'lib/core/base_component/logo/png/circle_logo-no-background.png';
+
+  /// svg
+  static const String logoNoBackGroundSvg =
+      'lib/core/base_component/logo/svg/logo-no-background.svg';
+  static const String circleLogoNoBackGroundSvg =
+      'lib/core/base_component/logo/svg/circle_logo-no-background.svg';
+
+  /////////////////////////////////////////
 
   static const String googleSVG =
       "lib/features/sign_in/presentation/assets/svg/google.svg";

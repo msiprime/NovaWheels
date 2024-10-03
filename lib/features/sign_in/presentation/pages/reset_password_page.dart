@@ -91,7 +91,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
 
   Image _buildAppHeader() {
     return Image.asset(
-      AppAssets.novaWheelsAppLogo,
+      AppAssets.logoNoBackGroundPng,
       height: 120.0,
       width: 120.0,
     );
