@@ -63,6 +63,7 @@ class _RequestOtpPageState extends State<RequestOtpPage> {
                   child: Column(
                     children: [
                       _buildAppHeader(),
+                      const Gap(20),
                       const AppSpacer(),
                       _buildEmailTextField(state),
                       const AppSpacer(),
@@ -87,7 +88,7 @@ class _RequestOtpPageState extends State<RequestOtpPage> {
   Image _buildAppHeader() {
     return Image.asset(
       AppAssets.circleLogoNoBackGroundPng,
-      height: 220,
+      height: 150,
     );
   }
 

@@ -21,6 +21,8 @@ abstract class AppAssets {
       "lib/features/sign_in/presentation/assets/svg/facebook.svg";
 
   // lottie animations
+  static const String underConstructionLottie =
+      'lib/core/base_component/lottie/under_construction_lottie_painting.json';
   static const String manAboveCarLottie =
       'lib/features/onboarding/presentation/asset/lottie_animation/man_above_car.json';
   static const String novaWheelsLottie =

@@ -62,6 +62,8 @@ dependencies:
   flutter_spinkit: ^5.2.1
   skeletonizer: ^1.4.2
   shimmer: ^3.0.0
+  flutter_native_splash: ^2.4.1
+  flutter_launcher_icons: ^0.14.1
 
 dev_dependencies:
   flutter_test:
@@ -77,6 +79,7 @@ flutter:
 
   assets:
     - .env
+    - lib/core/base_component/lottie/
     - lib/features/landing/presentation/assets/image/
     - lib/features/sign_in/presentation/assets/svg/
     - lib/features/onboarding/presentation/asset/lottie_animation/
