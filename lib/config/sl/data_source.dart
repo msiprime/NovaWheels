@@ -12,4 +12,11 @@ Future<void> _initDataSources() async {
       supabaseClient: sl.call(),
     ),
   );
+
+  /// vehicle data source
+  sl.registerLazySingleton<VehicleDataSource>(
+    () => VehicleDataSourceImpl(
+      supabaseClient: sl.call(),
+    ),
+  );
 }

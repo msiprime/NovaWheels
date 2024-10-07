@@ -11,11 +11,20 @@ Future<void> _initBlocs() async {
   );
   sl.registerFactory(
     () => SignInBloc(
-        signInUseCase: sl.call(),
-        signOutUseCase: sl.call(),
-        googleSignInUseCase: sl.call(),
-        resetPasswordUseCase: sl.call(),
-        requestOtpUseCase: sl.call(),
-        passResetOTPVerificationUseCase: sl.call()),
+      signInUseCase: sl.call(),
+      signOutUseCase: sl.call(),
+      googleSignInUseCase: sl.call(),
+      resetPasswordUseCase: sl.call(),
+      requestOtpUseCase: sl.call(),
+      passResetOTPVerificationUseCase: sl.call(),
+    ),
+  );
+
+  /// vehicle bloc
+
+  sl.registerFactory(
+    () => VehicleBloc(
+      vehicleUseCase: sl.call(),
+    ),
   );
 }

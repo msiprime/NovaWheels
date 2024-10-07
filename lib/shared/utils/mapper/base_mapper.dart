@@ -1,3 +1,3 @@
-abstract interface class DataMapper<Type> {
+abstract interface class BaseMapper<Type> {
   Type mapToEntity();
 }

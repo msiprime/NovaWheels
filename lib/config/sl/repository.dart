@@ -12,4 +12,11 @@ Future<void> _initRepositories() async {
       signUpDataSource: sl.call(),
     ),
   );
+
+  /// vehicle repository
+  sl.registerLazySingleton<VehicleRepo>(
+    () => VehicleRepoImpl(
+      vehicleDataSource: sl.call(),
+    ),
+  );
 }
