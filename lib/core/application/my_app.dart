@@ -63,7 +63,7 @@ class Application extends StatelessWidget {
         visualDensity: VisualDensity.compact,
         selectedTileColor: AppColors.selectedBlue,
         iconColor: AppColors.grey,
-        textColor: AppColors.selectedBlue,
+        // textColor: AppColors.selectedBlue,
       ),
     );
   }
