@@ -63,6 +63,7 @@ class _RequestOtpPageState extends State<RequestOtpPage> {
                   child: Column(
                     children: [
                       _buildAppHeader(),
+                      const Gap(20),
                       const AppSpacer(),
                       _buildEmailTextField(state),
                       const AppSpacer(),
@@ -86,9 +87,8 @@ class _RequestOtpPageState extends State<RequestOtpPage> {
 
   Image _buildAppHeader() {
     return Image.asset(
-      AppAssets.novaWheelsAppLogo,
-      height: 120.0,
-      width: 120.0,
+      AppAssets.circleLogoNoBackGroundPng,
+      height: 150,
     );
   }
 

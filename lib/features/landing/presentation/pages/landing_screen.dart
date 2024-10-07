@@ -74,7 +74,7 @@ class _LandingScreenState extends State<LandingScreen> {
 
   Scaffold _buildLandingScaffold(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blueGrey,
+      // backgroundColor: Colors.blueGrey,
       body: SizedBox(
         width: MediaQuery.of(context).size.width,
         child: Column(
@@ -82,12 +82,15 @@ class _LandingScreenState extends State<LandingScreen> {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisSize: MainAxisSize.max,
           children: [
-            SizedBox(
-              child: Image.asset(
-                AppAssets.novaWheelsLogo,
-                color: Colors.blueGrey,
-                colorBlendMode: BlendMode.overlay,
-              ).animate().scaleXY(delay: 200.ms, duration: 1.seconds),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: SizedBox(
+                child: Image.asset(
+                  AppAssets.logoNoBackGroundPng,
+                  // color: Colors.black,
+                  // colorBlendMode: BlendMode.overlay,
+                ).animate().scaleXY(delay: 200.ms, duration: 1.seconds),
+              ),
             ),
           ],
         ),

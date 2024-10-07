@@ -69,21 +69,12 @@ class _SignInScreenState extends State<SignInScreen> {
                     _buildPasswordTextField(state),
                     const AppSpacer(),
                     _buildSignInButton(state),
-                    const AppSpacer(
-                      height: AppValues.height_16,
-                    ),
+                    const AppSpacer(height: AppValues.height_16),
                     _buildSignInWith(context),
-                    const AppSpacer(
-                      height: AppValues.height_16,
-                    ),
+                    const AppSpacer(height: AppValues.height_16),
                     _buildSocialLogIn(context),
                     _buildDontHaveAccount(),
-                    FilledButton(
-                      onPressed: () {
-                        context.goNamed(Routes.requestOtpPage);
-                      },
-                      child: const Text('Forgot Password?'),
-                    ),
+                    _buildForgotPassword(context),
                   ],
                 ),
               ),
@@ -94,21 +85,19 @@ class _SignInScreenState extends State<SignInScreen> {
     });
   }
 
+  FilledButton _buildForgotPassword(BuildContext context) {
+    return FilledButton(
+      onPressed: () {
+        context.goNamed(Routes.requestOtpPage);
+      },
+      child: const Text('Forgot Password?'),
+    );
+  }
+
   Widget _buildAppHeader() {
-    return Column(
-      children: [
-        Image.asset(
-          AppAssets.novaWheelsAppLogo,
-          width: 100,
-        ),
-        Text(
-          'Nova Wheels',
-          style: Theme.of(context).textTheme.displaySmall?.copyWith(
-                color: Colors.grey.shade700,
-                fontWeight: FontWeight.bold,
-              ),
-        ),
-      ],
+    return Image.asset(
+      AppAssets.circleLogoNoBackGroundPng,
+      width: 220,
     );
   }
 

@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -28,12 +29,30 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
     on<EmailChangeEvent>(_onEmailChangeEvent);
     on<PasswordChangeEvent>(_onPasswordChangeEvent);
     on<PhoneNumberChangeEvent>(_onPhoneNumberChangeEvent);
-    on<SignInSubmitted>(_onSignInSubmittedEvent);
-    on<SignOutSubmitted>(_onSignOutSubmittedEvent);
-    on<GoogleSignInSubmitted>(_onGoogleSignInSubmittedEvent);
-    on<RequestOtpSubmitted>(_onRequestOtpSubmittedEvent);
-    on<VerifyOtpSubmitted>(_onVerifyOtpSubmittedEvent);
-    on<ResetPasswordSubmitted>(_onResetPasswordSubmittedEvent);
+    on<SignInSubmitted>(
+      _onSignInSubmittedEvent,
+      transformer: droppable(),
+    );
+    on<SignOutSubmitted>(
+      _onSignOutSubmittedEvent,
+      transformer: droppable(),
+    );
+    on<GoogleSignInSubmitted>(
+      _onGoogleSignInSubmittedEvent,
+      transformer: droppable(),
+    );
+    on<RequestOtpSubmitted>(
+      _onRequestOtpSubmittedEvent,
+      transformer: droppable(),
+    );
+    on<VerifyOtpSubmitted>(
+      _onVerifyOtpSubmittedEvent,
+      transformer: droppable(),
+    );
+    on<ResetPasswordSubmitted>(
+      _onResetPasswordSubmittedEvent,
+      transformer: droppable(),
+    );
   }
 
   final SignInUseCase signInUseCase;

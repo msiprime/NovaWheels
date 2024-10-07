@@ -30,6 +30,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _birthDateController = TextEditingController();
   final TextEditingController _phoneNumberController = TextEditingController();
+  final TextEditingController _confirmPasswordController =
+      TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -43,6 +45,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             _birthDateController.text = '';
             _emailController.text = '';
             _phoneNumberController.text = '';
+            _confirmPasswordController.text = '';
             context.read<SignUpBloc>().add(SignUpStatusChange());
           } else if (state.status == SignUpStatus.failure) {
             showSnackBarMessage(context, _appLocalizations?.failedMessage ?? "",
@@ -66,6 +69,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         const ChangeSetting(),
+                        const SizedBox(
+                          height: AppValues.halfPadding,
+                        ),
                         _buildAppHeader(),
                         const SizedBox(
                           height: AppValues.halfPadding,
@@ -92,6 +98,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           height: AppValues.halfPadding,
                         ),
                         _buildPasswordTextField(),
+                        const SizedBox(
+                          height: AppValues.padding,
+                        ),
+                        _buildConfirmPasswordTextField(),
                         const SizedBox(
                           height: AppValues.padding,
                         ),
@@ -223,20 +233,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
   }
 
   Widget _buildAppHeader() {
-    return Column(
-      children: [
-        Image.asset(
-          AppAssets.novaWheelsAppLogo,
-          width: 100,
-        ),
-        Text(
-          'Nova Wheels',
-          style: Theme.of(context).textTheme.displaySmall?.copyWith(
-                color: Colors.grey.shade700,
-                fontWeight: FontWeight.bold,
-              ),
-        ),
-      ],
+    return Image.asset(
+      AppAssets.circleLogoNoBackGroundPng,
+      width: 220,
     );
   }
 
@@ -296,6 +295,37 @@ class _SignUpScreenState extends State<SignUpScreen> {
     );
   }
 
+  Widget _buildConfirmPasswordTextField() {
+    return ListTile(
+      contentPadding: EdgeInsets.zero,
+      title: Padding(
+        padding: const EdgeInsets.only(left: AppValues.margin_2),
+        child: Text(
+          "Confirm Password",
+        ),
+      ),
+      subtitle: Padding(
+        padding: const EdgeInsets.only(
+          top: AppValues.smallMargin,
+        ),
+        child: AppTextField(
+            prefix: const Icon(Icons.password_outlined),
+            controller: _confirmPasswordController,
+            labelText: "Retype your password",
+            onChanged: (value) {
+              context
+                  .read<SignUpBloc>()
+                  .add(PasswordChangeEvent(password: value.toString()));
+            },
+            validator: (value) {
+              return InputValidators.confirmPassword(
+                  value, _passwordController.text);
+            },
+            obscureText: true),
+      ),
+    );
+  }
+
   Widget _buildSubmitButton(SignUpState state) {
     return state.status == SignUpStatus.loading
         ? const Center(
@@ -306,7 +336,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
         : AppPrimaryButton(
             onPressed: () => {
               if (_formKey.currentState!.validate())
-                {context.read<SignUpBloc>().add(SignUpSubmitted())}
+                {
+                  context.read<SignUpBloc>().add(SignUpSubmitted()),
+                }
             },
             title: _appLocalizations?.signUp ?? "",
           );
