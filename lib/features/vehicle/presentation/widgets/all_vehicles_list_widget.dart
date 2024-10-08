@@ -1,3 +1,4 @@
+import 'package:app_ui/app_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
@@ -20,6 +21,14 @@ class AllVehiclesListWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
                 children: [
+                  ImageAttachmentThumbnail(
+                    imageUrl: vehicle.images?.coverPhoto ?? '',
+                    width: 150,
+                    height: 150,
+                    borderRadius: BorderRadius.circular(12),
+                    withPlaceholder: true,
+                    withAdaptiveColors: true,
+                  ),
                   Text(vehicle.model ?? ''),
                   Text(vehicle.year.toString()),
                   Text(vehicle.price.toString()),

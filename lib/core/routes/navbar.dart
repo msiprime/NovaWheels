@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
+import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:nova_wheels/shared/utils/extensions/context_extension.dart';
 
-//ignore: must_be_immutable
 class ScaffoldWithNestedNavigation extends StatelessWidget {
-  late AppLocalizations? _appLocalizations;
-
-  ScaffoldWithNestedNavigation({
+  const ScaffoldWithNestedNavigation({
     Key? key,
     required this.navigationShell,
   }) : super(key: key ?? const ValueKey('ScaffoldWithNestedNavigation'));
@@ -21,23 +19,43 @@ class ScaffoldWithNestedNavigation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    _appLocalizations = AppLocalizations.of(context);
     return Scaffold(
       body: navigationShell,
-      bottomNavigationBar: NavigationBar(
+      bottomNavigationBar: GNav(
+        tabBackgroundColor: Colors.purple.withOpacity(0.1),
+        style: GnavStyle.google,
+        activeColor: Colors.blue,
+        gap: context.width * 0.025,
+        curve: Curves.linear,
+        padding: EdgeInsets.all(10),
+        iconSize: 20,
+        haptic: true,
+        rippleColor: Colors.blue.shade700.withOpacity(0.25),
+        color: Colors.grey[800],
         selectedIndex: navigationShell.currentIndex,
-        destinations: [
-          NavigationDestination(
-              label: _appLocalizations?.home ?? "",
-              icon: const Icon(Icons.home)),
-          NavigationDestination(
-              label: _appLocalizations?.profile ?? "",
-              icon: const Icon(Icons.person_rounded)),
-          NavigationDestination(
-              label: _appLocalizations?.setting ?? "",
-              icon: const Icon(Icons.settings)),
+        tabs: [
+          GButton(
+            text: context.localization?.home ?? "",
+            icon: Icons.home,
+          ),
+          GButton(
+            text: context.localization?.profile ?? "",
+            icon: Icons.person,
+          ),
+          GButton(
+            text: context.localization?.setting ?? "",
+            icon: Icons.settings,
+          ),
+          GButton(
+            text: context.localization?.home ?? "",
+            icon: Icons.store,
+          ),
+          // GButton(
+          //   text: context.localization?.home ?? "",
+          //   icon: Icons.add,
+          // ),
         ],
-        onDestinationSelected: _goBranch,
+        onTabChange: _goBranch,
       ),
     );
   }

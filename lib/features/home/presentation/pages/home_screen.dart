@@ -22,15 +22,8 @@ class HomeScreen extends StatelessWidget {
                 'Welcome to Nova Wheels',
                 style: context.titleLarge,
               ),
-              // LottieBuilder.asset(AppAssets.underConstructionLottie),
-              // const Gap(10),
-              // Text(
-              //   'We are currently building our application',
-              //   style: context.titleMedium,
-              // ),
               Expanded(child: AllVehiclesListWidget()),
               SignOutButton(),
-              //Title
             ],
           ),
         ),
