@@ -28,7 +28,7 @@ class AppPrimaryButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return isLoading == true
         ? const CircularProgressIndicator(
-            color: AppColors.colorPrimary,
+            color: AppColorsMain.colorPrimary,
           )
         : SizedBox(
             height: height,

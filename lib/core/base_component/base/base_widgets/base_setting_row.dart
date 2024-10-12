@@ -25,7 +25,7 @@ class ChangeSetting extends StatelessWidget {
           CupertinoSwitch(
               value: state.locale == const Locale('en'),
               applyTheme: true,
-              trackColor: AppColors.colorPrimary,
+              trackColor: AppColorsMain.colorPrimary,
               autofocus: true,
               onChanged: (v) {
                 context.read<BaseBloc>().add(ChangeLanguageEvent(

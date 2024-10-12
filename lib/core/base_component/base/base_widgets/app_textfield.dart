@@ -78,14 +78,14 @@ class AppTextField extends HookWidget {
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(borderRadius),
           borderSide: BorderSide(
-            color: borderColor ?? AppColors.textFieldBorderColor,
+            color: borderColor ?? AppColorsMain.textFieldBorderColor,
             width: borderWidth ?? 0.50,
           ),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(borderRadius),
           borderSide: BorderSide(
-            color: AppColors.textFieldBorderColor,
+            color: AppColorsMain.textFieldBorderColor,
             width: borderWidth ?? 1.2,
           ),
         ),

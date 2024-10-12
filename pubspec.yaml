@@ -17,6 +17,7 @@ dependencies:
   shared:
     path: packages/shared
 
+  dotted_border: ^2.0.0
   flutter_local_notifications: ^17.2.2
   cupertino_icons: ^1.0.8
   dartz: ^0.10.1

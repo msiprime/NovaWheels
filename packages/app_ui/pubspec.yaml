@@ -9,6 +9,8 @@ environment:
 
 
 dependencies:
+  dotted_border:
+  image_picker:
   cached_memory_image: ^1.5.0
   cached_network_image: ^3.3.1
   flex_color_scheme: ^7.3.1
