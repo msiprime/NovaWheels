@@ -37,6 +37,9 @@ class _CreateStoreScreenState extends State<CreateStoreScreen> {
   late final TextEditingController _storeTwitterController;
   late final TextEditingController _storeWebsiteController;
 
+  String _storeCoverImageUrl = '';
+  String _storeProfileImageUrl = '';
+
   @override
   Widget build(BuildContext context) {
     return AppScaffold(
@@ -52,32 +55,29 @@ class _CreateStoreScreenState extends State<CreateStoreScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Stack(
-                alignment: Alignment.bottomLeft, // Align to bottom right
                 children: [
-                  // Cover Image Widget
-                  StoreCoverImageUrlGenWidget(
-                    onImageUploaded: (imageUrl) {
-                      Log.info('Cover imageUrl: $imageUrl');
-                    },
+                  Column(
+                    children: [
+                      StoreCoverImageUrlGenWidget(
+                        onImageUploaded: (imageUrl) {
+                          _storeCoverImageUrl = imageUrl ?? '';
+                          Log.info('Profile Image URL: $_storeCoverImageUrl');
+                        },
+                      ),
+                      const Gap(50),
+                    ],
                   ),
-                  // Profile Image Widget
                   Positioned(
                     left: 16,
-                    bottom: 16, // Positioning the profile picture
+                    bottom: 0,
                     child: StoreProfileImageUrlGeneratorWidget(
                       onImageUploaded: (imageUrl) {
-                        Log.info('Profile imageUrl: $imageUrl');
+                        _storeProfileImageUrl = imageUrl ?? '';
+                        Log.info('Profile Image URL: $_storeProfileImageUrl');
                       },
                     ),
                   ),
                 ],
-              ),
-              const Gap(16),
-              Center(
-                child: Text(
-                  'Store Profile Picture',
-                  style: context.titleSmall,
-                ),
               ),
               const Gap(16),
               _buildLabel('Store Name'),
@@ -114,20 +114,20 @@ class _CreateStoreScreenState extends State<CreateStoreScreen> {
     );
   }
 
-  Text _buildLabel(String text) {
-    return Text(
-      text,
-      style: const TextStyle(
-        fontWeight: FontWeight.bold,
-        fontSize: 16,
-      ),
+  Widget _buildLabel(String text) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 4.0),
+      child: Text(text, style: context.titleMedium),
     );
   }
 
   AppTextField _buildStorePhoneNumTF() {
     return AppTextField.roundedBorder(
       textController: _storePhoneNumController,
-      labelText: 'Phone Number',
+      hintText: 'e.g +88 01712345678',
+      hintStyle: context.titleMedium?.copyWith(
+        color: Colors.grey,
+      ),
       validator: (p0) => InputValidators.phone(p0),
     );
   }
@@ -135,56 +135,80 @@ class _CreateStoreScreenState extends State<CreateStoreScreen> {
   AppTextField _buildStoreEmailTF() {
     return AppTextField.roundedBorder(
       textController: _storeEmailController,
-      labelText: 'Email Address',
+      hintText: 'e.g msisakib958@gmail.com',
+      hintStyle: context.titleMedium?.copyWith(
+        color: Colors.grey,
+      ),
     );
   }
 
   AppTextField _buildStoreFacebookTF() {
     return AppTextField.roundedBorder(
       textController: _storeFacebookController,
-      labelText: 'Facebook Page',
+      hintText: 'e.g www.facebook.com/msisakib958',
+      hintStyle: context.titleMedium?.copyWith(
+        color: Colors.grey,
+      ),
     );
   }
 
   AppTextField _buildInstagramTF() {
     return AppTextField.roundedBorder(
       textController: _storeInstagramController,
-      labelText: 'Instagram Page',
+      hintText: 'e.g www.instagram.com/msisakib958',
+      hintStyle: context.titleMedium?.copyWith(
+        color: Colors.grey,
+      ),
     );
   }
 
   AppTextField _buildStoreTwitterTF() {
     return AppTextField.roundedBorder(
       textController: _storeTwitterController,
-      labelText: 'Twitter Page',
+      hintText: 'e.g @msisakib958',
+      hintStyle: context.titleMedium?.copyWith(
+        color: Colors.grey,
+      ),
     );
   }
 
   AppTextField _buildStoreWebsiteTF() {
     return AppTextField.roundedBorder(
       textController: _storeWebsiteController,
-      labelText: 'Website',
+      hintText: 'e.g www.msisakib958.com',
+      hintStyle: context.titleMedium?.copyWith(
+        color: Colors.grey,
+      ),
     );
   }
 
   AppTextField _buildStoreAddressTF() {
     return AppTextField.roundedBorder(
       textController: _storeAddressController,
-      labelText: 'Address',
+      hintText: 'e.g 123, ABC Road, XYZ City',
+      hintStyle: context.titleMedium?.copyWith(
+        color: Colors.grey,
+      ),
     );
   }
 
   AppTextField _buildStoreDescriptionTF() {
     return AppTextField.roundedBorder(
       textController: _storeDescriptionController,
-      labelText: 'Description',
+      hintText: 'e.g Shop for all your needs',
+      hintStyle: context.titleMedium?.copyWith(
+        color: Colors.grey,
+      ),
     );
   }
 
   AppTextField _buildStoreNameTF() {
     return AppTextField.roundedBorder(
       textController: _storeNameController,
-      labelText: 'Name',
+      hintText: 'e.g Nova Wheels',
+      hintStyle: context.titleMedium?.copyWith(
+        color: Colors.grey,
+      ),
     );
   }
 

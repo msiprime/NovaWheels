@@ -49,31 +49,33 @@ class _StoreProfileImageUrlGeneratorWidgetState
           child: Stack(
             alignment: Alignment.center,
             children: [
-              if (state is ImagePickerInitial)
+              if (state is ImagePickerInitial || state is ImagePickerLoading)
                 CircleAvatar(
-                  radius: 60,
-                  backgroundColor: Colors.black54,
+                  radius: 50,
+                  backgroundColor: Colors.grey[300],
                   child: state is! ImageUploadedToSupabase
                       ? Icon(
                           Icons.person,
-                          size: 60,
-                          color: Colors.grey[400],
+                          size: 50,
+                          color: Colors.grey[600],
                         )
                       : null,
                 ),
               if (state is ImageUploadedToSupabase) ...[
                 CircleAvatar(
-                  radius: 60,
+                  radius: 50,
                   backgroundColor: Colors.grey[200],
                   child: ClipOval(
                       child:
                           ImageAttachmentThumbnail(imageUrl: state.imageUrl)),
                 ),
               ],
-              if (state is ImagePickerLoading)
+              if (state is ImagePickerLoading ||
+                  state is UploadingImageToSupabase ||
+                  state is RemovingImageFromSupabase)
                 Container(
-                  width: 120,
-                  height: 120,
+                  width: 100,
+                  height: 100,
                   decoration: BoxDecoration(
                     color: Colors.black.withOpacity(0.5),
                     shape: BoxShape.circle,
@@ -84,53 +86,39 @@ class _StoreProfileImageUrlGeneratorWidgetState
                     ),
                   ),
                 ),
-              if (state is UploadingImageToSupabase ||
-                  state is RemovingImageFromSupabase)
-                Container(
-                  width: 120,
-                  height: 120,
-                  decoration: BoxDecoration(
-                    color: Colors.black.withOpacity(0.5),
-                    shape: BoxShape.circle,
-                  ),
-                  child: const Center(
-                    child: CircularProgressIndicator(
-                      valueColor:
-                          AlwaysStoppedAnimation<Color>(Colors.blueAccent),
+              if (state is ImagePickerInitial || state is ImagePickerLoading)
+                Positioned(
+                  bottom: 0,
+                  right: 0,
+                  child: Tappable.scaled(
+                    onTap: () {
+                      storeProfileImageBloc.add(PickImageEvent(
+                        fileName:
+                            'store_profile_${DateTime.now().millisecondsSinceEpoch}',
+                      ));
+                    },
+                    child: CircleAvatar(
+                      backgroundColor: Colors.white,
+                      radius: 15,
+                      child: Icon(
+                        Icons.add_a_photo,
+                        size: 18,
+                        color: context.theme.primaryColor,
+                      ),
                     ),
                   ),
                 ),
-              Positioned(
-                bottom: 0,
-                right: 0,
-                child: Tappable.scaled(
-                  onTap: () {
-                    storeProfileImageBloc.add(PickImageEvent(
-                        // imageType: ImageType.storeProfile,
-                        ));
-                  },
-                  child: CircleAvatar(
-                    backgroundColor: Colors.white,
-                    radius: 18,
-                    child: Icon(
-                      Icons.add_a_photo,
-                      size: 20,
-                      color: context.theme.primaryColor,
-                    ),
-                  ),
-                ),
-              ),
               if (state is ImageUploadedToSupabase)
                 Positioned(
-                  bottom: -10,
-                  left: 10,
+                  top: 0,
+                  right: 0,
                   child: Tappable.scaled(
                     onTap: () {
                       storeProfileImageBloc.add(RemoveImageEvent());
                     },
                     child: CircleAvatar(
-                      backgroundColor: Colors.white,
-                      radius: 18,
+                      backgroundColor: Colors.white.withOpacity(0.8),
+                      radius: 15,
                       child: Icon(
                         Icons.delete_forever_outlined,
                         size: 20,

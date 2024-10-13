@@ -20,7 +20,7 @@ class ImagePickerBloc extends Bloc<ImagePickerEvent, ImagePickerState> {
     on<RemoveImageEvent>(_onRemoveImage);
   }
 
-  String fileName = '${DateTime.now().millisecondsSinceEpoch}.jpg';
+  String? globalFilePath;
 
   FutureOr<void> _onPickImage(PickImageEvent event, emit) async {
     emit(ImagePickerLoading());
@@ -29,7 +29,8 @@ class ImagePickerBloc extends Bloc<ImagePickerEvent, ImagePickerState> {
           .pickImage(imageQuality: 10, source: ImageSource.gallery);
       if (file == null) return;
 
-      String filePath = '${imageType.folderPath}/$fileName';
+      String filePath = '${imageType.folderPath}/${event.fileName}.jpg';
+      globalFilePath = filePath;
 
       emit(UploadingImageToSupabase());
       String imageUrl = await CoreDataSource.uploadImageToSupabase(
@@ -46,7 +47,7 @@ class ImagePickerBloc extends Bloc<ImagePickerEvent, ImagePickerState> {
   }
 
   FutureOr<void> _onRemoveImage(RemoveImageEvent event, emit) async {
-    String filePath = '${imageType.folderPath}/$fileName';
+    String filePath = globalFilePath ?? '';
 
     emit(RemovingImageFromSupabase());
     await CoreDataSource.deleteImageFromSupabase(

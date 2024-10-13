@@ -4,11 +4,11 @@ part of 'image_picker_bloc.dart';
 sealed class ImagePickerEvent {}
 
 final class PickImageEvent extends ImagePickerEvent {
-  // final ImageType imageType;
+  final String fileName;
 
-  // PickImageEvent({
-  //   required this.imageType,
-  // });
+  PickImageEvent({
+    required this.fileName,
+  });
 }
 
 final class RemoveImageEvent extends ImagePickerEvent {}

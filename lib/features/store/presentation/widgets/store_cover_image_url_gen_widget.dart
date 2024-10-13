@@ -54,25 +54,26 @@ class _StoreCoverImageUrlGenWidgetState
                 height: 200,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
-                  color: Colors.grey[200],
-                  image: state is ImageUploadedToSupabase
-                      ? DecorationImage(
-                          image: NetworkImage(state.imageUrl),
-                          fit: BoxFit.cover,
-                        )
-                      : null,
+                  color: Colors.grey[400],
+                  // image: state is ImageUploadedToSupabase
+                  //     ? DecorationImage(
+                  //         image: NetworkImage(
+                  //           state.imageUrl,
+                  //         ),
+                  //         fit: BoxFit.cover,
+                  //       )
+                  //     : null,
                 ),
-                child: state is! ImageUploadedToSupabase
-                    ? Center(
+                child: state is ImageUploadedToSupabase
+                    ? ImageAttachmentThumbnail(imageUrl: state.imageUrl)
+                    : Center(
                         child: Icon(
-                          Icons.image_outlined,
+                          Icons.image,
                           size: 60,
-                          color: Colors.grey[400],
+                          color: Colors.grey[600],
                         ),
-                      )
-                    : null,
+                      ),
               ),
-              // Loading Overlay
               if (state is ImagePickerLoading ||
                   state is UploadingImageToSupabase ||
                   state is RemovingImageFromSupabase)
@@ -90,32 +91,32 @@ class _StoreCoverImageUrlGenWidgetState
                     ),
                   ),
                 ),
-              // Add/Change Cover Photo Button
-              Positioned(
-                bottom: 10,
-                right: 10,
-                child: Tappable.scaled(
-                  onTap: () {
-                    storeCoverImageBloc.add(PickImageEvent(
-                        // imageType: ImageType.storeCover, // Changed to storeCover
-                        ));
-                  },
-                  child: CircleAvatar(
-                    backgroundColor: Colors.white,
-                    radius: 18,
-                    child: Icon(
-                      Icons.add_a_photo,
-                      size: 20,
-                      color: context.theme.primaryColor,
+              if (state is ImagePickerInitial || state is ImagePickerLoading)
+                Positioned(
+                  bottom: 10,
+                  right: 10,
+                  child: Tappable.scaled(
+                    onTap: () {
+                      storeCoverImageBloc.add(PickImageEvent(
+                        fileName:
+                            'cover_image_${DateTime.now().millisecondsSinceEpoch}',
+                      ));
+                    },
+                    child: CircleAvatar(
+                      backgroundColor: Colors.white,
+                      radius: 18,
+                      child: Icon(
+                        Icons.add_a_photo,
+                        size: 20,
+                        color: context.theme.primaryColor,
+                      ),
                     ),
                   ),
                 ),
-              ),
-              // Remove Cover Photo Button
               if (state is ImageUploadedToSupabase)
                 Positioned(
-                  bottom: 10,
-                  left: 10,
+                  top: 10,
+                  right: 10,
                   child: Tappable.scaled(
                     onTap: () {
                       storeCoverImageBloc.add(RemoveImageEvent());

@@ -160,9 +160,19 @@ class AppTextField extends StatelessWidget {
           cursorWidth: cursorWidth,
           disabledBorder: disabledBorder,
           enableSuggestion: enableSuggestion,
-          enabledBorder: enabledBorder,
+          enabledBorder: const OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(8)),
+            borderSide: BorderSide(
+              color: Colors.grey,
+            ),
+          ),
           expands: expands,
-          focusedBorder: focusedBorder,
+          focusedBorder: const OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(8)),
+            borderSide: BorderSide(
+              color: Colors.black87,
+            ),
+          ),
           keyboardAppearance: keyboardAppearance,
           magnifierConfiguration: magnifierConfiguration,
           maxLength: maxLength,
@@ -218,9 +228,7 @@ class AppTextField extends StatelessWidget {
           suffixIcon: suffixIcon,
           enabled: enabled,
           filled: filled,
-          border: const OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(8)),
-          ),
+          border: const OutlineInputBorder(),
           errorMaxLines: errorMaxLines,
         );
 
