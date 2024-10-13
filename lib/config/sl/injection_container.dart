@@ -3,7 +3,7 @@ import 'package:internet_connection_checker_plus/internet_connection_checker_plu
 import 'package:nova_wheels/config/supabase/secret/app_secrets.dart';
 import 'package:nova_wheels/core/base_component/base/base_bloc/base_bloc.dart';
 import 'package:nova_wheels/core/base_component/base/base_bloc/base_state.dart';
-import 'package:nova_wheels/core/base_component/image_picker_bloc/image_picker_cubit.dart';
+import 'package:nova_wheels/core/base_component/image_picker_bloc/image_picker_bloc.dart';
 import 'package:nova_wheels/features/landing/presentation/blocs/landing_bloc.dart';
 import 'package:nova_wheels/features/landing/presentation/blocs/landing_state.dart';
 import 'package:nova_wheels/features/sign_in/data/datasource/sign_in_datasource.dart';

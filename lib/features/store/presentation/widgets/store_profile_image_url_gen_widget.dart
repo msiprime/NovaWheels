@@ -1,11 +1,11 @@
 import 'package:app_ui/app_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nova_wheels/config/sl/injection_container.dart';
-import 'package:nova_wheels/core/base_component/image_picker_bloc/image_picker_cubit.dart';
+import 'package:nova_wheels/core/base_component/image_picker_bloc/image_picker_bloc.dart';
+import 'package:nova_wheels/core/datasource/core_datasource.dart';
 
-class AvatarImageUrlGeneratorWidget extends StatelessWidget {
-  const AvatarImageUrlGeneratorWidget({
+class StoreProfileImageUrlGeneratorWidget extends StatefulWidget {
+  const StoreProfileImageUrlGeneratorWidget({
     super.key,
     required this.onImageUploaded,
   });
@@ -13,16 +13,35 @@ class AvatarImageUrlGeneratorWidget extends StatelessWidget {
   final Function(String? imageUrl) onImageUploaded;
 
   @override
-  Widget build(BuildContext context) {
-    final cubit = sl.get<ImagePickerCubit>();
+  State<StoreProfileImageUrlGeneratorWidget> createState() =>
+      _StoreProfileImageUrlGeneratorWidgetState();
+}
 
-    return BlocConsumer<ImagePickerCubit, ImagePickerState>(
+class _StoreProfileImageUrlGeneratorWidgetState
+    extends State<StoreProfileImageUrlGeneratorWidget> {
+  late final ImagePickerBloc storeProfileImageBloc;
+
+  @override
+  void initState() {
+    storeProfileImageBloc = ImagePickerBloc(imageType: ImageType.storeProfile);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    storeProfileImageBloc.close();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocConsumer<ImagePickerBloc, ImagePickerState>(
       listener: (context, state) {
         if (state is ImagePickerError) {
           context.showSnackBar(state.message);
         }
         if (state is ImageUploadedToSupabase) {
-          onImageUploaded(state.imageUrl);
+          widget.onImageUploaded(state.imageUrl);
         }
       },
       builder: (context, state) {
@@ -33,7 +52,7 @@ class AvatarImageUrlGeneratorWidget extends StatelessWidget {
               if (state is ImagePickerInitial)
                 CircleAvatar(
                   radius: 60,
-                  backgroundColor: Colors.grey[200],
+                  backgroundColor: Colors.black54,
                   child: state is! ImageUploadedToSupabase
                       ? Icon(
                           Icons.person,
@@ -86,7 +105,9 @@ class AvatarImageUrlGeneratorWidget extends StatelessWidget {
                 right: 0,
                 child: Tappable.scaled(
                   onTap: () {
-                    cubit.pickImage();
+                    storeProfileImageBloc.add(PickImageEvent(
+                        // imageType: ImageType.storeProfile,
+                        ));
                   },
                   child: CircleAvatar(
                     backgroundColor: Colors.white,
@@ -105,7 +126,7 @@ class AvatarImageUrlGeneratorWidget extends StatelessWidget {
                   left: 10,
                   child: Tappable.scaled(
                     onTap: () {
-                      cubit.removeImage();
+                      storeProfileImageBloc.add(RemoveImageEvent());
                     },
                     child: CircleAvatar(
                       backgroundColor: Colors.white,
@@ -122,7 +143,7 @@ class AvatarImageUrlGeneratorWidget extends StatelessWidget {
           ),
         );
       },
-      bloc: cubit,
+      bloc: storeProfileImageBloc,
     );
   }
 }

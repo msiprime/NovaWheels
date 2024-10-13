@@ -28,8 +28,8 @@ Future<void> _initBlocs() async {
     ),
   );
 
-  /// Image Picker Cubit
-  sl.registerLazySingleton(
-    () => ImagePickerCubit(),
-  );
+  // /// Image Picker Cubit
+  // sl.registerLazySingleton(
+  //   () => ImagePickerBloc(),
+  // );
 }

@@ -1,10 +1,9 @@
-import 'dart:io';
-
 import 'package:app_ui/app_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:nova_wheels/core/base_component/base/base_widgets/app_bar.dart';
-import 'package:nova_wheels/features/store/presentation/widgets/avatar_image_url_gen_widget.dart';
+import 'package:nova_wheels/features/store/presentation/widgets/store_cover_image_url_gen_widget.dart';
+import 'package:nova_wheels/features/store/presentation/widgets/store_profile_image_url_gen_widget.dart';
 import 'package:nova_wheels/shared/utils/logger.dart';
 import 'package:nova_wheels/shared/validators/input_validators.dart';
 
@@ -27,8 +26,6 @@ class _CreateStoreScreenState extends State<CreateStoreScreen> {
     disposeTextFormControllers();
     super.dispose();
   }
-
-  File? _imageFile;
 
   late final TextEditingController _storeNameController;
   late final TextEditingController _storeDescriptionController;
@@ -54,47 +51,62 @@ class _CreateStoreScreenState extends State<CreateStoreScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Gap(16),
-              AvatarImageUrlGeneratorWidget(
-                onImageUploaded: (imageUrl) {
-                  Log.info('imageUrl: $imageUrl');
-                },
+              Stack(
+                alignment: Alignment.bottomLeft, // Align to bottom right
+                children: [
+                  // Cover Image Widget
+                  StoreCoverImageUrlGenWidget(
+                    onImageUploaded: (imageUrl) {
+                      Log.info('Cover imageUrl: $imageUrl');
+                    },
+                  ),
+                  // Profile Image Widget
+                  Positioned(
+                    left: 16,
+                    bottom: 16, // Positioning the profile picture
+                    child: StoreProfileImageUrlGeneratorWidget(
+                      onImageUploaded: (imageUrl) {
+                        Log.info('Profile imageUrl: $imageUrl');
+                      },
+                    ),
+                  ),
+                ],
               ),
-              const Gap(10),
+              const Gap(16),
               Center(
                 child: Text(
-                  'store profile picture',
+                  'Store Profile Picture',
                   style: context.titleSmall,
                 ),
               ),
               const Gap(16),
+              _buildLabel('Store Name'),
               _buildStoreNameTF(),
               const Gap(16),
+              _buildLabel('Store Description'),
               _buildStoreDescriptionTF(),
               const Gap(16),
+              _buildLabel('Store Address'),
               _buildStoreAddressTF(),
               const Gap(16),
+              _buildLabel('Store Phone Number'),
               _buildStorePhoneNumTF(),
               const Gap(16),
+              _buildLabel('Store Email Address'),
               _buildStoreEmailTF(),
               const Gap(16),
+              _buildLabel('Store Facebook Page'),
               _buildStoreFacebookTF(),
               const Gap(16),
+              _buildLabel('Store Instagram Page'),
               _buildInstagramTF(),
               const Gap(16),
+              _buildLabel('Store Twitter Page'),
               _buildStoreTwitterTF(),
               const Gap(16),
+              _buildLabel('Store Website'),
               _buildStoreWebsiteTF(),
               const Gap(16),
-              Tappable.faded(
-                  borderRadius: 8,
-                  backgroundColor: Colors.red,
-                  fadeStrength: FadeStrength.lg,
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text('Examining bullshit '),
-                  ),
-                  onTap: () async {}),
             ],
           ),
         ),
@@ -102,10 +114,20 @@ class _CreateStoreScreenState extends State<CreateStoreScreen> {
     );
   }
 
+  Text _buildLabel(String text) {
+    return Text(
+      text,
+      style: const TextStyle(
+        fontWeight: FontWeight.bold,
+        fontSize: 16,
+      ),
+    );
+  }
+
   AppTextField _buildStorePhoneNumTF() {
     return AppTextField.roundedBorder(
       textController: _storePhoneNumController,
-      labelText: 'Store Phone Number',
+      labelText: 'Phone Number',
       validator: (p0) => InputValidators.phone(p0),
     );
   }
@@ -113,56 +135,56 @@ class _CreateStoreScreenState extends State<CreateStoreScreen> {
   AppTextField _buildStoreEmailTF() {
     return AppTextField.roundedBorder(
       textController: _storeEmailController,
-      labelText: 'Store Email Address',
+      labelText: 'Email Address',
     );
   }
 
   AppTextField _buildStoreFacebookTF() {
     return AppTextField.roundedBorder(
       textController: _storeFacebookController,
-      labelText: 'Store Facebook Page',
+      labelText: 'Facebook Page',
     );
   }
 
   AppTextField _buildInstagramTF() {
     return AppTextField.roundedBorder(
       textController: _storeInstagramController,
-      labelText: 'Store Instagram Page',
+      labelText: 'Instagram Page',
     );
   }
 
   AppTextField _buildStoreTwitterTF() {
     return AppTextField.roundedBorder(
       textController: _storeTwitterController,
-      labelText: 'Store Twitter Page',
+      labelText: 'Twitter Page',
     );
   }
 
   AppTextField _buildStoreWebsiteTF() {
     return AppTextField.roundedBorder(
       textController: _storeWebsiteController,
-      labelText: 'Store Website',
+      labelText: 'Website',
     );
   }
 
   AppTextField _buildStoreAddressTF() {
     return AppTextField.roundedBorder(
       textController: _storeAddressController,
-      labelText: 'Store Address',
+      labelText: 'Address',
     );
   }
 
   AppTextField _buildStoreDescriptionTF() {
     return AppTextField.roundedBorder(
       textController: _storeDescriptionController,
-      labelText: 'Store Description',
+      labelText: 'Description',
     );
   }
 
   AppTextField _buildStoreNameTF() {
     return AppTextField.roundedBorder(
       textController: _storeNameController,
-      labelText: 'Store Name',
+      labelText: 'Name',
     );
   }
 

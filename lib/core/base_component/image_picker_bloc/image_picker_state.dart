@@ -1,4 +1,4 @@
-part of 'image_picker_cubit.dart';
+part of 'image_picker_bloc.dart';
 
 @immutable
 sealed class ImagePickerState {}
