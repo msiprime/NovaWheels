@@ -36,6 +36,7 @@ class Application extends StatelessWidget {
 
   ThemeData _buildDarkThemeData() {
     return ThemeData(
+      fontFamily: 'SFProDisplay',
       appBarTheme: const AppBarTheme(
         actionsIconTheme: IconThemeData(color: AppColorsMain.selectedBlue),
         iconTheme: IconThemeData(color: AppColorsMain.selectedBlue),
@@ -48,6 +49,7 @@ class Application extends StatelessWidget {
 
   ThemeData _buildThemeData() {
     return ThemeData(
+      fontFamily: 'SFProDisplay',
       appBarTheme: const AppBarTheme(
         actionsIconTheme: IconThemeData(color: AppColorsMain.selectedBlue),
         iconTheme: IconThemeData(color: AppColorsMain.selectedBlue),

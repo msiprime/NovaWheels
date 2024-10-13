@@ -67,6 +67,7 @@ dependencies:
   flutter_launcher_icons: ^0.14.1
   bloc_concurrency: ^0.2.5
   persistent_bottom_nav_bar: ^6.2.1
+  google_fonts: ^6.2.1
 
 dev_dependencies:
   flutter_test:
@@ -79,6 +80,18 @@ dev_dependencies:
 flutter:
   generate: true
   uses-material-design: true
+
+  fonts:
+    - family: SFProDisplay
+      fonts:
+        - asset: assets/fonts/SF-Pro-Display-Regular.otf
+          weight: 400
+        - asset: assets/fonts/SF-Pro-Display-Semibold.otf
+          weight: 600
+        - asset: assets/fonts/SF-Pro-Display-Medium.otf
+          weight: 500
+        - asset: assets/fonts/SF-Pro-Display-Thin.otf
+          weight: 200
 
   assets:
     - .env

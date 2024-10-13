@@ -2,6 +2,7 @@ import 'package:app_ui/app_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:nova_wheels/core/base_component/base/base_widgets/app_bar.dart';
+import 'package:nova_wheels/core/base_component/base/base_widgets/app_primary_button.dart';
 import 'package:nova_wheels/features/store/presentation/widgets/store_cover_image_url_gen_widget.dart';
 import 'package:nova_wheels/features/store/presentation/widgets/store_profile_image_url_gen_widget.dart';
 import 'package:nova_wheels/shared/utils/logger.dart';
@@ -106,6 +107,13 @@ class _CreateStoreScreenState extends State<CreateStoreScreen> {
               const Gap(16),
               _buildLabel('Store Website'),
               _buildStoreWebsiteTF(),
+              const Gap(16),
+              AppPrimaryButton(
+                title: 'Create Store',
+                onPressed: () {
+                  Log.info('Create Store Button Pressed');
+                },
+              ),
               const Gap(16),
             ],
           ),

@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart' show Brightness, PlatformDispatcher;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class AppThemeInstance {
   AppThemeInstance._private();
@@ -15,9 +16,6 @@ class AppThemeInstance {
   }) {
     final lightTheme = ThemeData(
       appBarTheme: const AppBarTheme(
-        // backgroundColor: ThemeMode.light == mode
-        //     ? const Color(0xFFcde8e2)
-        //     : const Color(0xff53dbc9),
         systemOverlayStyle: SystemUiOverlayStyle(
           statusBarColor: Colors.transparent,
           statusBarIconBrightness: Brightness.dark,
@@ -32,6 +30,7 @@ class AppThemeInstance {
     );
 
     final darkTheme = ThemeData(
+      fontFamily: GoogleFonts.roboto().fontFamily,
       appBarTheme: const AppBarTheme(
         // backgroundColor: ThemeMode.dark == mode ? Colors.green : Colors.greenAccent,
         systemOverlayStyle: SystemUiOverlayStyle(
