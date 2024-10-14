@@ -1,21 +1,35 @@
 part of 'injection_container.dart';
 
 Future<void> _initBlocs() async {
-  sl.registerFactory(() => BaseBloc(BaseState.initial()));
-  sl.registerFactory(
+  sl.registerLazySingleton(() => BaseBloc(BaseState.initial()));
+  sl.registerLazySingleton(
     () => LandingBloc(const LandingState(landingStatus: LandingStatus.initial)),
   );
-  sl.registerFactory(
+  sl.registerLazySingleton(
     () =>
         SignUpBloc(signUpUseCase: sl.call(), otpVerificationUseCase: sl.call()),
   );
-  sl.registerFactory(
+  sl.registerLazySingleton(
     () => SignInBloc(
-        signInUseCase: sl.call(),
-        signOutUseCase: sl.call(),
-        googleSignInUseCase: sl.call(),
-        resetPasswordUseCase: sl.call(),
-        requestOtpUseCase: sl.call(),
-        passResetOTPVerificationUseCase: sl.call()),
+      signInUseCase: sl.call(),
+      signOutUseCase: sl.call(),
+      googleSignInUseCase: sl.call(),
+      resetPasswordUseCase: sl.call(),
+      requestOtpUseCase: sl.call(),
+      passResetOTPVerificationUseCase: sl.call(),
+    ),
   );
+
+  /// vehicle bloc
+
+  sl.registerLazySingleton(
+    () => VehicleBloc(
+      vehicleUseCase: sl.call(),
+    ),
+  );
+
+  // /// Image Picker Cubit
+  // sl.registerLazySingleton(
+  //   () => ImagePickerBloc(),
+  // );
 }

@@ -4,7 +4,7 @@ import 'package:nova_wheels/shared/values/app_colors.dart';
 const primaryColorSubtitleStyle = TextStyle(
     fontSize: 14,
     fontWeight: FontWeight.w400,
-    color: AppColors.colorPrimary,
+    color: AppColorsMain.colorPrimary,
     height: 1.45);
 
 const whiteText16 = TextStyle(
@@ -57,7 +57,7 @@ const labelStyle = TextStyle(
 );
 
 final labelStyleAppPrimaryColor = labelStyle.copyWith(
-  color: AppColors.colorPrimary,
+  color: AppColorsMain.colorPrimary,
   height: 1,
 );
 
@@ -74,7 +74,7 @@ const labelStyleWhite = TextStyle(
 const cardTitleCyanStyle = TextStyle(
   fontSize: 20,
   fontWeight: FontWeight.w500,
-  color: AppColors.colorPrimary,
+  color: AppColorsMain.colorPrimary,
 );
 
 const titleStyle = TextStyle(
@@ -91,7 +91,7 @@ const settingsItemStyle = TextStyle(
 const appBarActionTextStyle = TextStyle(
   fontSize: 16,
   fontWeight: FontWeight.w600,
-  color: AppColors.colorPrimary,
+  color: AppColorsMain.colorPrimary,
 );
 
 const extraBigTitleStyle = TextStyle(

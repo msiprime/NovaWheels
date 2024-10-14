@@ -330,7 +330,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     return state.status == SignUpStatus.loading
         ? const Center(
             child: CircularProgressIndicator(
-              color: AppColors.colorPrimary,
+              color: AppColorsMain.colorPrimary,
             ),
           )
         : AppPrimaryButton(

@@ -43,4 +43,19 @@ Future<void> _initUseCases() async {
       repository: sl.call(),
     ),
   );
+
+  /// vehicle usecase
+  sl.registerLazySingleton(
+    () => VehicleUseCase(
+      vehicleRepo: sl.call(),
+    ),
+  );
+
+  /// Store usecase
+  // create store usecase
+  sl.registerLazySingleton(
+    () => CreateStoreUseCase(
+      sl.call(),
+    ),
+  );
 }

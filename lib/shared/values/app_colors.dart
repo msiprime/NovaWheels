@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-abstract class AppColors {
+abstract class AppColorsMain {
   static const Color colorPrimary = Color(0xFF000000);
   static const Color textFieldBorderColor = Color(0x1B9F9FA5);
   static const Color selectedBlue = Color(0xff007AFF);

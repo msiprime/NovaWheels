@@ -36,9 +36,10 @@ class Application extends StatelessWidget {
 
   ThemeData _buildDarkThemeData() {
     return ThemeData(
+      fontFamily: 'SFProDisplay',
       appBarTheme: const AppBarTheme(
-        actionsIconTheme: IconThemeData(color: AppColors.selectedBlue),
-        iconTheme: IconThemeData(color: AppColors.selectedBlue),
+        actionsIconTheme: IconThemeData(color: AppColorsMain.selectedBlue),
+        iconTheme: IconThemeData(color: AppColorsMain.selectedBlue),
       ),
       useMaterial3: true,
       colorScheme: darkColorScheme,
@@ -48,9 +49,10 @@ class Application extends StatelessWidget {
 
   ThemeData _buildThemeData() {
     return ThemeData(
+      fontFamily: 'SFProDisplay',
       appBarTheme: const AppBarTheme(
-        actionsIconTheme: IconThemeData(color: AppColors.selectedBlue),
-        iconTheme: IconThemeData(color: AppColors.selectedBlue),
+        actionsIconTheme: IconThemeData(color: AppColorsMain.selectedBlue),
+        iconTheme: IconThemeData(color: AppColorsMain.selectedBlue),
       ),
       useMaterial3: true,
       colorScheme: lightColorScheme,
@@ -61,8 +63,8 @@ class Application extends StatelessWidget {
           borderRadius: BorderRadius.circular(12),
         ),
         visualDensity: VisualDensity.compact,
-        selectedTileColor: AppColors.selectedBlue,
-        iconColor: AppColors.grey,
+        selectedTileColor: AppColorsMain.selectedBlue,
+        iconColor: AppColorsMain.grey,
         // textColor: AppColors.selectedBlue,
       ),
     );

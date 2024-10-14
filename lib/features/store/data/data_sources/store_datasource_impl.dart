@@ -1,0 +1,47 @@
+import 'package:dartz/dartz.dart';
+import 'package:nova_wheels/core/base_component/failure/failures.dart';
+import 'package:nova_wheels/features/store/data/data_sources/store_datasource.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+
+class StoreDataSourceImpl implements StoreDataSource {
+  final SupabaseClient supabaseClient;
+
+  StoreDataSourceImpl({required this.supabaseClient});
+
+  @override
+  Future<Either<Failure, Map<String, dynamic>>> createStore({
+    required StoreCreationParams storeCreationParams,
+  }) async {
+    try {
+      final response = await supabaseClient
+          .from('stores')
+          .insert([
+            {
+              'name': storeCreationParams.name,
+              'owner_id': supabaseClient.auth.currentUser!.id,
+              'description': storeCreationParams.description,
+              'address': storeCreationParams.address,
+              'phone_number': storeCreationParams.phoneNumber,
+              'email': storeCreationParams.email,
+              'facebook': storeCreationParams.facebook,
+              'instagram': storeCreationParams.instagram,
+              'website': storeCreationParams.website,
+              'cover_image': storeCreationParams.coverImage,
+              'profile_picture': storeCreationParams.profilePicture,
+            }
+          ])
+          .select()
+          .single();
+
+      if (response.isEmpty) {
+        return Left(ServerFailure('Failed to create store'));
+      }
+
+      return Right(response);
+    } on PostgrestException catch (e) {
+      return Left(ServerFailure(e.message));
+    } on Exception catch (e) {
+      return Left(ServerFailure(e.toString()));
+    }
+  }
+}

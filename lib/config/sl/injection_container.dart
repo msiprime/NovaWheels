@@ -23,6 +23,17 @@ import 'package:nova_wheels/features/sign_up/domain/repositories/sign_up_reposit
 import 'package:nova_wheels/features/sign_up/domain/use_cases/otp_verification_usecase.dart';
 import 'package:nova_wheels/features/sign_up/domain/use_cases/sign_up_use_case.dart';
 import 'package:nova_wheels/features/sign_up/presentation/bloc/sign_up_bloc.dart';
+import 'package:nova_wheels/features/store/data/data_sources/store_datasource.dart';
+import 'package:nova_wheels/features/store/data/data_sources/store_datasource_impl.dart';
+import 'package:nova_wheels/features/store/data/repositories/store_repo_impl.dart';
+import 'package:nova_wheels/features/store/domain/repositories/store_repo.dart';
+import 'package:nova_wheels/features/store/domain/use_cases/create_store_usecase.dart';
+import 'package:nova_wheels/features/vehicle/data/datasources/vehicle_datasource.dart';
+import 'package:nova_wheels/features/vehicle/data/datasources/vehicle_datasource_impl.dart';
+import 'package:nova_wheels/features/vehicle/data/repositories/vehicle_repo_impl.dart';
+import 'package:nova_wheels/features/vehicle/domain/repositories/vehicle_repo.dart';
+import 'package:nova_wheels/features/vehicle/domain/use_cases/vehicle_usecase.dart';
+import 'package:nova_wheels/features/vehicle/presentation/blocs/vehicle_bloc.dart';
 import 'package:nova_wheels/shared/remote_datasource/network/rest_client.dart'
     show RestClient;
 import 'package:nova_wheels/shared/utils/connection_checker/connection_checker.dart';

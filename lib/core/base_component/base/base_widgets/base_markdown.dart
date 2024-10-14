@@ -67,7 +67,7 @@ class BaseMarkdown extends StatelessWidget {
   AppBar _appBar(BuildContext context) {
     return AppBar(
       foregroundColor: context.theme.colorScheme.surface,
-      backgroundColor: AppColors.colorPrimary,
+      backgroundColor: AppColorsMain.colorPrimary,
       title: Text(screenTitle),
       centerTitle: true,
     );

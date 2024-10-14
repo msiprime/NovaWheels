@@ -162,6 +162,8 @@ class NetworkImageAttachment extends StatelessWidget {
           : (context, __) => ShimmerPlaceholder.rectangle(
                 height: height,
                 width: width,
+                highlightColorLight: Colors.grey[300]!,
+                baseColorLight: Colors.grey[100]!,
                 withAdaptiveColors: withAdaptiveColors,
                 borderRadius: borderRadius,
               ),

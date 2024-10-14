@@ -1,36 +1,34 @@
 import 'package:app_ui/app_ui.dart';
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
-import 'package:lottie/lottie.dart';
 import 'package:nova_wheels/core/base_component/base/base_widgets/sign_out_button.dart';
-import 'package:nova_wheels/shared/values/app_assets_path.dart';
+import 'package:nova_wheels/features/vehicle/presentation/widgets/all_vehicles_list_widget.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Home')),
+    return AppScaffold(
+      appBar: AppBar(
+        scrolledUnderElevation: 0,
+        elevation: 0,
+        title: Text('Welcome to Nova Wheels!'),
+        titleTextStyle: context.titleLarge,
+        // centerTitle: true,
+      ),
+      drawer: const Drawer(
+        child: Text('Drawer'),
+      ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Gap(30),
-            Text(
-              'Welcome to Nova Wheels',
-              style: context.titleLarge,
-            ),
-            LottieBuilder.asset(AppAssets.underConstructionLottie),
-            const Gap(10),
-            Text(
-              'We are currently building our application',
-              style: context.titleMedium,
-            ),
-            Spacer(),
-            SignOutButton(),
-            //Title
-          ],
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Expanded(child: AllVehiclesListWidget()),
+              SignOutButton(),
+            ],
+          ),
         ),
       ),
     );

@@ -17,6 +17,7 @@ dependencies:
   shared:
     path: packages/shared
 
+  dotted_border: ^2.0.0
   flutter_local_notifications: ^17.2.2
   cupertino_icons: ^1.0.8
   dartz: ^0.10.1
@@ -65,6 +66,8 @@ dependencies:
   flutter_native_splash: ^2.4.1
   flutter_launcher_icons: ^0.14.1
   bloc_concurrency: ^0.2.5
+  persistent_bottom_nav_bar: ^6.2.1
+  google_fonts: ^6.2.1
 
 dev_dependencies:
   flutter_test:
@@ -77,6 +80,22 @@ dev_dependencies:
 flutter:
   generate: true
   uses-material-design: true
+
+  fonts:
+    - family: SFProDisplay
+      fonts:
+        - asset: assets/fonts/SF-Pro-Display-Thin.otf
+          weight: 200
+        - asset: assets/fonts/SF-Pro-Display-Regular.otf
+          weight: 400
+        - asset: assets/fonts/SF-Pro-Display-Medium.otf
+          weight: 500
+        - asset: assets/fonts/SF-Pro-Display-Semibold.otf
+          weight: 600
+        - asset: assets/fonts/SF-Pro-Display-Bold.otf
+          weight: 700
+
+
 
   assets:
     - .env

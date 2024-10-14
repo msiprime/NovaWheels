@@ -13,6 +13,8 @@ import 'package:nova_wheels/features/sign_in/presentation/pages/sign_in_screen.d
 import 'package:nova_wheels/features/sign_in/presentation/pages/verify_otp_page.dart';
 import 'package:nova_wheels/features/sign_up/presentation/pages/sign_up_screen.dart';
 import 'package:nova_wheels/features/sign_up/presentation/widgets/otp_verification_widget.dart';
+import 'package:nova_wheels/features/store/presentation/pages/create_store_screen.dart';
+import 'package:nova_wheels/features/store/presentation/pages/store_screen.dart';
 
 class RouteGenerator {
   RouteGenerator._();
@@ -89,6 +91,30 @@ class RouteGenerator {
                 name: Routes.home,
                 path: '/${Routes.home}',
                 builder: (context, state) => const HomeScreen(),
+              ),
+            ],
+          ),
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                  name: Routes.store,
+                  path: '/${Routes.store}',
+                  builder: (context, state) => const StoreScreen(),
+                  routes: [
+                    GoRoute(
+                      path: Routes.createStore,
+                      name: Routes.createStore,
+                      builder: (context, state) => const CreateStoreScreen(),
+                    ),
+                  ]),
+            ],
+          ),
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                name: Routes.addPost,
+                path: '/${Routes.addPost}',
+                builder: (context, state) => const PlaceHolderScreen(),
               ),
             ],
           ),

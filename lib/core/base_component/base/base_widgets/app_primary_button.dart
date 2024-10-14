@@ -1,8 +1,6 @@
-import 'package:flutter/cupertino.dart';
+import 'package:app_ui/app_ui.dart';
 import 'package:flutter/material.dart';
-import 'package:nova_wheels/shared/utils/extensions/context_extension.dart';
 import 'package:nova_wheels/shared/values/app_colors.dart';
-import 'package:nova_wheels/shared/values/app_values.dart';
 
 class AppPrimaryButton extends StatelessWidget {
   final Function() onPressed;
@@ -28,35 +26,22 @@ class AppPrimaryButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return isLoading == true
         ? const CircularProgressIndicator(
-            color: AppColors.colorPrimary,
+            color: AppColorsMain.colorPrimary,
           )
         : SizedBox(
-            height: height,
-            width: width ?? context.width, // MediaQuery.of(context).size.width,
-            child: CupertinoButton(
-              padding: textStyle != null
-                  ? const EdgeInsets.symmetric(
-                      horizontal: 10, vertical: AppValues.halfPadding)
-                  : null,
-              // color: Theme.of(context).colorScheme.primary,
-              color: context.theme.colorScheme.primary,
-              onPressed:
-                  isEnabled == null || isEnabled == true ? onPressed : null,
-              child: textStyle == null
-                  ? FittedBox(
-                      child: Text(
-                        title,
-                        style: textStyle ??
-                            TextStyle(
-                              color: context.theme.colorScheme.surface,
-                              fontWeight: FontWeight.w600,
-                            ),
-                      ),
-                    )
-                  : Text(
-                      title,
-                      style: textStyle,
-                    ),
+            height: height ?? 48,
+            width: width ?? double.infinity,
+            child: Tappable.scaled(
+              scaleStrength: ScaleStrength.xxs,
+              borderRadius: 8,
+              backgroundColor: context.theme.primaryColor,
+              onTap: onPressed,
+              child: Center(
+                child: Text(title,
+                    style: textStyle ??
+                        context.theme.textTheme.titleMedium
+                            ?.copyWith(color: context.reversedAdaptiveColor)),
+              ),
             ),
           );
   }

@@ -23,7 +23,7 @@ class CustomTextSpam extends StatelessWidget {
             text: modifyValue,
             style: const TextStyle(
               fontWeight: FontWeight.bold,
-              color: AppColors.colorPrimary,
+              color: AppColorsMain.colorPrimary,
             ),
           ),
           TextSpan(
