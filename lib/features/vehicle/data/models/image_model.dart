@@ -17,7 +17,7 @@ class ImagesModel implements BaseMapper<ImageEntity> {
   }
 
   @override
-  ImageEntity mapToEntity() {
+  ImageEntity toEntity() {
     return ImageEntity(coverPhoto: coverPhoto);
   }
 }

@@ -19,4 +19,11 @@ Future<void> _initDataSources() async {
       supabaseClient: sl.call(),
     ),
   );
+
+  /// Store data source
+  sl.registerLazySingleton<StoreDataSource>(
+    () => StoreDataSourceImpl(
+      supabaseClient: sl.call(),
+    ),
+  );
 }

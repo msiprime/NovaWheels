@@ -14,8 +14,7 @@ class VehicleRepoImpl implements VehicleRepo {
     try {
       final response = await vehicleDataSource.fetchAllVehicles();
 
-      final vehicles =
-          response.map((vehicle) => vehicle.mapToEntity()).toList();
+      final vehicles = response.map((vehicle) => vehicle.toEntity()).toList();
 
       return Right(vehicles);
     } catch (e) {

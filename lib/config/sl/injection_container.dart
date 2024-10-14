@@ -3,7 +3,6 @@ import 'package:internet_connection_checker_plus/internet_connection_checker_plu
 import 'package:nova_wheels/config/supabase/secret/app_secrets.dart';
 import 'package:nova_wheels/core/base_component/base/base_bloc/base_bloc.dart';
 import 'package:nova_wheels/core/base_component/base/base_bloc/base_state.dart';
-import 'package:nova_wheels/core/base_component/image_picker_bloc/image_picker_bloc.dart';
 import 'package:nova_wheels/features/landing/presentation/blocs/landing_bloc.dart';
 import 'package:nova_wheels/features/landing/presentation/blocs/landing_state.dart';
 import 'package:nova_wheels/features/sign_in/data/datasource/sign_in_datasource.dart';
@@ -24,6 +23,11 @@ import 'package:nova_wheels/features/sign_up/domain/repositories/sign_up_reposit
 import 'package:nova_wheels/features/sign_up/domain/use_cases/otp_verification_usecase.dart';
 import 'package:nova_wheels/features/sign_up/domain/use_cases/sign_up_use_case.dart';
 import 'package:nova_wheels/features/sign_up/presentation/bloc/sign_up_bloc.dart';
+import 'package:nova_wheels/features/store/data/data_sources/store_datasource.dart';
+import 'package:nova_wheels/features/store/data/data_sources/store_datasource_impl.dart';
+import 'package:nova_wheels/features/store/data/repositories/store_repo_impl.dart';
+import 'package:nova_wheels/features/store/domain/repositories/store_repo.dart';
+import 'package:nova_wheels/features/store/domain/use_cases/create_store_usecase.dart';
 import 'package:nova_wheels/features/vehicle/data/datasources/vehicle_datasource.dart';
 import 'package:nova_wheels/features/vehicle/data/datasources/vehicle_datasource_impl.dart';
 import 'package:nova_wheels/features/vehicle/data/repositories/vehicle_repo_impl.dart';

@@ -20,7 +20,8 @@ class StoreScreen extends StatelessWidget {
             const SizedBox(
               width: double.infinity,
             ),
-            Tappable.scaled(
+            Tappable.faded(
+              fadeStrength: FadeStrength.lg,
               borderRadius: 8,
               backgroundColor: context.theme.primaryColor,
               child: Padding(

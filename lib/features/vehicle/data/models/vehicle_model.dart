@@ -76,7 +76,7 @@ class VehicleModel implements BaseMapper<VehicleEntity> {
   }
 
   @override
-  VehicleEntity mapToEntity() {
+  VehicleEntity toEntity() {
     return VehicleEntity(
       id: id,
       storeId: storeId,
