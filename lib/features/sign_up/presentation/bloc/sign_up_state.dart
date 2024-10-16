@@ -38,17 +38,18 @@ class SignUpState extends Equatable {
         isAgeValidate = true,
         otp = '';
 
-  SignUpState copyWith(
-      {SignUpStatus? status,
-      String? fullName,
-      String? email,
-      String? password,
-      String? phoneNumber,
-      String? birthdate,
-      bool? isAgeValidate = true,
-      String? errorMessage,
-      String? responseMessage,
-      String? otp}) {
+  SignUpState copyWith({
+    SignUpStatus? status,
+    String? fullName,
+    String? email,
+    String? password,
+    String? phoneNumber,
+    String? birthdate,
+    bool? isAgeValidate = true,
+    String? errorMessage,
+    String? responseMessage,
+    String? otp,
+  }) {
     return SignUpState(
         status: status ?? this.status,
         fullName: fullName ?? this.fullName,

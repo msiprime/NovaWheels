@@ -46,10 +46,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
             _emailController.text = '';
             _phoneNumberController.text = '';
             _confirmPasswordController.text = '';
+            showSnackBarMessage(
+              context,
+              state.responseMessage,
+              SnackBarMessageType.success,
+            );
             context.read<SignUpBloc>().add(SignUpStatusChange());
           } else if (state.status == SignUpStatus.failure) {
-            showSnackBarMessage(context, _appLocalizations?.failedMessage ?? "",
-                SnackBarMessageType.failure);
+            showSnackBarMessage(
+                context, state.errorMessage, SnackBarMessageType.failure);
           } else if (state.status == SignUpStatus.verifyOTP) {
             showSnackBarMessage(
                 context, state.responseMessage, SnackBarMessageType.success);

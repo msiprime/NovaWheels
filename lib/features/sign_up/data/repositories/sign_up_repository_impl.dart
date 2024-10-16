@@ -20,9 +20,28 @@ class SignUpRepositoryImp implements SignUpRepository {
     try {
       final AuthResponse response =
           await signUpDataSource.signUp(requestBody: requestBody);
-      Log.error(response.toString());
 
+      final session = response.session;
       final user = response.user;
+
+      Log.error('User: ${user?.email}, '
+          'Session: ${session?.accessToken},'
+          ' User: ${user?.identities},'
+          ' Session: ${session?.accessToken}, '
+          'confirmation: ${user?.confirmationSentAt},'
+          'identities: ${user?.identities},'
+          'confirmed at: ${user?.emailConfirmedAt},'
+          'created at: ${user?.createdAt},'
+          'updated at: ${user?.updatedAt},'
+          'user role: ${user?.role}'
+          'last sign in: ${user?.lastSignInAt}');
+
+      if (user != null &&
+          (user.identities == null ||
+              user.identities!.isEmpty ||
+              user.identities!.isEmpty)) {
+        return Left(Failure('User already exist'));
+      }
 
       if (user == null) {
         throw const ServerException('User is not created');
@@ -54,6 +73,25 @@ class SignUpRepositoryImp implements SignUpRepository {
       return Right(accessToken);
     } catch (e) {
       Log.debug(e.toString());
+      return Left(Failure(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, String>> resendOTP({
+    required String email,
+  }) async {
+    try {
+      final ResendResponse response =
+          await signUpDataSource.resendOTP(email: email);
+
+      final String? messageId = response.messageId;
+
+      if (messageId == null) {
+        return Left(Failure('OTP sending failed'));
+      }
+      return Right('OTP has sent, id: $messageId');
+    } catch (e) {
       return Left(Failure(e.toString()));
     }
   }

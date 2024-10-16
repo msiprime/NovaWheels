@@ -60,6 +60,8 @@ class SignUpValidateAgeEvent extends SignUpEvent {
   final bool isValidAge;
 }
 
+class ResendOTPSubmitted extends SignUpEvent {}
+
 class SignUpSubmitted extends SignUpEvent {}
 
 class VerifyOTPEvent extends SignUpEvent {}

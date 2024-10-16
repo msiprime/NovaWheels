@@ -1,3 +1,4 @@
+import 'package:nova_wheels/core/base_component/failure/exceptions.dart';
 import 'package:nova_wheels/shared/utils/logger.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -38,5 +39,22 @@ class SignUpDataSourceImp implements SignUpDataSource {
       email: requestBody['email'],
     );
     return response;
+  }
+
+  @override
+  Future<ResendResponse> resendOTP({
+    required String email,
+  }) async {
+    try {
+      final res = await supabaseClient.auth.resend(
+        type: OtpType.signup,
+        email: email,
+      );
+      return res;
+    } catch (e) {
+      throw ServerException(
+        e.toString(),
+      );
+    }
   }
 }

@@ -6,8 +6,11 @@ Future<void> _initBlocs() async {
     () => LandingBloc(const LandingState(landingStatus: LandingStatus.initial)),
   );
   sl.registerLazySingleton(
-    () =>
-        SignUpBloc(signUpUseCase: sl.call(), otpVerificationUseCase: sl.call()),
+    () => SignUpBloc(
+      signUpUseCase: sl.call(),
+      otpVerificationUseCase: sl.call(),
+      resendOTPUseCase: sl.call(),
+    ),
   );
   sl.registerLazySingleton(
     () => SignInBloc(
