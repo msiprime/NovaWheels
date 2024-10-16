@@ -28,6 +28,13 @@ Future<void> _initBlocs() async {
     ),
   );
 
+  /// Store bloc
+  // fetch store
+  sl.registerFactory(
+    () => FetchStoreBloc(
+      fetchUserStoreUseCase: sl.call(),
+    ),
+  );
   // /// Image Picker Cubit
   // sl.registerLazySingleton(
   //   () => ImagePickerBloc(),

@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:nova_wheels/core/base_component/failure/failures.dart';
 import 'package:nova_wheels/features/store/data/data_sources/store_datasource.dart';
+import 'package:nova_wheels/features/store/domain/params/store_creation_params.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class StoreDataSourceImpl implements StoreDataSource {
@@ -32,6 +33,26 @@ class StoreDataSourceImpl implements StoreDataSource {
           ])
           .select()
           .single();
+
+      if (response.isEmpty) {
+        return Left(ServerFailure('Failed to create store'));
+      }
+
+      return Right(response);
+    } on PostgrestException catch (e) {
+      return Left(ServerFailure(e.message));
+    } on Exception catch (e) {
+      return Left(ServerFailure(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<Map<String, dynamic>>>> fetchUserStores() async {
+    try {
+      final response = await supabaseClient
+          .from('stores')
+          .select()
+          .eq('owner_id', supabaseClient.auth.currentUser!.id);
 
       if (response.isEmpty) {
         return Left(ServerFailure('Failed to create store'));
