@@ -35,6 +35,7 @@ Future<void> _initBlocs() async {
   // fetch store
   sl.registerFactory(
     () => FetchStoreBloc(
+      fetchAllStoreUseCase: sl.call(),
       fetchUserStoreUseCase: sl.call(),
     ),
   );

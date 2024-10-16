@@ -9,4 +9,6 @@ abstract interface class StoreRepo {
   });
 
   Future<Either<Failure, List<StoreEntity>>> fetchUserStores();
+
+  Future<Either<Failure, List<StoreEntity>>> fetchAllStores();
 }

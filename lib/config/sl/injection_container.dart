@@ -29,6 +29,7 @@ import 'package:nova_wheels/features/store/data/data_sources/store_datasource_im
 import 'package:nova_wheels/features/store/data/repositories/store_repo_impl.dart';
 import 'package:nova_wheels/features/store/domain/repositories/store_repo.dart';
 import 'package:nova_wheels/features/store/domain/use_cases/create_store_usecase.dart';
+import 'package:nova_wheels/features/store/domain/use_cases/fetch_all_stores_usecase.dart';
 import 'package:nova_wheels/features/store/domain/use_cases/fetch_user_store_usecase.dart';
 import 'package:nova_wheels/features/store/presentation/blocs/fetch_store_bloc/fetch_store_bloc.dart';
 import 'package:nova_wheels/features/vehicle/data/datasources/vehicle_datasource.dart';

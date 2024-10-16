@@ -8,4 +8,6 @@ abstract interface class StoreDataSource {
   });
 
   Future<Either<Failure, List<Map<String, dynamic>>>> fetchUserStores();
+
+  Future<Either<Failure, List<Map<String, dynamic>>>> fetchAllStores();
 }
