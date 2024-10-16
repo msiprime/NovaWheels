@@ -7,9 +7,9 @@ import 'package:nova_wheels/config/sl/injection_container.dart';
 import 'package:nova_wheels/core/base_component/base/base_widgets/app_bar.dart';
 import 'package:nova_wheels/core/base_component/base/base_widgets/app_primary_button.dart';
 import 'package:nova_wheels/core/routes/routes.dart';
-import 'package:nova_wheels/features/store/data/data_sources/store_datasource.dart';
+import 'package:nova_wheels/features/store/domain/params/store_creation_params.dart';
 import 'package:nova_wheels/features/store/domain/use_cases/create_store_usecase.dart';
-import 'package:nova_wheels/features/store/presentation/blocs/create_store_cubit/create_store_cubit.dart';
+import 'package:nova_wheels/features/store/presentation/blocs/create_store_bloc/create_store_bloc.dart';
 import 'package:nova_wheels/features/store/presentation/widgets/store_cover_image_url_gen_widget.dart';
 import 'package:nova_wheels/features/store/presentation/widgets/store_profile_image_url_gen_widget.dart';
 import 'package:nova_wheels/shared/utils/logger.dart';
@@ -59,14 +59,14 @@ class _CreateStoreScreenState extends State<CreateStoreScreen> {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) =>
-          CreateStoreCubit(createStoreUseCase: sl.get<CreateStoreUseCase>()),
+          CreateStoreBloc(createStoreUseCase: sl.get<CreateStoreUseCase>()),
       child: AppScaffold(
         releaseFocus: true,
         appBar: NovaWheelsAppBar(
           title: 'Create Store',
         ),
         safeArea: true,
-        body: BlocConsumer<CreateStoreCubit, CreateStoreState>(
+        body: BlocConsumer<CreateStoreBloc, CreateStoreState>(
           listener: (context, state) {
             if (state is CreateStoreSuccess) {
               context.showSnackBar('Store Created Successfully',
@@ -150,20 +150,23 @@ class _CreateStoreScreenState extends State<CreateStoreScreen> {
                           title: 'Create Store',
                           onPressed: () {
                             if (_formKey.currentState?.validate() ?? false) {
-                              context.read<CreateStoreCubit>().createStore(
-                                    storeCreationParams: StoreCreationParams(
-                                      name: _storeNameController.text,
-                                      email: _storeEmailController.text,
-                                      phoneNumber:
-                                          _storePhoneNumController.text,
-                                      address: _storeAddressController.text,
-                                      coverImage: _storeCoverImageUrl,
-                                      description:
-                                          _storeDescriptionController.text,
-                                      facebook: _storeFacebookController.text,
-                                      instagram: _storeInstagramController.text,
-                                      profilePicture: _storeProfileImageUrl,
-                                      website: _storeWebsiteController.text,
+                              context.read<CreateStoreBloc>().add(
+                                    CreateStoreTapped(
+                                      storeCreationParams: StoreCreationParams(
+                                        name: _storeNameController.text,
+                                        email: _storeEmailController.text,
+                                        phoneNumber:
+                                            _storePhoneNumController.text,
+                                        address: _storeAddressController.text,
+                                        coverImage: _storeCoverImageUrl,
+                                        description:
+                                            _storeDescriptionController.text,
+                                        facebook: _storeFacebookController.text,
+                                        instagram:
+                                            _storeInstagramController.text,
+                                        profilePicture: _storeProfileImageUrl,
+                                        website: _storeWebsiteController.text,
+                                      ),
                                     ),
                                   );
                             }

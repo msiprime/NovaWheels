@@ -1,4 +1,4 @@
-part of 'create_store_cubit.dart';
+part of 'create_store_bloc.dart';
 
 @immutable
 sealed class CreateStoreState {
