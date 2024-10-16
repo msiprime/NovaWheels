@@ -15,12 +15,12 @@ abstract interface class SignInDataSource {
 
   Future<void> signOut();
 
-  Future<void> requestOtpForForgetPassword({
+  Future<void> requestOtpForForgetPasswordWhenNotAuthenticated({
     required Map<String, dynamic> requestBody,
   });
 
   Future<UserResponse> resetPassword({
-    required Map<String, dynamic> requestBody,
+    required String password,
   });
 
   Future<AuthResponse> verifyOTP({required Map<String, dynamic> requestBody});

@@ -113,8 +113,9 @@ class SignInRepoImp implements SignInRepository {
   Future<Either<Failure, String>> requestOtpForForgetPassword(
       {required Map<String, dynamic> requestBody}) async {
     try {
-      await signInRemoteDataSource.requestOtpForForgetPassword(
-          requestBody: requestBody);
+      await signInRemoteDataSource
+          .requestOtpForForgetPasswordWhenNotAuthenticated(
+              requestBody: requestBody);
       return const Right('OTP sent successfully');
     } on ServerException catch (e) {
       return left(Failure(e.message));
@@ -145,10 +146,10 @@ class SignInRepoImp implements SignInRepository {
 
   @override
   Future<Either<Failure, String>> resetPassword(
-      {required Map<String, dynamic> requestBody}) async {
+      {required String password}) async {
     try {
       final UserResponse user =
-          await signInRemoteDataSource.resetPassword(requestBody: requestBody);
+          await signInRemoteDataSource.resetPassword(password: password);
       if (user.user == null) {
         return left(Failure('User not found'));
       }

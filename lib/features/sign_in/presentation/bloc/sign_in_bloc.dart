@@ -292,7 +292,6 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
           );
         },
         (r) {
-          Log.error(r);
           emit(
             state.copyWith(
               status: SignInStatus.success,
@@ -308,10 +307,5 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
         ),
       );
     }
-  }
-
-  FutureOr<void> _onOtpChangeEvent(
-      OtpChangeEvent event, Emitter<SignInState> emit) {
-    emit(state.copyWith(otp: event.otp));
   }
 }

@@ -49,7 +49,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
         );
       }
       if (state.status == SignInStatus.success) {
-        context.goNamed(Routes.signIn);
+        context.goNamed(Routes.home);
       }
     }, builder: (context, state) {
       return Scaffold(
