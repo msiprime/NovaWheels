@@ -116,11 +116,12 @@ class SignInDataSourceImp implements SignInDataSource {
   }
 
   @override
-  Future<UserResponse> resetPassword(
-      {required Map<String, dynamic> requestBody}) {
+  Future<UserResponse> resetPassword({required String password}) async {
     try {
-      final res = supabaseClient.auth.updateUser(
-        UserAttributes(password: requestBody['password']),
+      final res = await supabaseClient.auth.updateUser(
+        UserAttributes(
+          password: password,
+        ),
       );
       return res;
     } catch (e) {
@@ -131,7 +132,7 @@ class SignInDataSourceImp implements SignInDataSource {
   }
 
   @override
-  Future<void> requestOtpForForgetPassword(
+  Future<void> requestOtpForForgetPasswordWhenNotAuthenticated(
       {required Map<String, dynamic> requestBody}) async {
     try {
       final res = await supabaseClient.auth.resetPasswordForEmail(

@@ -22,6 +22,6 @@ abstract interface class SignInRepository {
   });
 
   Future<Either<Failure, String>> resetPassword({
-    required Map<String, dynamic> requestBody,
+    required String password,
   });
 }
