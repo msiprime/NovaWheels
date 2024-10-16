@@ -21,6 +21,7 @@ import 'package:nova_wheels/features/sign_up/data/data_sources/sign_up_data_sour
 import 'package:nova_wheels/features/sign_up/data/repositories/sign_up_repository_impl.dart';
 import 'package:nova_wheels/features/sign_up/domain/repositories/sign_up_repositories.dart';
 import 'package:nova_wheels/features/sign_up/domain/use_cases/otp_verification_usecase.dart';
+import 'package:nova_wheels/features/sign_up/domain/use_cases/resend_otp_usecase.dart';
 import 'package:nova_wheels/features/sign_up/domain/use_cases/sign_up_use_case.dart';
 import 'package:nova_wheels/features/sign_up/presentation/bloc/sign_up_bloc.dart';
 import 'package:nova_wheels/features/store/data/data_sources/store_datasource.dart';

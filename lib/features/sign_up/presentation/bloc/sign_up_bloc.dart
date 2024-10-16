@@ -4,16 +4,18 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nova_wheels/features/sign_up/domain/use_cases/otp_verification_usecase.dart';
+import 'package:nova_wheels/features/sign_up/domain/use_cases/resend_otp_usecase.dart';
 import 'package:nova_wheels/features/sign_up/domain/use_cases/sign_up_use_case.dart';
-import 'package:nova_wheels/shared/utils/logger.dart';
 
 part 'sign_up_event.dart';
 part 'sign_up_state.dart';
 
 class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
-  SignUpBloc(
-      {required this.signUpUseCase, required this.otpVerificationUseCase})
-      : super(const SignUpState()) {
+  SignUpBloc({
+    required this.signUpUseCase,
+    required this.otpVerificationUseCase,
+    required this.resendOTPUseCase,
+  }) : super(const SignUpState()) {
     on<SignUpSubmitted>(_onSignUpSubmitted);
     on<FirstNameChangeEvent>(_onFirstNameChangeEvent);
     on<EmailChangeEvent>(_onEmailChangeEvent);
@@ -24,10 +26,12 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
     on<SignUpValidateAgeEvent>(_onValidateAgeEvent);
     on<OTPChangeEvent>(_onOTPChangeEvent);
     on<VerifyOTPEvent>(_onVerifyOTPEvent);
+    on<ResendOTPSubmitted>(_onResendOTPSubmitted);
   }
 
   final SignUpUseCase signUpUseCase;
   final OTPVerificationUseCase otpVerificationUseCase;
+  final ResendOTPUseCase resendOTPUseCase;
 
   FutureOr<void> _onFirstNameChangeEvent(
     FirstNameChangeEvent event,
@@ -107,8 +111,6 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
           );
         },
         (r) async {
-          Log.debug(r);
-
           emit(
             state.copyWith(
               status: SignUpStatus.verifyOTP,
@@ -175,6 +177,42 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
           emit(
             state.copyWith(
               status: SignUpStatus.success,
+            ),
+          );
+        },
+      );
+    } catch (e) {
+      emit(
+        state.copyWith(
+          status: SignUpStatus.failure,
+          errorMessage: e.toString(),
+        ),
+      );
+    }
+  }
+
+  FutureOr<void> _onResendOTPSubmitted(
+    ResendOTPSubmitted event,
+    Emitter<SignUpState> emit,
+  ) async {
+    try {
+      final response = await resendOTPUseCase.call(
+        email: state.email,
+      );
+      response.fold(
+        (l) {
+          emit(
+            state.copyWith(
+              status: SignUpStatus.failure,
+              errorMessage: l.message,
+            ),
+          );
+        },
+        (r) async {
+          emit(
+            state.copyWith(
+              status: SignUpStatus.verifyOTP,
+              responseMessage: r,
             ),
           );
         },
