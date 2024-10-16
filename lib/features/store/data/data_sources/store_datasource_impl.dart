@@ -65,4 +65,21 @@ class StoreDataSourceImpl implements StoreDataSource {
       return Left(ServerFailure(e.toString()));
     }
   }
+
+  @override
+  Future<Either<Failure, List<Map<String, dynamic>>>> fetchAllStores() async {
+    try {
+      final response = await supabaseClient.from('stores').select();
+
+      if (response.isEmpty) {
+        return Left(ServerFailure('Failed to create store'));
+      }
+
+      return Right(response);
+    } on PostgrestException catch (e) {
+      return Left(ServerFailure(e.message));
+    } on Exception catch (e) {
+      return Left(ServerFailure(e.toString()));
+    }
+  }
 }
