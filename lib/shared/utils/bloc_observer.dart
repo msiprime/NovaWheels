@@ -29,6 +29,6 @@ class GlobalBlocObserver extends BlocObserver {
   @override
   void onClose(BlocBase bloc) {
     super.onClose(bloc);
-    Log.verbose('${bloc.runtimeType} closed');
+    Log.info('${bloc.runtimeType} closed');
   }
 }

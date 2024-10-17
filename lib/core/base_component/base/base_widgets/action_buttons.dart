@@ -54,7 +54,7 @@ class UrgentBackButton extends _ActionButton {
     if (Navigator.of(context).canPop()) {
       Navigator.of(context).pop();
     } else {
-      context.goNamed(Routes.home);
+      context.pushReplacementNamed(Routes.home);
     }
   }
 

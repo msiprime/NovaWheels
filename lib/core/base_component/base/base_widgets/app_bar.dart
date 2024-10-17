@@ -41,7 +41,7 @@ class NovaWheelsAppBar extends StatelessWidget implements PreferredSizeWidget {
         title,
         style: context.theme.textTheme.titleMedium?.copyWith(
           // fontSize: context.width * 0.041,
-          fontWeight: FontWeight.w500,
+          fontWeight: FontWeight.w600,
         ),
       ),
     );

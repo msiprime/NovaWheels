@@ -25,8 +25,9 @@ Future<void> _initBlocs() async {
 
   /// vehicle bloc
 
-  sl.registerLazySingleton(
+  sl.registerFactory(
     () => VehicleBloc(
+      storeVehicleUsecase: sl.call(),
       vehicleUseCase: sl.call(),
     ),
   );
@@ -37,6 +38,12 @@ Future<void> _initBlocs() async {
     () => FetchStoreBloc(
       fetchAllStoreUseCase: sl.call(),
       fetchUserStoreUseCase: sl.call(),
+    ),
+  );
+  // delete store
+  sl.registerFactory(
+    () => UpdateStoreBloc(
+      deleteStoreUseCase: sl.call(),
     ),
   );
   // /// Image Picker Cubit

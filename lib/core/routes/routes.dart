@@ -9,11 +9,11 @@ class Routes {
   static const String verifyOtpPage = 'verify_otp_page';
 
   //Scaffold with navigation shell
-  static const String home = 'home';
-  static const String store = 'store';
-  static const String profile = 'profile';
-  static const String settings = 'settings';
-  static const String addPost = 'add_post';
+  static const String home = '/home';
+  static const String store = '/store';
+  static const String profile = '/profile';
+  static const String settings = '/settings';
+  static const String addPost = '/add_post';
 
   // Onboarding
   static const String onboarding = 'onboarding';
@@ -26,4 +26,7 @@ class Routes {
 
   // Store
   static const String createStore = 'create_store';
+  static const String manageStore = 'manage_store';
+  static const String generalStoreDetails = 'general-store-details';
+  static const String userStoreDetails = 'user-store-details';
 }

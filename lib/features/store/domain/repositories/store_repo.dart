@@ -11,4 +11,8 @@ abstract interface class StoreRepo {
   Future<Either<Failure, List<StoreEntity>>> fetchUserStores();
 
   Future<Either<Failure, List<StoreEntity>>> fetchAllStores();
+
+  Future<Either<Failure, List<StoreEntity>>> deleteStoreById({
+    required String storeId,
+  });
 }
