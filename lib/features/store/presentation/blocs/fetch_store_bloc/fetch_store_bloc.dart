@@ -20,14 +20,25 @@ class FetchStoreBloc extends Bloc<FetchStoreEvent, FetchStoreState> {
   })  : _fetchUserStoreUseCase = fetchUserStoreUseCase,
         _fetchAllStoreUseCase = fetchAllStoreUseCase,
         super(FetchStoreInitial()) {
-    on<AllStoreFetched>(_onAllStoreFetched);
-    on<UserStoreFetched>(_onUserStoreFetched);
-    on<FetchStoreEvent>((event, emit) {});
+    on<StoreFetched>(_onStoreFetched);
+    // on<FetchStoreEvent>((event, emit) {});
   }
 
-  FutureOr<void> _onAllStoreFetched(
-      AllStoreFetched event, Emitter<FetchStoreState> emit) async {
+  FutureOr<void> _onStoreFetched(
+      StoreFetched event, Emitter<FetchStoreState> emit) async {
     emit(FetchStoreLoading());
+
+    switch (event.type) {
+      case FetchStoreType.allStores:
+        await _fetchAllStores(emit);
+        break;
+      case FetchStoreType.userStores:
+        await _fetchUserStores(emit);
+        break;
+    }
+  }
+
+  Future<void> _fetchAllStores(Emitter<FetchStoreState> emit) async {
     try {
       final response = await _fetchAllStoreUseCase.call();
       response.fold(
@@ -42,9 +53,7 @@ class FetchStoreBloc extends Bloc<FetchStoreEvent, FetchStoreState> {
     }
   }
 
-  FutureOr<void> _onUserStoreFetched(
-      UserStoreFetched event, Emitter<FetchStoreState> emit) async {
-    emit(FetchStoreLoading());
+  _fetchUserStores(Emitter<FetchStoreState> emit) async {
     try {
       final response = await _fetchUserStoreUseCase.call();
       response.fold(

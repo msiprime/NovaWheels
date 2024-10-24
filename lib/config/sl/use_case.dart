@@ -36,6 +36,9 @@ Future<void> _initUseCases() async {
   sl.registerLazySingleton(
     () => VehicleUseCase(vehicleRepo: sl.call()),
   );
+  sl.registerLazySingleton(
+    () => VehicleByStoreUsecase(vehicleRepo: sl.call()),
+  );
 
   /// Store usecase
   // create store usecase
@@ -49,5 +52,9 @@ Future<void> _initUseCases() async {
   // fetch store usecase [all]
   sl.registerLazySingleton(
     () => FetchAllStoreUseCase(sl.call()),
+  );
+  // delete store usecase
+  sl.registerLazySingleton(
+    () => DeleteStoreUseCase(sl.call()),
   );
 }

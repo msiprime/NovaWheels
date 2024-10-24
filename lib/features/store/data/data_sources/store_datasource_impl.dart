@@ -55,7 +55,7 @@ class StoreDataSourceImpl implements StoreDataSource {
           .eq('owner_id', supabaseClient.auth.currentUser!.id);
 
       if (response.isEmpty) {
-        return Left(ServerFailure('Failed to create store'));
+        return Left(ServerFailure('No Store Found!'));
       }
 
       return Right(response);
@@ -70,6 +70,29 @@ class StoreDataSourceImpl implements StoreDataSource {
   Future<Either<Failure, List<Map<String, dynamic>>>> fetchAllStores() async {
     try {
       final response = await supabaseClient.from('stores').select();
+
+      if (response.isEmpty) {
+        return Left(ServerFailure('Failed to create store'));
+      }
+
+      return Right(response);
+    } on PostgrestException catch (e) {
+      return Left(ServerFailure(e.message));
+    } on Exception catch (e) {
+      return Left(ServerFailure(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<Map<String, dynamic>>>> deleteStoreById(
+      {required String storeId}) async {
+    try {
+      final response = await supabaseClient
+          .from('stores')
+          .delete()
+          .eq('owner_id', supabaseClient.auth.currentUser!.id)
+          .eq('id', storeId)
+          .select();
 
       if (response.isEmpty) {
         return Left(ServerFailure('Failed to create store'));

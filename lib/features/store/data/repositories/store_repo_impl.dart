@@ -59,4 +59,21 @@ class StoreRepoImpl implements StoreRepo {
       },
     );
   }
+
+  @override
+  Future<Either<Failure, List<StoreEntity>>> deleteStoreById({
+    required String storeId,
+  }) async {
+    final response = await storeDataSource.deleteStoreById(storeId: storeId);
+
+    return response.fold(
+      (failure) => Left(failure),
+      (listMapResponse) {
+        final List<StoreEntity> listStoreModel = listMapResponse
+            .map((map) => StoreModel.fromJson(map).toEntity())
+            .toList();
+        return Right(listStoreModel);
+      },
+    );
+  }
 }

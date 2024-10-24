@@ -21,4 +21,18 @@ class VehicleRepoImpl implements VehicleRepo {
       return Left(Failure(e.toString()));
     }
   }
+
+  @override
+  Future<Either<Failure, List<VehicleEntity>>> fetchAllVehiclesByStore(
+      {required String storeId}) async {
+    try {
+      final response = await vehicleDataSource.fetchAllVehicles();
+
+      final vehicles = response.map((vehicle) => vehicle.toEntity()).toList();
+
+      return Right(vehicles);
+    } catch (e) {
+      return Left(Failure(e.toString()));
+    }
+  }
 }

@@ -3,8 +3,15 @@ part of 'fetch_store_bloc.dart';
 @immutable
 sealed class FetchStoreEvent {}
 
-final class AllStoreFetched extends FetchStoreEvent {}
+final class StoreFetched extends FetchStoreEvent {
+  final FetchStoreType type;
 
-final class UserStoreFetched extends FetchStoreEvent {
-  UserStoreFetched();
+  StoreFetched({
+    required this.type,
+  });
+}
+
+enum FetchStoreType {
+  allStores,
+  userStores,
 }
