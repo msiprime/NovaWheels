@@ -5,7 +5,6 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:nova_wheels/config/sl/injection_container.dart';
-import 'package:nova_wheels/core/base_component/base/base_widgets/app_bar.dart';
 import 'package:nova_wheels/features/store/domain/entities/store_entity.dart';
 import 'package:nova_wheels/features/store/presentation/widgets/small_advertisement_card.dart';
 import 'package:nova_wheels/features/store/presentation/widgets/verification_chip.dart';
@@ -22,50 +21,71 @@ class UserStoreDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppScaffold(
-      appBar: NovaWheelsAppBar(
-        title: store.name,
-      ),
       safeArea: true,
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          _ProfileAndCoverSpace(store: store),
-          const Gap(20),
-          _NameAndDescription(store: store),
-          const Gap(10),
-          DefaultTabController(
-            length: 2,
-            child: Expanded(
-              child: Column(
-                children: [
-                  TabBar(
-                    labelColor: context.theme.primaryColor,
-                    unselectedLabelColor: Colors.grey,
-                    indicatorColor: context.theme.primaryColor,
-                    indicatorWeight: 3,
-                    tabs: const [
-                      Tab(text: 'Advertisements'),
-                      Tab(text: 'Store Info'),
-                    ],
-                  ),
-                  Expanded(
-                    child: TabBarView(
-                      children: [
-                        UserStoreAdvertisement(storeId: store.id),
-                        StoreDetailsCard(store: store),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
+      body: CustomScrollView(
+        slivers: [
+          SliverAppBar(
+            title: Text(store.name),
+            floating: false,
+            expandedHeight: 350,
+            flexibleSpace: FlexibleSpaceBar(
+              collapseMode: CollapseMode.parallax,
+              stretchModes: [StretchMode.zoomBackground],
+              titlePadding: const EdgeInsets.only(left: 16, bottom: 0),
+              background: _ProfileAndCoverSpace(store: store),
             ),
           ),
+          SliverList(
+            delegate: SliverChildBuilderDelegate(
+              childCount: 200,
+              (context, index) => ListTile(
+                title: Text('Item $index'),
+              ),
+            ),
+          )
         ],
       ),
     );
   }
 }
+
+//Column(
+//         crossAxisAlignment: CrossAxisAlignment.start,
+//         mainAxisAlignment: MainAxisAlignment.start,
+//         children: [
+//           _ProfileAndCoverSpace(store: store),
+//           const Gap(20),
+//           _NameAndDescription(store: store),
+//           const Gap(10),
+//           DefaultTabController(
+//             length: 2,
+//             child: Expanded(
+//               child: Column(
+//                 children: [
+//                   TabBar(
+//                     labelColor: context.theme.primaryColor,
+//                     unselectedLabelColor: Colors.grey,
+//                     indicatorColor: context.theme.primaryColor,
+//                     indicatorWeight: 3,
+//                     tabs: const [
+//                       Tab(text: 'Advertisements'),
+//                       Tab(text: 'Store Info'),
+//                     ],
+//                   ),
+//                   Expanded(
+//                     child: TabBarView(
+//                       children: [
+//                         UserStoreAdvertisement(storeId: store.id),
+//                         StoreDetailsCard(store: store),
+//                       ],
+//                     ),
+//                   ),
+//                 ],
+//               ),
+//             ),
+//           ),
+//         ],
+//       ),
 
 class UserStoreAdvertisement extends StatelessWidget {
   const UserStoreAdvertisement({

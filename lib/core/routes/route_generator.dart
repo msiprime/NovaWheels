@@ -161,6 +161,7 @@ class RouteGenerator {
                 name: Routes.settings,
                 path: Routes.settings,
                 builder: (context, state) => const SettingsScreen(),
+                // builder: (context, state) => DebugPanel(),
               ),
             ],
           ),

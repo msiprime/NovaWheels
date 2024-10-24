@@ -15,19 +15,20 @@ class GeneralStoreDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppScaffold(
-        appBar: NovaWheelsAppBar(
-          title: store.name,
-        ),
-        safeArea: true,
-        body: Column(
-          children: [
-            ImageAttachmentThumbnail(
-                imageUrl: store.coverImage ?? '', height: 200),
-            const Gap(10),
-            Text(store.name),
-            const Gap(10),
-            // UpdateStoreWidget(id: store.id)
-          ],
-        ));
+      appBar: NovaWheelsAppBar(
+        title: store.name,
+      ),
+      safeArea: true,
+      body: Column(
+        children: [
+          ImageAttachmentThumbnail(
+              imageUrl: store.coverImage ?? '', height: 200),
+          const Gap(10),
+          Text(store.name),
+          const Gap(10),
+          // UpdateStoreWidget(id: store.id)
+        ],
+      ),
+    );
   }
 }
