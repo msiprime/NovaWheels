@@ -32,6 +32,7 @@ class MyStoreWidget extends StatelessWidget {
           return switch (state) {
             FetchStoreInitial() => const Center(child: Text('Initializing...')),
             FetchStoreLoading() =>
+              //TODO: create shimmer loading here
               const Center(child: CircularProgressIndicator()),
             FetchStoreSuccess storeSuccess => ListView.separated(
                 physics: const NeverScrollableScrollPhysics(),
