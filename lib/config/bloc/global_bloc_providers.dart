@@ -4,7 +4,6 @@ import 'package:nova_wheels/core/base_component/base/base_bloc/base_bloc.dart';
 import 'package:nova_wheels/features/landing/presentation/blocs/landing_bloc.dart';
 import 'package:nova_wheels/features/sign_in/presentation/bloc/sign_in_bloc.dart';
 import 'package:nova_wheels/features/sign_up/presentation/bloc/sign_up_bloc.dart';
-import 'package:nova_wheels/features/store/presentation/blocs/fetch_store_bloc/fetch_store_bloc.dart';
 
 class GlobalBlocProviders {
   dynamic providers = [
@@ -12,8 +11,8 @@ class GlobalBlocProviders {
     BlocProvider(create: (_) => di.sl<LandingBloc>()),
     BlocProvider(create: (_) => di.sl<SignUpBloc>()),
     BlocProvider(create: (_) => di.sl<SignInBloc>()),
-    BlocProvider(
-        create: (_) => di.sl<FetchStoreBloc>()
-          ..add(StoreFetched(type: FetchStoreType.allStores))),
+    // BlocProvider(
+    //     create: (_) => di.sl<FetchStoreBloc>()
+    //       ..add(StoreFetched(type: FetchStoreType.allStores))),
   ];
 }
