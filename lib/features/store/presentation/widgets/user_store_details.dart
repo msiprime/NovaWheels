@@ -26,106 +26,154 @@ class UserStoreDetails extends StatelessWidget {
         length: 3,
         child: CustomScrollView(
           slivers: [
-            SliverAppBar(
-              title: Text(store.name),
-              floating: false,
-              expandedHeight: 350,
-              flexibleSpace: FlexibleSpaceBar(
-                collapseMode: CollapseMode.parallax,
-                stretchModes: [StretchMode.zoomBackground],
-                titlePadding: const EdgeInsets.only(left: 16, bottom: 0),
-                background: _ProfileAndCoverSpace(store: store),
-              ),
-            ),
+            StoreAppBar(store: store),
             SliverPersistentHeader(
               pinned: true,
               delegate: _SliverTabBarDelegate(
-                TabBar(
-                  labelColor: Colors.black,
-                  indicatorColor: Colors.blue,
-                  tabs: [
-                    Tab(text: 'Advertisements'),
-                    Tab(text: 'Statistics'),
-                    Tab(text: 'Store Details'),
-                  ],
-                ),
+                _buildTabBarSection(),
               ),
             ),
             SliverFillRemaining(
               child: TabBarView(
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      children: [
-                        Expanded(
-                          child: ListView.builder(
-                            itemCount: 10,
-                            itemBuilder: (context, index) => Container(
-                              height: 300,
-                              margin: const EdgeInsets.symmetric(vertical: 8.0),
-                              color: Colors.blueGrey[100 * ((index % 8) + 1)],
-                              child:
-                                  Center(child: Text('Advertisement $index')),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  // SingleChildScrollView(
-                  //   // physics: NeverScrollableScrollPhysics(),
-                  //   child: Column(
-                  //     children: List.generate(
-                  //       5,
-                  //       (index) => Container(
-                  //         height: 300,
-                  //         margin: const EdgeInsets.symmetric(vertical: 8.0),
-                  //         color: Colors.blueGrey[100 * ((index % 8) + 1)],
-                  //         child: Center(child: Text('Advertisement $index')),
-                  //       ),
-                  //     ),
-                  //   ),
-                  // ),
+                  // Tab 1: Advertisements
+                  _StoreAdvertisementsTab(store: store),
                   // Tab 2: Statistics
-                  Center(
-                    child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text('Total Cars: 50'),
-                          Text('Cars for Rent: 20'),
-                          Text('Cars for Sale: 30'),
-                          Text('Services Available: 5'),
-                        ],
-                      ),
-                    ),
-                  ),
+                  _StoreStatisticsTab(store: store),
                   // Tab 3: Store Details
-                  Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text('Store Owner}',
-                            style: Theme.of(context).textTheme.titleMedium),
-                        SizedBox(height: 8),
-                        Text('Description:',
-                            style: Theme.of(context).textTheme.titleSmall),
-                        Text(store.description ?? ''),
-                        SizedBox(height: 16),
-                        Text('Contact Information:',
-                            style: Theme.of(context).textTheme.titleSmall),
-                        Text('contact info'),
-                      ],
-                    ),
-                  ),
+                  _StoreDetailsTab(store: store),
                 ],
               ),
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  TabBar _buildTabBarSection() {
+    return TabBar(
+      labelColor: Colors.black,
+      indicatorColor: Colors.blue,
+      tabs: [
+        Tab(text: 'Advertisements'),
+        Tab(text: 'Statistics'),
+        Tab(text: 'Store Details'),
+      ],
+    );
+  }
+}
+
+class StoreAppBar extends StatelessWidget {
+  const StoreAppBar({
+    super.key,
+    required this.store,
+  });
+
+  final StoreEntity store;
+
+  @override
+  Widget build(BuildContext context) {
+    return SliverAppBar(
+      title: Text(store.name),
+      floating: false,
+      expandedHeight: 350,
+      flexibleSpace: FlexibleSpaceBar(
+        collapseMode: CollapseMode.parallax,
+        stretchModes: [StretchMode.zoomBackground],
+        titlePadding: const EdgeInsets.only(left: 16, bottom: 0),
+        background: _ProfileAndCoverSpace(store: store),
+      ),
+    );
+  }
+}
+
+class _StoreAdvertisementsTab extends StatelessWidget {
+  const _StoreAdvertisementsTab({
+    required this.store,
+  });
+
+  final StoreEntity store;
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text('Total Cars: 50'),
+            Text('Cars for Rent: 20'),
+            Text('Cars for Sale: 30'),
+            Text('Services Available: 5'),
+            Expanded(
+              child: ListView.builder(
+                itemCount: 10,
+                itemBuilder: (context, index) => Container(
+                  height: 300,
+                  margin: const EdgeInsets.symmetric(vertical: 8.0),
+                  color: Colors.blueGrey[100 * ((index % 8) + 1)],
+                  child: Center(child: Text('Advertisement $index')),
+                ),
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _StoreStatisticsTab extends StatelessWidget {
+  const _StoreStatisticsTab({
+    required this.store,
+  });
+
+  final StoreEntity store;
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text('Total Cars: 50'),
+            Text('Cars for Rent: 20'),
+            Text('Cars for Sale: 30'),
+            Text('Services Available: 5'),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _StoreDetailsTab extends StatelessWidget {
+  const _StoreDetailsTab({
+    required this.store,
+  });
+
+  final StoreEntity store;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text('Store Owner}', style: Theme.of(context).textTheme.titleMedium),
+          SizedBox(height: 8),
+          Text('Description:', style: Theme.of(context).textTheme.titleSmall),
+          Text(store.description ?? ''),
+          SizedBox(height: 16),
+          Text('Contact Information:',
+              style: Theme.of(context).textTheme.titleSmall),
+          Text('contact info'),
+        ],
       ),
     );
   }
