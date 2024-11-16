@@ -51,7 +51,7 @@ Future<void> _initUseCases() async {
   );
   // fetch store usecase [all]
   sl.registerLazySingleton(
-    () => FetchAllStoreUseCase(sl.call()),
+    () => FetchPublicStoreUseCase(sl.call()),
   );
   // delete store usecase
   sl.registerLazySingleton(

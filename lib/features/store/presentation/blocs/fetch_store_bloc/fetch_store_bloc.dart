@@ -12,11 +12,11 @@ part 'fetch_store_state.dart';
 
 class FetchStoreBloc extends Bloc<FetchStoreEvent, FetchStoreState> {
   final FetchUserStoreUseCase _fetchUserStoreUseCase;
-  final FetchAllStoreUseCase _fetchAllStoreUseCase;
+  final FetchPublicStoreUseCase _fetchAllStoreUseCase;
 
   FetchStoreBloc({
     required FetchUserStoreUseCase fetchUserStoreUseCase,
-    required FetchAllStoreUseCase fetchAllStoreUseCase,
+    required FetchPublicStoreUseCase fetchAllStoreUseCase,
   })  : _fetchUserStoreUseCase = fetchUserStoreUseCase,
         _fetchAllStoreUseCase = fetchAllStoreUseCase,
         super(FetchStoreInitial()) {

@@ -103,10 +103,6 @@ class _StoreAdvertisementsTab extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text('Total Cars: 50'),
-            Text('Cars for Rent: 20'),
-            Text('Cars for Sale: 30'),
-            Text('Services Available: 5'),
             Expanded(
               child: ListView.builder(
                 itemCount: 10,
@@ -137,15 +133,54 @@ class _StoreStatisticsTab extends StatelessWidget {
     return Center(
       child: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text('Total Cars: 50'),
-            Text('Cars for Rent: 20'),
-            Text('Cars for Sale: 30'),
-            Text('Services Available: 5'),
-          ],
+        child: Card(
+          elevation: 4,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(24.0),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Summary',
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        fontWeight: FontWeight.bold,
+                      ),
+                ),
+                const SizedBox(height: 16),
+                _buildStatisticRow('Total Cars:', '50'),
+                _buildStatisticRow('Cars for Rent:', '20'),
+                _buildStatisticRow('Cars for Sale:', '30'),
+                _buildStatisticRow('Services Available:', '5'),
+              ],
+            ),
+          ),
         ),
+      ),
+    );
+  }
+
+  Widget _buildStatisticRow(String title, String value) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 4.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            title,
+            style: const TextStyle(fontSize: 16),
+          ),
+          Text(
+            value,
+            style: const TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -162,19 +197,79 @@ class _StoreDetailsTab extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(16.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text('Store Owner}', style: Theme.of(context).textTheme.titleMedium),
-          SizedBox(height: 8),
-          Text('Description:', style: Theme.of(context).textTheme.titleSmall),
-          Text(store.description ?? ''),
-          SizedBox(height: 16),
-          Text('Contact Information:',
-              style: Theme.of(context).textTheme.titleSmall),
-          Text('contact info'),
-        ],
+      child: Card(
+        elevation: 4,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(24.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _buildHeader(
+                context,
+                title: 'Store Owner',
+                value: store.ownerId ?? 'Unknown',
+              ),
+              const Divider(thickness: 1),
+              const SizedBox(height: 16),
+              _buildSection(
+                context,
+                title: 'Description',
+                content: store.description ?? 'No description available.',
+              ),
+              const SizedBox(height: 16),
+              _buildSection(
+                context,
+                title: 'Contact Information',
+                content:
+                    store.phoneNumber ?? 'No contact information available.',
+              ),
+            ],
+          ),
+        ),
       ),
+    );
+  }
+
+  Widget _buildHeader(BuildContext context,
+      {required String title, required String value}) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          title,
+          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                fontWeight: FontWeight.bold,
+              ),
+        ),
+        const SizedBox(height: 8),
+        Text(
+          value,
+          style: Theme.of(context).textTheme.titleMedium,
+        ),
+      ],
+    );
+  }
+
+  Widget _buildSection(BuildContext context,
+      {required String title, required String content}) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          title,
+          style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                fontWeight: FontWeight.bold,
+              ),
+        ),
+        const SizedBox(height: 8),
+        Text(
+          content,
+          style: Theme.of(context).textTheme.titleMedium,
+        ),
+      ],
     );
   }
 }
