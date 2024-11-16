@@ -6,8 +6,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:nova_wheels/config/sl/injection_container.dart';
 import 'package:nova_wheels/features/store/domain/entities/store_entity.dart';
-import 'package:nova_wheels/features/store/presentation/widgets/small_advertisement_card.dart';
-import 'package:nova_wheels/features/store/presentation/widgets/verification_chip.dart';
+import 'package:nova_wheels/features/store/shared/widget/small_advertisement_card.dart';
+import 'package:nova_wheels/features/store/shared/widget/verification_chip.dart';
 import 'package:nova_wheels/features/vehicle/presentation/blocs/vehicle_bloc.dart';
 
 class UserStoreDetails extends StatelessWidget {

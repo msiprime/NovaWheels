@@ -6,7 +6,9 @@ import 'package:nova_wheels/config/sl/injection_container.dart';
 import 'package:nova_wheels/core/base_component/base/base_widgets/app_bar.dart';
 import 'package:nova_wheels/core/routes/routes.dart';
 import 'package:nova_wheels/features/store/presentation/blocs/fetch_store_bloc/fetch_store_bloc.dart';
-import 'package:nova_wheels/features/store/presentation/widgets/my_store_widget.dart';
+import 'package:nova_wheels/features/store/shared/widget/my_store_widget.dart';
+
+import '../../shared/store_type_enum.dart';
 
 class StoreScreen extends StatelessWidget {
   const StoreScreen({super.key});

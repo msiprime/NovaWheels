@@ -8,10 +8,10 @@ import 'package:nova_wheels/features/store/domain/use_cases/delete_store_usecase
 part 'update_store_event.dart';
 part 'update_store_state.dart';
 
-class UpdateStoreBloc extends Bloc<UpdateStoreEvent, UpdateStoreState> {
+class UserStoreUpdateBloc extends Bloc<UpdateStoreEvent, UpdateStoreState> {
   final DeleteStoreUseCase _deleteStoreUseCase;
 
-  UpdateStoreBloc({required DeleteStoreUseCase deleteStoreUseCase})
+  UserStoreUpdateBloc({required DeleteStoreUseCase deleteStoreUseCase})
       : _deleteStoreUseCase = deleteStoreUseCase,
         super(UpdateStoreInitial()) {
     on<DeleteStoreStarted>(_onDeleteStoreStarted);

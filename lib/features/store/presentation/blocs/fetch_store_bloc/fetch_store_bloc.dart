@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nova_wheels/features/store/domain/entities/store_entity.dart';
 import 'package:nova_wheels/features/store/domain/use_cases/fetch_all_stores_usecase.dart';
 import 'package:nova_wheels/features/store/domain/use_cases/fetch_user_store_usecase.dart';
+import 'package:nova_wheels/features/store/shared/store_type_enum.dart';
 import 'package:nova_wheels/shared/utils/logger.dart';
 
 part 'fetch_store_event.dart';

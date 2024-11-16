@@ -10,8 +10,3 @@ final class StoreFetched extends FetchStoreEvent {
     required this.type,
   });
 }
-
-enum FetchStoreType {
-  allStores,
-  userStores,
-}

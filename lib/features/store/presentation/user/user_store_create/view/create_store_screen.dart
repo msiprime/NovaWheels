@@ -10,8 +10,8 @@ import 'package:nova_wheels/core/routes/routes.dart';
 import 'package:nova_wheels/features/store/domain/params/store_creation_params.dart';
 import 'package:nova_wheels/features/store/domain/use_cases/create_store_usecase.dart';
 import 'package:nova_wheels/features/store/presentation/user/user_store_create/bloc/create_store_bloc.dart';
-import 'package:nova_wheels/features/store/presentation/widgets/store_cover_image_url_gen_widget.dart';
-import 'package:nova_wheels/features/store/presentation/widgets/store_profile_image_url_gen_widget.dart';
+import 'package:nova_wheels/features/store/shared/widget/store_cover_image_url_gen_widget.dart';
+import 'package:nova_wheels/features/store/shared/widget/store_profile_image_url_gen_widget.dart';
 import 'package:nova_wheels/shared/utils/logger.dart';
 import 'package:nova_wheels/shared/validators/input_validators.dart';
 

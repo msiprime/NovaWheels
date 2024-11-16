@@ -42,7 +42,7 @@ Future<void> _initBlocs() async {
   );
   // delete store
   sl.registerFactory(
-    () => UpdateStoreBloc(
+    () => UserStoreUpdateBloc(
       deleteStoreUseCase: sl.call(),
     ),
   );

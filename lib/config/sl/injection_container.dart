@@ -33,7 +33,7 @@ import 'package:nova_wheels/features/store/domain/use_cases/delete_store_usecase
 import 'package:nova_wheels/features/store/domain/use_cases/fetch_all_stores_usecase.dart';
 import 'package:nova_wheels/features/store/domain/use_cases/fetch_user_store_usecase.dart';
 import 'package:nova_wheels/features/store/presentation/blocs/fetch_store_bloc/fetch_store_bloc.dart';
-import 'package:nova_wheels/features/store/presentation/blocs/update_store_bloc/update_store_bloc.dart';
+import 'package:nova_wheels/features/store/presentation/user/user_store_update/bloc/update_store_bloc.dart';
 import 'package:nova_wheels/features/vehicle/data/datasources/vehicle_datasource.dart';
 import 'package:nova_wheels/features/vehicle/data/datasources/vehicle_datasource_impl.dart';
 import 'package:nova_wheels/features/vehicle/data/repositories/vehicle_repo_impl.dart';
