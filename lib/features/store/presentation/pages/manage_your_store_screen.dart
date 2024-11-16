@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:nova_wheels/core/base_component/base/base_widgets/app_bar.dart';
 import 'package:nova_wheels/core/routes/routes.dart';
-import 'package:nova_wheels/features/store/shared/store_type_enum.dart';
-import 'package:nova_wheels/features/store/shared/widget/my_store_widget.dart';
 
 class ManageOwnedStoreScreen extends StatelessWidget {
   const ManageOwnedStoreScreen({super.key});
@@ -18,7 +16,7 @@ class ManageOwnedStoreScreen extends StatelessWidget {
       safeArea: true,
       body: Column(
         children: [
-          MyStoreWidget(type: FetchStoreType.userStores),
+          // MyStoreWidget(type: FetchStoreType.userStores),
           Center(
             child: Tappable.faded(
               throttle: false,

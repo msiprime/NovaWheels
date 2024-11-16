@@ -22,6 +22,7 @@ class UserStoreFetchBloc
 
   FutureOr<void> _onUserStoreFetched(
       UserStoreFetched event, Emitter<UserStoreFetchState> emit) async {
+    emit(UserStoreFetchLoading());
     try {
       final response = await _fetchUserStoreUseCase.call();
       response.fold(

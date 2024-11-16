@@ -18,8 +18,8 @@ import 'package:nova_wheels/features/store/domain/entities/store_entity.dart';
 import 'package:nova_wheels/features/store/presentation/pages/manage_your_store_screen.dart';
 import 'package:nova_wheels/features/store/presentation/pages/store_screen.dart';
 import 'package:nova_wheels/features/store/presentation/user/user_store_create/view/create_store_screen.dart';
+import 'package:nova_wheels/features/store/presentation/user/user_store_fetch/widget/user_store_details_widget.dart';
 import 'package:nova_wheels/features/store/shared/widget/general_store_details_widget.dart';
-import 'package:nova_wheels/features/store/shared/widget/user_store_details.dart';
 
 class RouteGenerator {
   RouteGenerator._();
