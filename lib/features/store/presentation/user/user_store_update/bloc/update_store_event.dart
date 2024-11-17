@@ -3,8 +3,14 @@ part of 'update_store_bloc.dart';
 @immutable
 sealed class UpdateStoreEvent {}
 
-class DeleteStoreStarted extends UpdateStoreEvent {
+class DeleteStorePressed extends UpdateStoreEvent {
   final String storeId;
 
-  DeleteStoreStarted({required this.storeId});
+  DeleteStorePressed({required this.storeId});
+}
+
+class UpdateStoreStarted extends UpdateStoreEvent {
+  final StoreEntity storeEntity;
+
+  UpdateStoreStarted({required this.storeEntity});
 }

@@ -15,10 +15,11 @@ import 'package:nova_wheels/features/sign_in/presentation/pages/verify_otp_page.
 import 'package:nova_wheels/features/sign_up/presentation/pages/sign_up_screen.dart';
 import 'package:nova_wheels/features/sign_up/presentation/widgets/otp_verification_widget.dart';
 import 'package:nova_wheels/features/store/domain/entities/store_entity.dart';
-import 'package:nova_wheels/features/store/presentation/pages/manage_your_store_screen.dart';
-import 'package:nova_wheels/features/store/presentation/pages/store_screen.dart';
+import 'package:nova_wheels/features/store/presentation/public/public_store/view/public_store_screen.dart';
 import 'package:nova_wheels/features/store/presentation/user/user_store_create/view/create_store_screen.dart';
+import 'package:nova_wheels/features/store/presentation/user/user_store_fetch/view/user_stores_screen.dart';
 import 'package:nova_wheels/features/store/presentation/user/user_store_fetch/widget/user_store_details_widget.dart';
+import 'package:nova_wheels/features/store/presentation/user/user_store_update/view/user_store_update_page.dart';
 import 'package:nova_wheels/features/store/shared/widget/general_store_details_widget.dart';
 
 class RouteGenerator {
@@ -106,22 +107,30 @@ class RouteGenerator {
               GoRoute(
                   path: Routes.store,
                   name: Routes.store,
-                  builder: (context, state) => const StoreScreen(),
+                  builder: (context, state) => const PublicStoreScreen(),
                   routes: [
                     GoRoute(
-                        path: Routes.manageStore,
-                        name: Routes.manageStore,
-                        builder: (context, state) =>
-                            const ManageOwnedStoreScreen(),
-                        routes: [
-                          GoRoute(
-                            path: Routes.userStoreDetails,
-                            name: Routes.userStoreDetails,
-                            builder: (context, state) => UserStoreDetails(
-                              store: state.extra as StoreEntity,
-                            ),
+                      path: Routes.manageStore,
+                      name: Routes.manageStore,
+                      builder: (context, state) => const UserStoresScreen(),
+                      routes: [
+                        GoRoute(
+                          path: Routes.userStoreDetails,
+                          name: Routes.userStoreDetails,
+                          builder: (context, state) => UserStoreDetails(
+                            store: state.extra as StoreEntity,
                           ),
-                        ]),
+                          routes: [
+                            GoRoute(
+                              path: UserStoreUpdatePage.routeName,
+                              name: UserStoreUpdatePage.routeName,
+                              builder: (context, state) =>
+                                  UserStoreUpdatePage(),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                     GoRoute(
                       path: Routes.generalStoreDetails,
                       name: Routes.generalStoreDetails,

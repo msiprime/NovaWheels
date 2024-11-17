@@ -15,6 +15,8 @@ class Routes {
   static const String settings = '/settings';
   static const String addPost = '/add_post';
 
+  // store
+
   // Onboarding
   static const String onboarding = 'onboarding';
   static const String introduction = 'introduction';

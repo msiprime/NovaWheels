@@ -10,19 +10,20 @@ part 'public_store_event.dart';
 part 'public_store_state.dart';
 
 class PublicStoreBloc extends Bloc<PublicStoreEvent, PublicStoreState> {
-  final FetchPublicStoreUseCase _fetchAllStoreUseCase;
+  final FetchPublicStoreUseCase _fetchPublicStoreUseCase;
 
   PublicStoreBloc({
     required FetchPublicStoreUseCase fetchPublicStoreUseCase,
-  })  : _fetchAllStoreUseCase = fetchPublicStoreUseCase,
+  })  : _fetchPublicStoreUseCase = fetchPublicStoreUseCase,
         super(PublicStoreInitial()) {
     on<PublicStoreFetched>(_onPublicStoreFetched);
   }
 
   FutureOr<void> _onPublicStoreFetched(
       PublicStoreFetched event, Emitter<PublicStoreState> emit) async {
+    emit(PublicStoreLoading());
     try {
-      final response = await _fetchAllStoreUseCase.call();
+      final response = await _fetchPublicStoreUseCase.call();
       response.fold(
         (l) => emit(PublicStoreFailure(errorMessage: l.message)),
         (r) => emit(PublicStoreSuccess(storeEntities: r)),

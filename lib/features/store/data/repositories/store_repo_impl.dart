@@ -46,8 +46,8 @@ class StoreRepoImpl implements StoreRepo {
   }
 
   @override
-  Future<Either<Failure, List<StoreEntity>>> fetchAllStores() async {
-    final response = await storeDataSource.fetchAllStores();
+  Future<Either<Failure, List<StoreEntity>>> fetchPublicStores() async {
+    final response = await storeDataSource.fetchPublicStores();
 
     return response.fold(
       (failure) => Left(failure),

@@ -34,15 +34,9 @@ Future<void> _initBlocs() async {
 
   /// Store bloc
   // fetch store
-  sl.registerFactory(
-    () => FetchStoreBloc(
-      fetchAllStoreUseCase: sl.call(),
-      fetchUserStoreUseCase: sl.call(),
-    ),
-  );
   // delete store
   sl.registerFactory(
-    () => UserStoreUpdateBloc(
+    () => UpdateStoreBloc(
       deleteStoreUseCase: sl.call(),
     ),
   );

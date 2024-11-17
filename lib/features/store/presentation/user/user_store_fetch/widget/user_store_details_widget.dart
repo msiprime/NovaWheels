@@ -3,9 +3,10 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gap/gap.dart';
 import 'package:nova_wheels/config/sl/injection_container.dart';
+import 'package:nova_wheels/core/base_component/base/base_widgets/app_primary_button.dart';
 import 'package:nova_wheels/features/store/domain/entities/store_entity.dart';
+import 'package:nova_wheels/features/store/presentation/user/user_store_update/widget/store_deletion_widget.dart';
 import 'package:nova_wheels/features/store/shared/widget/small_advertisement_card.dart';
 import 'package:nova_wheels/features/store/shared/widget/verification_chip.dart';
 import 'package:nova_wheels/features/vehicle/presentation/blocs/vehicle_bloc.dart';
@@ -204,29 +205,39 @@ class _StoreDetailsTab extends StatelessWidget {
         ),
         child: Padding(
           padding: const EdgeInsets.all(24.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              _buildHeader(
-                context,
-                title: 'Store Owner',
-                value: store.ownerId ?? 'Unknown',
-              ),
-              const Divider(thickness: 1),
-              const SizedBox(height: 16),
-              _buildSection(
-                context,
-                title: 'Description',
-                content: store.description ?? 'No description available.',
-              ),
-              const SizedBox(height: 16),
-              _buildSection(
-                context,
-                title: 'Contact Information',
-                content:
-                    store.phoneNumber ?? 'No contact information available.',
-              ),
-            ],
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _buildHeader(
+                  context,
+                  title: 'Store Owner',
+                  value: store.ownerId ?? 'Unknown',
+                ),
+                const Divider(thickness: 1),
+                const SizedBox(height: 16),
+                _buildSection(
+                  context,
+                  title: 'Description',
+                  content: store.description ?? 'No description available.',
+                ),
+                const SizedBox(height: 16),
+                _buildSection(
+                  context,
+                  title: 'Contact Information',
+                  content:
+                      store.phoneNumber ?? 'No contact information available.',
+                ),
+                const SizedBox(height: 20),
+                AppSecondaryButton(
+                  height: 40,
+                  onPressed: () {},
+                  title: "Update Store",
+                ),
+                const SizedBox(height: 16),
+                StoreDeletionWidget(storeId: store.id),
+              ],
+            ),
           ),
         ),
       ),
@@ -440,39 +451,6 @@ class StoreDetailsCard extends StatelessWidget {
               ),
             ),
           ),
-        ],
-      ),
-    );
-  }
-}
-
-class _NameAndDescription extends StatelessWidget {
-  const _NameAndDescription({
-    required this.store,
-  });
-
-  final StoreEntity store;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            store.name,
-            style: context.titleLarge?.copyWith(
-              fontWeight: FontWeight.bold,
-              color: context.theme.primaryColor.withOpacity(0.8),
-            ),
-          ),
-          Text(
-            store.description ?? '',
-            style: context.titleMedium,
-          ),
-          const Gap(10),
-          const Divider(),
         ],
       ),
     );

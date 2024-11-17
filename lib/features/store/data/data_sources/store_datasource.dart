@@ -9,7 +9,7 @@ abstract interface class StoreDataSource {
 
   Future<Either<Failure, List<Map<String, dynamic>>>> fetchUserStores();
 
-  Future<Either<Failure, List<Map<String, dynamic>>>> fetchAllStores();
+  Future<Either<Failure, List<Map<String, dynamic>>>> fetchPublicStores();
 
   Future<Either<Failure, List<Map<String, dynamic>>>> deleteStoreById({
     required String storeId,

@@ -23,6 +23,8 @@ final class UpdateStoreError extends UpdateStoreState {
   });
 }
 
+/// for deleting store
+
 final class DeleteStoreLoading extends UpdateStoreState {}
 
 final class DeleteStoreSuccess extends UpdateStoreState {}

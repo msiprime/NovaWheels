@@ -67,12 +67,13 @@ class StoreDataSourceImpl implements StoreDataSource {
   }
 
   @override
-  Future<Either<Failure, List<Map<String, dynamic>>>> fetchAllStores() async {
+  Future<Either<Failure, List<Map<String, dynamic>>>>
+      fetchPublicStores() async {
     try {
       final response = await supabaseClient.from('stores').select();
 
       if (response.isEmpty) {
-        return Left(ServerFailure('Failed to create store'));
+        return Left(ServerFailure('No Store Found!'));
       }
 
       return Right(response);

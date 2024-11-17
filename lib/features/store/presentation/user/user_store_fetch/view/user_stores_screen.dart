@@ -2,7 +2,11 @@ import 'package:app_ui/app_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 import 'package:nova_wheels/config/sl/injection_container.dart';
+import 'package:nova_wheels/core/base_component/base/base_widgets/app_bar.dart';
+import 'package:nova_wheels/core/base_component/base/base_widgets/app_primary_button.dart';
+import 'package:nova_wheels/core/routes/routes.dart';
 import 'package:nova_wheels/features/store/data/data_sources/store_datasource_impl.dart';
 import 'package:nova_wheels/features/store/data/repositories/store_repo_impl.dart';
 import 'package:nova_wheels/features/store/domain/use_cases/fetch_user_store_usecase.dart';
@@ -38,34 +42,52 @@ class UserStoresView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppScaffold(
+        appBar: NovaWheelsAppBar(
+          title: 'Your Stores',
+        ),
         body: BlocBuilder<UserStoreFetchBloc, UserStoreFetchState>(
-      builder: (context, state) {
-        return switch (state) {
-          UserStoreFetchInitial() =>
-            const Center(child: Text('Initializing...')),
-          UserStoreFetchLoading() =>
-            //TODO: create shimmer loading here
-            const Center(child: CircularProgressIndicator()),
-          UserStoreFetchSuccess storeSuccess => ListView.separated(
-              physics: const NeverScrollableScrollPhysics(),
-              separatorBuilder: (context, index) => const Gap(10),
-              padding: const EdgeInsets.all(8),
-              shrinkWrap: true,
-              itemCount: storeSuccess.stores.length,
-              itemBuilder: (context, index) {
-                final store = storeSuccess.stores[index];
-                return StoreFrontWidget(
-                  store: store,
-                  type: FetchStoreType.userStores,
-                  // type: FetchStoreType.userStores,
-                );
-              },
-            ),
-          UserStoreFetchFailure failure => Center(
-              child: Text(failure.errorMessage),
-            ),
-        };
-      },
-    ));
+          builder: (context, state) {
+            return Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                children: [
+                  switch (state) {
+                    UserStoreFetchInitial() =>
+                      const Center(child: Text('Initializing...')),
+                    UserStoreFetchLoading() =>
+                      //TODO: create shimmer loading here
+                      const Center(child: CircularProgressIndicator()),
+                    UserStoreFetchSuccess storeSuccess => Expanded(
+                        child: ListView.separated(
+                          physics: const NeverScrollableScrollPhysics(),
+                          separatorBuilder: (context, index) => const Gap(10),
+                          padding: const EdgeInsets.all(8),
+                          shrinkWrap: true,
+                          itemCount: storeSuccess.stores.length,
+                          itemBuilder: (context, index) {
+                            final store = storeSuccess.stores[index];
+                            return StoreFrontWidget(
+                              store: store,
+                              type: FetchStoreType.userStores,
+                              // type: FetchStoreType.userStores,
+                            );
+                          },
+                        ),
+                      ),
+                    UserStoreFetchFailure failure => Center(
+                        child: Text(failure.errorMessage),
+                      ),
+                  },
+                  AppPrimaryButton(
+                    onPressed: () {
+                      context.goNamed(Routes.createStore);
+                    },
+                    title: "Create Store",
+                  ),
+                ],
+              ),
+            );
+          },
+        ));
   }
 }
