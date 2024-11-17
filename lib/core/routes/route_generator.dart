@@ -110,8 +110,8 @@ class RouteGenerator {
                   builder: (context, state) => const PublicStoreScreen(),
                   routes: [
                     GoRoute(
-                      path: Routes.manageStore,
-                      name: Routes.manageStore,
+                      path: Routes.userStores,
+                      name: Routes.userStores,
                       builder: (context, state) => const UserStoresScreen(),
                       routes: [
                         GoRoute(
@@ -124,8 +124,9 @@ class RouteGenerator {
                             GoRoute(
                               path: UserStoreUpdatePage.routeName,
                               name: UserStoreUpdatePage.routeName,
-                              builder: (context, state) =>
-                                  UserStoreUpdatePage(),
+                              builder: (context, state) => UserStoreUpdatePage(
+                                storeId: state.extra as String,
+                              ),
                             ),
                           ],
                         ),

@@ -8,7 +8,10 @@ class StoreProfileImageUrlGeneratorWidget extends StatefulWidget {
   const StoreProfileImageUrlGeneratorWidget({
     super.key,
     required this.onImageUploaded,
+    this.imageUrl,
   });
+
+  final String? imageUrl;
 
   final Function(String? imageUrl) onImageUploaded;
 
@@ -45,6 +48,9 @@ class _StoreProfileImageUrlGeneratorWidgetState
         }
       },
       builder: (context, state) {
+        final String? currentImageUrl = (state is ImageUploadedToSupabase)
+            ? state.imageUrl
+            : widget.imageUrl;
         return Center(
           child: Stack(
             alignment: Alignment.center,
@@ -53,14 +59,34 @@ class _StoreProfileImageUrlGeneratorWidgetState
                 CircleAvatar(
                   radius: 50,
                   backgroundColor: Colors.grey[300],
-                  child: state is! ImageUploadedToSupabase
-                      ? Icon(
+                  child: currentImageUrl != null && currentImageUrl.isNotEmpty
+                      ? ClipOval(
+                          child: ImageAttachmentThumbnail(
+                              imageUrl: currentImageUrl),
+                        )
+                      : const Icon(
                           Icons.person,
                           size: 50,
-                          color: Colors.grey[600],
-                        )
-                      : null,
+                          color: Colors.grey,
+                        ),
                 ),
+              // CircleAvatar(
+              //   radius: 50,
+              //   backgroundColor: Colors.grey[300],
+              //   child: state is! ImageUploadedToSupabase
+              //       ? widget.imageUrl != null
+              //           ? ClipOval(
+              //               child: ImageAttachmentThumbnail(
+              //                 imageUrl: widget.imageUrl!,
+              //               ),
+              //             )
+              //           : const Icon(
+              //               Icons.person,
+              //               size: 50,
+              //               color: Colors.grey,
+              //             )
+              //       : null,
+              // ),
               if (state is ImageUploadedToSupabase) ...[
                 CircleAvatar(
                   radius: 50,

@@ -4,3 +4,9 @@ part of 'user_store_fetch_bloc.dart';
 sealed class UserStoreFetchEvent {}
 
 class UserStoreFetched extends UserStoreFetchEvent {}
+
+class UserStoreByIdFetched extends UserStoreFetchEvent {
+  final String storeId;
+
+  UserStoreByIdFetched(this.storeId);
+}

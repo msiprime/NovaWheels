@@ -8,8 +8,10 @@ class StoreCoverImageUrlGenWidget extends StatefulWidget {
   const StoreCoverImageUrlGenWidget({
     super.key,
     required this.onImageUploaded,
+    this.imageUrl,
   });
 
+  final String? imageUrl;
   final Function(String? imageUrl) onImageUploaded;
 
   @override
@@ -66,13 +68,17 @@ class _StoreCoverImageUrlGenWidgetState
                 ),
                 child: state is ImageUploadedToSupabase
                     ? ImageAttachmentThumbnail(imageUrl: state.imageUrl)
-                    : Center(
-                        child: Icon(
-                          Icons.image,
-                          size: 60,
-                          color: Colors.grey[600],
-                        ),
-                      ),
+                    : widget.imageUrl != null
+                        ? ImageAttachmentThumbnail(
+                            imageUrl: widget.imageUrl ?? '',
+                          )
+                        : Center(
+                            child: Icon(
+                              Icons.image,
+                              size: 60,
+                              color: Colors.grey[600],
+                            ),
+                          ),
               ),
               if (state is ImagePickerLoading ||
                   state is UploadingImageToSupabase ||

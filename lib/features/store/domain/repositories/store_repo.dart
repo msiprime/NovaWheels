@@ -10,6 +10,14 @@ abstract interface class StoreRepo {
 
   Future<Either<Failure, List<StoreEntity>>> fetchUserStores();
 
+  Future<Either<Failure, List<StoreEntity>>> fetchStoreById({
+    required String storeId,
+  });
+
+  Future<Either<Failure, StoreEntity>> updateStore({
+    required StoreEntity store,
+  });
+
   Future<Either<Failure, List<StoreEntity>>> fetchPublicStores();
 
   Future<Either<Failure, List<StoreEntity>>> deleteStoreById({

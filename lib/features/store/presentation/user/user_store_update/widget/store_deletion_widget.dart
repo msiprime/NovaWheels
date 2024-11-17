@@ -6,6 +6,7 @@ import 'package:nova_wheels/config/sl/injection_container.dart';
 import 'package:nova_wheels/core/base_component/base/base_widgets/app_primary_button.dart';
 import 'package:nova_wheels/core/routes/routes.dart';
 import 'package:nova_wheels/features/store/domain/use_cases/delete_store_usecase.dart';
+import 'package:nova_wheels/features/store/domain/use_cases/update_store_usecase.dart';
 import 'package:nova_wheels/features/store/presentation/user/user_store_update/bloc/update_store_bloc.dart';
 
 class StoreDeletionWidget extends StatelessWidget {
@@ -20,6 +21,7 @@ class StoreDeletionWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => UpdateStoreBloc(
+        updateStoreUseCase: sl.call<UpdateStoreUseCase>(),
         deleteStoreUseCase: sl.call<DeleteStoreUseCase>(),
       ),
       child: StoreDeletionButton(storeId: storeId),
@@ -37,7 +39,7 @@ class StoreDeletionButton extends StatelessWidget {
     return BlocConsumer<UpdateStoreBloc, UpdateStoreState>(
       listener: (context, state) {
         if (state is DeleteStoreSuccess) {
-          context.goNamed(Routes.store);
+          context.pushReplacementNamed(Routes.userStores, extra: storeId);
         }
       },
       builder: (context, state) {
@@ -49,9 +51,9 @@ class StoreDeletionButton extends StatelessWidget {
                 yesText: 'Delete',
                 noText: 'Cancel',
                 fn: () {
-                  context.read<UpdateStoreBloc>().add(
-                        DeleteStorePressed(storeId: storeId),
-                      );
+                  context
+                      .read<UpdateStoreBloc>()
+                      .add(DeleteStorePressed(storeId: storeId));
                 },
                 title: 'Confirm Deletion',
                 content:

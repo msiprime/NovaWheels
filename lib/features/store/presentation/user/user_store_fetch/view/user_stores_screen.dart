@@ -7,9 +7,6 @@ import 'package:nova_wheels/config/sl/injection_container.dart';
 import 'package:nova_wheels/core/base_component/base/base_widgets/app_bar.dart';
 import 'package:nova_wheels/core/base_component/base/base_widgets/app_primary_button.dart';
 import 'package:nova_wheels/core/routes/routes.dart';
-import 'package:nova_wheels/features/store/data/data_sources/store_datasource_impl.dart';
-import 'package:nova_wheels/features/store/data/repositories/store_repo_impl.dart';
-import 'package:nova_wheels/features/store/domain/use_cases/fetch_user_store_usecase.dart';
 import 'package:nova_wheels/features/store/presentation/user/user_store_fetch/bloc/user_store_fetch_bloc.dart';
 import 'package:nova_wheels/features/store/shared/store_type_enum.dart';
 import 'package:nova_wheels/features/store/shared/widget/store_front_widget.dart';
@@ -23,13 +20,8 @@ class UserStoresScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => UserStoreFetchBloc(
-        fetchUserStoreUseCase: FetchUserStoreUseCase(
-          StoreRepoImpl(
-            storeDataSource: StoreDataSourceImpl(
-              supabaseClient: sl.get(),
-            ),
-          ),
-        ),
+        fetchUserStoreByIdUseCase: sl.call(),
+        fetchUserStoreUseCase: sl.call(),
       )..add(UserStoreFetched()),
       child: const UserStoresView(),
     );
@@ -44,6 +36,14 @@ class UserStoresView extends StatelessWidget {
     return AppScaffold(
         appBar: NovaWheelsAppBar(
           title: 'Your Stores',
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.refresh),
+              onPressed: () {
+                context.read<UserStoreFetchBloc>().add(UserStoreFetched());
+              },
+            ),
+          ],
         ),
         body: BlocBuilder<UserStoreFetchBloc, UserStoreFetchState>(
           builder: (context, state) {

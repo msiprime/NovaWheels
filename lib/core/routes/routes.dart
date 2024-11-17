@@ -28,7 +28,7 @@ class Routes {
 
   // Store
   static const String createStore = 'create_store';
-  static const String manageStore = 'manage_store';
+  static const String userStores = 'manage_store';
   static const String generalStoreDetails = 'general-store-details';
   static const String userStoreDetails = 'user-store-details';
 }

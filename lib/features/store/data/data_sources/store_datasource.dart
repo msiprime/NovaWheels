@@ -9,6 +9,14 @@ abstract interface class StoreDataSource {
 
   Future<Either<Failure, List<Map<String, dynamic>>>> fetchUserStores();
 
+  Future<Either<Failure, List<Map<String, dynamic>>>> fetchUserStoreById({
+    required String storeId,
+  });
+
+  Future<Either<Failure, Map<String, dynamic>>> updateStore({
+    required Map<String, dynamic> storeJson,
+  });
+
   Future<Either<Failure, List<Map<String, dynamic>>>> fetchPublicStores();
 
   Future<Either<Failure, List<Map<String, dynamic>>>> deleteStoreById({

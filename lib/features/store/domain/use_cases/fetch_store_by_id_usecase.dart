@@ -3,13 +3,14 @@ import 'package:nova_wheels/core/base_component/failure/failures.dart';
 import 'package:nova_wheels/features/store/domain/entities/store_entity.dart';
 import 'package:nova_wheels/features/store/domain/repositories/store_repo.dart';
 
-class UpdateStoreUseCase {
+class FetchUserStoreByIdUseCase {
   final StoreRepo _storeRepository;
 
-  UpdateStoreUseCase({required StoreRepo storeRepository})
-      : _storeRepository = storeRepository;
+  FetchUserStoreByIdUseCase(this._storeRepository);
 
-  Future<Either<Failure, StoreEntity>> call(StoreEntity store) async {
-    return await _storeRepository.updateStore(store: store);
+  Future<Either<Failure, List<StoreEntity>>> call({
+    required String storeId,
+  }) async {
+    return await _storeRepository.fetchStoreById(storeId: storeId);
   }
 }

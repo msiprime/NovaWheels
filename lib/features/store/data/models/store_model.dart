@@ -9,8 +9,8 @@ class StoreModel extends Equatable implements BaseMapper<StoreEntity> {
   final String? description;
   final bool isVerified;
   final String? address;
-  final DateTime createdAt;
-  final DateTime updatedAt;
+  final DateTime? createdAt;
+  final DateTime? updatedAt;
   final String? phoneNumber;
   final String? email;
   final String? facebook;
@@ -18,16 +18,18 @@ class StoreModel extends Equatable implements BaseMapper<StoreEntity> {
   final String? website;
   final String? coverImage;
   final String? profilePicture;
+  final String? twitter;
 
   const StoreModel({
+    this.twitter,
     required this.id,
     this.ownerId,
     required this.name,
     this.description,
     this.isVerified = false,
     this.address,
-    required this.createdAt,
-    required this.updatedAt,
+    this.createdAt,
+    this.updatedAt,
     this.phoneNumber,
     this.email,
     this.facebook,
@@ -72,30 +74,10 @@ class StoreModel extends Equatable implements BaseMapper<StoreEntity> {
       facebook: json['facebook'] as String?,
       instagram: json['instagram'] as String?,
       website: json['website'] as String?,
+      twitter: json['twitter'] as String?,
       coverImage: json['cover_image'] as String?,
       profilePicture: json['profile_picture'] as String?,
     );
-  }
-
-  // Method to convert a Store object to a JSON map (useful for sending data)
-  Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'owner_id': ownerId,
-      'name': name,
-      'description': description,
-      'is_verified': isVerified,
-      'address': address,
-      'created_at': createdAt.toIso8601String(),
-      'updated_at': updatedAt.toIso8601String(),
-      'phone_number': phoneNumber,
-      'email': email,
-      'facebook': facebook,
-      'instagram': instagram,
-      'website': website,
-      'cover_image': coverImage,
-      'profile_picture': profilePicture,
-    };
   }
 
   @override
@@ -116,6 +98,65 @@ class StoreModel extends Equatable implements BaseMapper<StoreEntity> {
       website: website,
       coverImage: coverImage,
       profilePicture: profilePicture,
+    );
+  }
+
+  factory StoreModel.fromEntity(StoreEntity entity) {
+    return StoreModel(
+      id: entity.id,
+      ownerId: entity.ownerId,
+      name: entity.name,
+      description: entity.description,
+      isVerified: entity.isVerified,
+      address: entity.address,
+      createdAt: entity.createdAt,
+      updatedAt: entity.updatedAt,
+      phoneNumber: entity.phoneNumber,
+      email: entity.email,
+      facebook: entity.facebook,
+      instagram: entity.instagram,
+      website: entity.website,
+      coverImage: entity.coverImage,
+      profilePicture: entity.profilePicture,
+      twitter: entity.twitter,
+    );
+  }
+
+  StoreModel copyWith(
+    String? id,
+    String? ownerId,
+    String? name,
+    String? description,
+    bool? isVerified,
+    String? address,
+    DateTime? createdAt,
+    DateTime? updatedAt,
+    String? phoneNumber,
+    String? email,
+    String? facebook,
+    String? instagram,
+    String? website,
+    String? coverImage,
+    String? profilePicture,
+    String? twitter,
+  ) {
+    return StoreModel(
+      id: id ?? this.id,
+      ownerId: ownerId ?? this.ownerId,
+      name: name ?? this.name,
+      description: description ?? this.description,
+      isVerified: isVerified ?? this.isVerified,
+      address: address ?? this.address,
+      createdAt: createdAt ?? this.createdAt,
+      updatedAt: updatedAt ?? this.updatedAt,
+      phoneNumber: phoneNumber ?? this.phoneNumber,
+      email: email ?? this.email,
+      facebook: facebook ?? this.facebook,
+      instagram: instagram ?? this.instagram,
+      website: website ?? this.website,
+      coverImage: coverImage ?? this.coverImage,
+      profilePicture: profilePicture ?? this.profilePicture,
+      twitter: twitter ?? this.twitter,
     );
   }
 }

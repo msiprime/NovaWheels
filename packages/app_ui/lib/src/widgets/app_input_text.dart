@@ -12,6 +12,7 @@ class AppTextField extends StatelessWidget {
   const AppTextField({
     this.textDirection = TextDirection.ltr,
     this.cursorWidth = 2.0,
+    this.isLoading = false,
     this.enableSuggestion = true,
     this.expands = false,
     this.obscuringCharacter = '•',
@@ -79,10 +80,12 @@ class AppTextField extends StatelessWidget {
     this.autofillHints,
     this.errorMaxLines,
     this.labelStyle,
+    this.suffix,
   });
 
-  const AppTextField.roundedBorder({
+  AppTextField.roundedBorder({
     Key? key,
+    Widget? suffix,
     String? hintText,
     String? labelText,
     String? errorText,
@@ -94,7 +97,8 @@ class AppTextField extends StatelessWidget {
     TextInputAction? textInputAction,
     bool obscureText = false,
     bool autoCorrect = true,
-    bool enabled = true,
+    // bool enabled = true,
+    bool isLoading = false,
     bool autofocus = false,
     Widget? suffixIcon,
     Icon? prefixIcon,
@@ -115,7 +119,7 @@ class AppTextField extends StatelessWidget {
     Radius? cursorRadius,
     double cursorWidth = 2,
     bool enableSuggestion = true,
-    AutovalidateMode? autovalidateMode,
+    AutovalidateMode? autoValidateMode,
     bool expands = false,
     Brightness? keyboardAppearance,
     TextMagnifierConfiguration? magnifierConfiguration,
@@ -153,24 +157,29 @@ class AppTextField extends StatelessWidget {
   }) : this(
           key: key,
           autofillHints: autofillHints,
-          autovalidateMode: autovalidateMode,
+          autovalidateMode: autoValidateMode,
           cursorColor: cursorColor,
           cursorHeight: cursorHeight,
           cursorRadius: cursorRadius,
           cursorWidth: cursorWidth,
-          disabledBorder: disabledBorder,
+          disabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(12)),
+            borderSide: BorderSide(
+              color: Color(0xFFdbdbdf),
+            ),
+          ),
           enableSuggestion: enableSuggestion,
           enabledBorder: const OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(8)),
+            borderRadius: BorderRadius.all(Radius.circular(12)),
             borderSide: BorderSide(
-              color: Colors.grey,
+              color: Color(0xFFdbdbdf),
             ),
           ),
           expands: expands,
           focusedBorder: const OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(8)),
+            borderRadius: BorderRadius.all(Radius.circular(12)),
             borderSide: BorderSide(
-              color: Colors.black87,
+              color: Colors.grey,
             ),
           ),
           keyboardAppearance: keyboardAppearance,
@@ -182,7 +191,10 @@ class AppTextField extends StatelessWidget {
           minLines: minLines,
           mouseCursor: mouseCursor,
           constraints: constraints,
-          hintStyle: hintStyle,
+          hintStyle: TextStyle(
+            color: Colors.grey,
+            fontWeight: FontWeight.w400,
+          ),
           labelStyle: labelStyle,
           obscuringCharacter: obscuringCharacter,
           onEditingComplete: onEditingComplete,
@@ -225,10 +237,13 @@ class AppTextField extends StatelessWidget {
           suffixText: suffixText,
           prefixIcon: prefixIcon,
           prefix: prefix,
+          suffix: suffix,
           suffixIcon: suffixIcon,
-          enabled: enabled,
+          enabled: !isLoading,
           filled: filled,
-          border: const OutlineInputBorder(),
+          border: const OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(12)),
+          ),
           errorMaxLines: errorMaxLines,
         );
 
@@ -247,6 +262,7 @@ class AppTextField extends StatelessWidget {
     bool obscureText = false,
     bool autoCorrect = true,
     bool enabled = true,
+    bool isLoading = false,
     bool autofocus = false,
     Widget? suffixIcon,
     Icon? prefixIcon,
@@ -267,7 +283,7 @@ class AppTextField extends StatelessWidget {
     Radius? cursorRadius,
     double cursorWidth = 2,
     bool enableSuggestion = true,
-    AutovalidateMode? autovalidateMode,
+    AutovalidateMode? autoValidateMode,
     bool expands = false,
     Brightness? keyboardAppearance,
     TextMagnifierConfiguration? magnifierConfiguration,
@@ -305,7 +321,7 @@ class AppTextField extends StatelessWidget {
   }) : this(
           key: key,
           autofillHints: autofillHints,
-          autovalidateMode: autovalidateMode,
+          autovalidateMode: autoValidateMode,
           cursorColor: cursorColor,
           cursorHeight: cursorHeight,
           cursorRadius: cursorRadius,
@@ -369,6 +385,7 @@ class AppTextField extends StatelessWidget {
           prefix: prefix,
           suffixIcon: suffixIcon,
           enabled: enabled,
+          isLoading: isLoading,
           filled: filled,
           border: const UnderlineInputBorder(),
           errorMaxLines: errorMaxLines,
@@ -380,7 +397,7 @@ class AppTextField extends StatelessWidget {
   final FocusNode? focusNode;
   final void Function(String)? onChanged;
   final TextInputAction? textInputAction;
-  final bool obscureText, autoCorrect, enabled, autofocus, readOnly;
+  final bool obscureText, autoCorrect, enabled, autofocus, readOnly, isLoading;
   final Widget? suffixIcon;
   final Icon? prefixIcon;
   final Widget? prefix;
@@ -432,6 +449,7 @@ class AppTextField extends StatelessWidget {
   final TextDirection textDirection;
   final Iterable<String>? autofillHints;
   final int? errorMaxLines;
+  final Widget? suffix;
 
   @override
   Widget build(BuildContext context) {
@@ -494,6 +512,7 @@ class AppTextField extends StatelessWidget {
       autofocus: autofocus,
       textCapitalization: textCapitalization,
       decoration: InputDecoration(
+        suffix: suffix,
         constraints: constraints,
         suffixText: suffixText,
         labelStyle: labelStyle,

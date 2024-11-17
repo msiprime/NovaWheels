@@ -9,8 +9,8 @@ class DeleteStorePressed extends UpdateStoreEvent {
   DeleteStorePressed({required this.storeId});
 }
 
-class UpdateStoreStarted extends UpdateStoreEvent {
+class UpdateStorePressed extends UpdateStoreEvent {
   final StoreEntity storeEntity;
 
-  UpdateStoreStarted({required this.storeEntity});
+  UpdateStorePressed({required this.storeEntity});
 }

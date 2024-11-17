@@ -3,9 +3,12 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:nova_wheels/config/sl/injection_container.dart';
 import 'package:nova_wheels/core/base_component/base/base_widgets/app_primary_button.dart';
 import 'package:nova_wheels/features/store/domain/entities/store_entity.dart';
+import 'package:nova_wheels/features/store/presentation/user/user_store_fetch/bloc/user_store_fetch_bloc.dart';
+import 'package:nova_wheels/features/store/presentation/user/user_store_update/view/user_store_update_page.dart';
 import 'package:nova_wheels/features/store/presentation/user/user_store_update/widget/store_deletion_widget.dart';
 import 'package:nova_wheels/features/store/shared/widget/small_advertisement_card.dart';
 import 'package:nova_wheels/features/store/shared/widget/verification_chip.dart';
@@ -21,33 +24,58 @@ class UserStoreDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AppScaffold(
-      safeArea: true,
-      body: DefaultTabController(
-        length: 3,
-        child: CustomScrollView(
-          slivers: [
-            StoreAppBar(store: store),
-            SliverPersistentHeader(
-              pinned: true,
-              delegate: _SliverTabBarDelegate(
-                _buildTabBarSection(),
-              ),
-            ),
-            SliverFillRemaining(
-              child: TabBarView(
-                children: [
-                  // Tab 1: Advertisements
-                  _StoreAdvertisementsTab(store: store),
-                  // Tab 2: Statistics
-                  _StoreStatisticsTab(store: store),
-                  // Tab 3: Store Details
-                  _StoreDetailsTab(store: store),
-                ],
-              ),
-            ),
-          ],
-        ),
+    return BlocProvider(
+      create: (context) => UserStoreFetchBloc(
+          fetchUserStoreUseCase: sl.call(),
+          fetchUserStoreByIdUseCase: sl.call())
+        ..add(UserStoreByIdFetched(store.id)),
+      child: BlocBuilder<UserStoreFetchBloc, UserStoreFetchState>(
+        builder: (context, state) {
+          return RefreshIndicator(
+            onRefresh: () async {
+              context
+                  .read<UserStoreFetchBloc>()
+                  .add(UserStoreByIdFetched(store.id));
+            },
+            child: switch (state) {
+              UserStoreFetchInitial() =>
+                const Center(child: CircularProgressIndicator()),
+              UserStoreFetchLoading() =>
+                const Center(child: CircularProgressIndicator()),
+              UserStoreFetchFailure() => Center(child: Text('message')),
+              UserStoreFetchSuccess success => AppScaffold(
+                  safeArea: true,
+                  body: DefaultTabController(
+                    length: 3,
+                    child: CustomScrollView(
+                      slivers: [
+                        StoreAppBar(store: success.stores.first),
+                        SliverPersistentHeader(
+                          pinned: true,
+                          delegate: _SliverTabBarDelegate(
+                            _buildTabBarSection(),
+                          ),
+                        ),
+                        SliverFillRemaining(
+                          child: TabBarView(
+                            children: [
+                              // Tab 1: Advertisements
+                              _StoreAdvertisementsTab(
+                                  store: success.stores.first),
+                              // Tab 2: Statistics
+                              _StoreStatisticsTab(store: success.stores.first),
+                              // Tab 3: Store Details
+                              _StoreDetailsTab(store: success.stores.first),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+            },
+          );
+        },
       ),
     );
   }
@@ -231,7 +259,12 @@ class _StoreDetailsTab extends StatelessWidget {
                 const SizedBox(height: 20),
                 AppSecondaryButton(
                   height: 40,
-                  onPressed: () {},
+                  onPressed: () {
+                    context.pushNamed(
+                      UserStoreUpdatePage.routeName,
+                      extra: store.id,
+                    );
+                  },
                   title: "Update Store",
                 ),
                 const SizedBox(height: 16),
@@ -391,7 +424,8 @@ class StoreDetailsCard extends StatelessWidget {
                 ),
                 _buildDetailRow(
                   label: 'Created At',
-                  value: store.createdAt.timeZoneOffset.toString(),
+                  value:
+                      store.createdAt?.timeZoneOffset.toString() ?? 'Unknown',
                   icon: Icons.calendar_today,
                   context: context,
                 ),

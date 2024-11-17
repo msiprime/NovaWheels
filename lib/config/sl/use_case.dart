@@ -45,10 +45,22 @@ Future<void> _initUseCases() async {
   sl.registerLazySingleton(
     () => CreateStoreUseCase(sl.call()),
   );
+
   // fetch store usecase [user]
   sl.registerLazySingleton(
     () => FetchUserStoreUseCase(sl.call()),
   );
+
+  // fetch store by ud usecase [user - id]
+  sl.registerLazySingleton(
+    () => FetchUserStoreByIdUseCase(sl.call()),
+  );
+
+  // update store usecase
+  sl.registerLazySingleton(
+    () => UpdateStoreUseCase(storeRepository: sl.call()),
+  );
+
   // fetch store usecase [all]
   sl.registerLazySingleton(
     () => FetchPublicStoreUseCase(storeRepository: sl.call()),

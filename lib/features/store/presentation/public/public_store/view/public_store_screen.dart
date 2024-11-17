@@ -67,7 +67,7 @@ class PublicStoreView extends StatelessWidget {
                                 color: context.reversedAdaptiveColor)),
                       ),
                       onTap: () async {
-                        context.goNamed(Routes.manageStore);
+                        context.goNamed(Routes.userStores);
                       },
                     ),
                     Text('Stores Near You',

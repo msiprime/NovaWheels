@@ -76,4 +76,50 @@ class StoreRepoImpl implements StoreRepo {
       },
     );
   }
+
+  @override
+  Future<Either<Failure, List<StoreEntity>>> fetchStoreById(
+      {required String storeId}) async {
+    final response = await storeDataSource.fetchUserStoreById(storeId: storeId);
+
+    return response.fold(
+      (failure) => Left(failure),
+      (listMapResponse) {
+        final List<StoreEntity> listStoreModel = listMapResponse
+            .map((map) => StoreModel.fromJson(map).toEntity())
+            .toList();
+        return Right(listStoreModel);
+      },
+    );
+  }
+
+  @override
+  Future<Either<Failure, StoreEntity>> updateStore(
+      {required StoreEntity store}) async {
+    Map<String, dynamic> updateMap = {
+      'id': store.id,
+      'name': store.name,
+      'description': store.description,
+      'is_verified': store.isVerified,
+      'address': store.address,
+      'phone_number': store.phoneNumber,
+      'email': store.email,
+      'twitter': store.twitter,
+      'facebook': store.facebook,
+      'instagram': store.instagram,
+      'website': store.website,
+      'cover_image': store.coverImage,
+      'profile_picture': store.profilePicture,
+    };
+
+    final response = await storeDataSource.updateStore(storeJson: updateMap);
+
+    return response.fold(
+      (failure) => Left(failure),
+      (mapResponse) {
+        final storeModel = StoreModel.fromJson(mapResponse);
+        return Right(storeModel.toEntity());
+      },
+    );
+  }
 }
