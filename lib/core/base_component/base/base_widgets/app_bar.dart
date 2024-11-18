@@ -30,6 +30,7 @@ class NovaWheelsAppBar extends StatelessWidget implements PreferredSizeWidget {
     return Column(
       children: [
         AppBar(
+          toolbarHeight: 40,
           leadingWidth: context.width * 0.25,
           elevation: 0,
           scrolledUnderElevation: 0,

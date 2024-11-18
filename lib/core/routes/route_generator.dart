@@ -22,6 +22,8 @@ import 'package:nova_wheels/features/store/presentation/user/user_store_fetch/wi
 import 'package:nova_wheels/features/store/presentation/user/user_store_update/view/user_store_update_page.dart';
 import 'package:nova_wheels/features/store/shared/widget/general_store_details_widget.dart';
 
+import '../../features/vehicle/presentation/post_vehicle_ad/view/add_vehicle_screen.dart';
+
 class RouteGenerator {
   RouteGenerator._();
 
@@ -150,9 +152,9 @@ class RouteGenerator {
           StatefulShellBranch(
             routes: [
               GoRoute(
-                name: Routes.addPost,
-                path: Routes.addPost,
-                builder: (context, state) => const PlaceHolderScreen(),
+                name: PostVehicleAdScreen.routeName,
+                path: PostVehicleAdScreen.routeName,
+                builder: (context, state) => const PostVehicleAdScreen(),
               ),
             ],
           ),
