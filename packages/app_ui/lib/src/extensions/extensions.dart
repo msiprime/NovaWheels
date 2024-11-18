@@ -1,4 +1,5 @@
 export 'build_context_extension.dart';
+export 'gap_extension.dart';
 export 'ignore_pointer_extension.dart';
 export 'show_dialog_extension.dart';
 export 'snack_bar_extension.dart';
