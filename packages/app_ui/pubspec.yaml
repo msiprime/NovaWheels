@@ -9,6 +9,7 @@ environment:
 
 
 dependencies:
+  gap:
   dotted_border:
   image_picker:
   cached_memory_image: ^1.5.0
