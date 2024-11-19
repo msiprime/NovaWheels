@@ -11,4 +11,14 @@ final class PickImageEvent extends ImagePickerEvent {
   });
 }
 
+final class MultiplePickImageEvent extends ImagePickerEvent {
+  final String fileName;
+
+  MultiplePickImageEvent({
+    required this.fileName,
+  });
+}
+
 final class RemoveImageEvent extends ImagePickerEvent {}
+
+final class RemoveMultipleImagesEvent extends ImagePickerEvent {}

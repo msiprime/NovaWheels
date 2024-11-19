@@ -16,11 +16,14 @@ class ImagePickerBloc extends Bloc<ImagePickerEvent, ImagePickerState> {
     required this.imageType,
   }) : super(ImagePickerInitial()) {
     on<PickImageEvent>(_onPickImage);
+    on<MultiplePickImageEvent>(_onMultiplePickImage);
 
     on<RemoveImageEvent>(_onRemoveImage);
+    on<RemoveMultipleImagesEvent>(_onRemoveMultipleImages);
   }
 
   String? globalFilePath;
+  List<String?>? globalFilePaths;
 
   FutureOr<void> _onPickImage(PickImageEvent event, emit) async {
     emit(ImagePickerLoading());
@@ -55,6 +58,52 @@ class ImagePickerBloc extends Bloc<ImagePickerEvent, ImagePickerState> {
       imageType: imageType,
     );
     emit(ImageRemovedFromSupabase());
+    emit(ImagePickerInitial());
+  }
+
+  FutureOr<void> _onMultiplePickImage(
+      MultiplePickImageEvent event, Emitter<ImagePickerState> emit) async {
+    emit(ImagePickerLoading());
+    try {
+      final files = await ImagePicker().pickMultiImage();
+
+      List<String> imageUrls = [];
+      for (final file in files) {
+        String filePath = '${imageType.folderPath}/${event.fileName}.jpg';
+        globalFilePaths?.add(filePath);
+        emit(UploadingImageToSupabase());
+        String imageUrl = await CoreDataSource.uploadImageToSupabase(
+          imageFile: File(file.path),
+          imageType: imageType,
+          filePath: filePath,
+        );
+        if (imageUrl.isNotEmpty) {
+          imageUrls.add(imageUrl);
+        }
+      }
+      emit(MultipleImagesUploadedToSupabase(imageUrls));
+    } catch (e) {
+      emit(ImagePickerError('Error picking image'));
+    }
+  }
+
+  FutureOr<void> _onRemoveMultipleImages(
+      RemoveMultipleImagesEvent event, Emitter<ImagePickerState> emit) async {
+    List<String?> filePaths = globalFilePaths ?? [];
+
+    emit(RemovingImageFromSupabase());
+    // for (final filePath in filePaths) {
+    //   await CoreDataSource.deleteImageFromSupabase(
+    //     filePath: filePath ?? '',
+    //     imageType: imageType,
+    //   );
+    // }
+
+    await CoreDataSource.deleteBatchImagesFromSupabase(
+      filePaths: filePaths.map((e) => e ?? '').toList(),
+      imageType: imageType,
+    );
+    emit(MultipleImagesRemovedFromSupabase());
     emit(ImagePickerInitial());
   }
 }

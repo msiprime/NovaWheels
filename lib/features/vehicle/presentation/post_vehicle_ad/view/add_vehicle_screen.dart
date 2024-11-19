@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:nova_wheels/core/base_component/base/base_widgets/app_bar.dart';
 import 'package:nova_wheels/core/base_component/base/base_widgets/app_primary_button.dart';
 import 'package:nova_wheels/features/vehicle/presentation/post_vehicle_ad/widget/chip_filter_section.dart';
+import 'package:nova_wheels/features/vehicle/presentation/post_vehicle_ad/widget/multiple_image_picker_widget.dart';
 import 'package:nova_wheels/features/vehicle/presentation/shared/enums/enums.dart';
 import 'package:nova_wheels/features/vehicle/presentation/shared/enums/vehicle_type.dart';
 import 'package:shared/shared.dart';
@@ -64,6 +65,10 @@ class _AddVehicleViewState extends State<AddVehicleView> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              SizedBox(
+                height: 100,
+                child: MultipleImagePickerWidget(),
+              ),
               VehiclePostTextFieldForm(
                 titleController: titleController,
                 descriptionController: descriptionController,
