@@ -90,7 +90,7 @@ class AppTextField extends StatelessWidget {
     String? labelText,
     String? errorText,
     String? initialValue,
-    TextEditingController? textController,
+    TextEditingController? controller,
     VoidCallback? onTap,
     FocusNode? focusNode,
     void Function(String)? onChanged,
@@ -123,7 +123,7 @@ class AppTextField extends StatelessWidget {
     bool expands = false,
     Brightness? keyboardAppearance,
     TextMagnifierConfiguration? magnifierConfiguration,
-    int maxLines = 1,
+    int? maxLines = 1,
     int? maxLength,
     int? minLength,
     int? minLines,
@@ -162,7 +162,7 @@ class AppTextField extends StatelessWidget {
           cursorHeight: cursorHeight,
           cursorRadius: cursorRadius,
           cursorWidth: cursorWidth,
-          disabledBorder: OutlineInputBorder(
+          disabledBorder: const OutlineInputBorder(
             borderRadius: BorderRadius.all(Radius.circular(12)),
             borderSide: BorderSide(
               color: Color(0xFFdbdbdf),
@@ -186,12 +186,12 @@ class AppTextField extends StatelessWidget {
           magnifierConfiguration: magnifierConfiguration,
           maxLength: maxLength,
           maxLengthEnforcement: maxLengthEnforcement,
-          maxLines: maxLines,
+          maxLines: maxLines ?? 1,
           minLength: minLength,
           minLines: minLines,
           mouseCursor: mouseCursor,
           constraints: constraints,
-          hintStyle: TextStyle(
+          hintStyle: const TextStyle(
             color: Colors.grey,
             fontWeight: FontWeight.w400,
           ),
@@ -215,8 +215,9 @@ class AppTextField extends StatelessWidget {
           textAlign: textAlign,
           textAlignVertical: textAlignVertical,
           textDirection: textDirection,
-          contentPadding: const EdgeInsets.symmetric(horizontal: 16),
-          textController: textController,
+          contentPadding:
+              contentPadding ?? const EdgeInsets.symmetric(horizontal: 16),
+          textController: controller,
           initialValue: initialValue,
           focusNode: focusNode,
           textInputType: textInputType,
