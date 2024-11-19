@@ -19,10 +19,18 @@ final class RemovingImageFromSupabase extends ImagePickerState {}
 
 final class ImageRemovedFromSupabase extends ImagePickerState {}
 
+final class MultipleImagesRemovedFromSupabase extends ImagePickerState {}
+
 final class ImageUploadedToSupabase extends ImagePickerState {
   final String imageUrl;
 
   ImageUploadedToSupabase(this.imageUrl);
+}
+
+final class MultipleImagesUploadedToSupabase extends ImagePickerState {
+  final List<String> imageUrls;
+
+  MultipleImagesUploadedToSupabase(this.imageUrls);
 }
 
 final class ImagePickerError extends ImagePickerState {

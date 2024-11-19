@@ -195,7 +195,7 @@ class _CreateStoreScreenState extends State<CreateStoreScreen> {
   AppTextField _buildStorePhoneNumTF(bool loadingState) {
     return AppTextField.roundedBorder(
       isLoading: loadingState,
-      textController: _storePhoneNumController,
+      controller: _storePhoneNumController,
       hintText: 'e.g +88 01712345678',
       hintStyle: context.titleMedium?.copyWith(
         color: Colors.grey,
@@ -207,7 +207,7 @@ class _CreateStoreScreenState extends State<CreateStoreScreen> {
   AppTextField _buildStoreEmailTF(bool isTextFieldEnabled) {
     return AppTextField.roundedBorder(
       isLoading: isTextFieldEnabled,
-      textController: _storeEmailController,
+      controller: _storeEmailController,
       hintText: 'e.g msisakib958@gmail.com',
       hintStyle: context.titleMedium?.copyWith(
         color: Colors.grey,
@@ -218,7 +218,7 @@ class _CreateStoreScreenState extends State<CreateStoreScreen> {
   AppTextField _buildStoreFacebookTF(bool isTextFieldEnabled) {
     return AppTextField.roundedBorder(
       isLoading: isTextFieldEnabled,
-      textController: _storeFacebookController,
+      controller: _storeFacebookController,
       hintText: 'e.g www.facebook.com/msisakib958',
       hintStyle: context.titleMedium?.copyWith(
         color: Colors.grey,
@@ -229,7 +229,7 @@ class _CreateStoreScreenState extends State<CreateStoreScreen> {
   AppTextField _buildInstagramTF(bool isTextFieldEnabled) {
     return AppTextField.roundedBorder(
       isLoading: isTextFieldEnabled,
-      textController: _storeInstagramController,
+      controller: _storeInstagramController,
       hintText: 'e.g www.instagram.com/msisakib958',
       hintStyle: context.titleMedium?.copyWith(
         color: Colors.grey,
@@ -240,7 +240,7 @@ class _CreateStoreScreenState extends State<CreateStoreScreen> {
   AppTextField _buildStoreTwitterTF(bool isTextFieldEnabled) {
     return AppTextField.roundedBorder(
       isLoading: isTextFieldEnabled,
-      textController: _storeTwitterController,
+      controller: _storeTwitterController,
       hintText: 'e.g @msisakib958',
       hintStyle: context.titleMedium?.copyWith(
         color: Colors.grey,
@@ -251,7 +251,7 @@ class _CreateStoreScreenState extends State<CreateStoreScreen> {
   AppTextField _buildStoreWebsiteTF(bool isTextFieldEnabled) {
     return AppTextField.roundedBorder(
       isLoading: isTextFieldEnabled,
-      textController: _storeWebsiteController,
+      controller: _storeWebsiteController,
       hintText: 'e.g www.msisakib958.com',
       hintStyle: context.titleMedium?.copyWith(
         color: Colors.grey,
@@ -262,7 +262,7 @@ class _CreateStoreScreenState extends State<CreateStoreScreen> {
   AppTextField _buildStoreAddressTF(bool isTextFieldEnabled) {
     return AppTextField.roundedBorder(
       isLoading: isTextFieldEnabled,
-      textController: _storeAddressController,
+      controller: _storeAddressController,
       hintText: 'e.g 123, ABC Road, XYZ City',
       hintStyle: context.titleMedium?.copyWith(
         color: Colors.grey,
@@ -273,7 +273,7 @@ class _CreateStoreScreenState extends State<CreateStoreScreen> {
   AppTextField _buildStoreDescriptionTF(bool isTextFieldEnabled) {
     return AppTextField.roundedBorder(
       isLoading: isTextFieldEnabled,
-      textController: _storeDescriptionController,
+      controller: _storeDescriptionController,
       hintText: 'e.g Shop for all your needs',
       hintStyle: context.titleMedium?.copyWith(
         color: Colors.grey,
@@ -284,7 +284,7 @@ class _CreateStoreScreenState extends State<CreateStoreScreen> {
   AppTextField _buildStoreNameTF(bool isTextFieldEnabled) {
     return AppTextField.roundedBorder(
       isLoading: isTextFieldEnabled,
-      textController: _storeNameController,
+      controller: _storeNameController,
       hintText: 'e.g Nova Wheels',
       validator: (p0) => InputValidators.name(p0),
       hintStyle: context.titleMedium?.copyWith(

@@ -6,7 +6,9 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 enum ImageType {
   storeProfile(folderPath: 'profile_pictures', bucketName: 'store-images'),
   storeCover(folderPath: 'cover_pictures', bucketName: 'store-images'),
-  userAvatar(folderPath: 'profile_picture', bucketName: 'avatars');
+  userAvatar(folderPath: 'profile_picture', bucketName: 'avatars'),
+  vehicleImage(
+      folderPath: 'vehicle_image_arrays', bucketName: 'vehicle_images');
 
   final String folderPath;
   final String bucketName;
@@ -52,6 +54,24 @@ abstract class CoreDataSource {
     try {
       final response =
           await supabase.storage.from(imageType.bucketName).remove([filePath]);
+
+      if (response.isEmpty) {
+        throw Exception('Error deleting image exception');
+      }
+    } catch (e) {
+      Log.error('Error during image deletion: $e');
+    }
+  }
+
+  static Future<void> deleteBatchImagesFromSupabase({
+    required List<String> filePaths,
+    required ImageType imageType,
+  }) async {
+    final SupabaseClient supabase = Supabase.instance.client;
+
+    try {
+      final response =
+          await supabase.storage.from(imageType.bucketName).remove(filePaths);
 
       if (response.isEmpty) {
         throw Exception('Error deleting image exception');

@@ -347,7 +347,7 @@ class _UpdateForm extends StatelessWidget {
           const Gap(5),
           AppTextField.roundedBorder(
             isLoading: _isLoading,
-            textController: _storeNameController,
+            controller: _storeNameController,
             hintText: 'Store Name',
           ),
           const Gap(10),
@@ -358,7 +358,7 @@ class _UpdateForm extends StatelessWidget {
           const Gap(5),
           AppTextField.roundedBorder(
             isLoading: _isLoading,
-            textController: _storeDescriptionController,
+            controller: _storeDescriptionController,
             hintText: 'Store Description',
           ),
           const Gap(10),
@@ -369,7 +369,7 @@ class _UpdateForm extends StatelessWidget {
           const Gap(5),
           AppTextField.roundedBorder(
             isLoading: _isLoading,
-            textController: _storeAddressController,
+            controller: _storeAddressController,
             hintText: 'Store Address',
           ),
           const Gap(10),
@@ -380,7 +380,7 @@ class _UpdateForm extends StatelessWidget {
           const Gap(5),
           AppTextField.roundedBorder(
             isLoading: _isLoading,
-            textController: _storePhoneNumController,
+            controller: _storePhoneNumController,
             hintText: 'Store Phone Number',
           ),
           const Gap(10),
@@ -391,7 +391,7 @@ class _UpdateForm extends StatelessWidget {
           const Gap(5),
           AppTextField.roundedBorder(
             isLoading: _isLoading,
-            textController: _storeEmailController,
+            controller: _storeEmailController,
             hintText: 'Store Email',
           ),
           const Gap(10),
@@ -402,7 +402,7 @@ class _UpdateForm extends StatelessWidget {
           const Gap(5),
           AppTextField.roundedBorder(
             isLoading: _isLoading,
-            textController: _storeFacebookController,
+            controller: _storeFacebookController,
             hintText: 'Store Facebook',
           ),
           const Gap(10),
@@ -413,7 +413,7 @@ class _UpdateForm extends StatelessWidget {
           const Gap(5),
           AppTextField.roundedBorder(
             isLoading: _isLoading,
-            textController: _storeInstagramController,
+            controller: _storeInstagramController,
             hintText: 'Store Instagram',
           ),
           const Gap(10),
@@ -424,7 +424,7 @@ class _UpdateForm extends StatelessWidget {
           const Gap(5),
           AppTextField.roundedBorder(
             isLoading: _isLoading,
-            textController: _storeTwitterController,
+            controller: _storeTwitterController,
             hintText: 'Store Twitter',
           ),
           const Gap(10),
@@ -435,7 +435,7 @@ class _UpdateForm extends StatelessWidget {
           const Gap(5),
           AppTextField.roundedBorder(
             isLoading: _isLoading,
-            textController: _storeWebsiteController,
+            controller: _storeWebsiteController,
             hintText: 'Store Website',
           ),
         ],

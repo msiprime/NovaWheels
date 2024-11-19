@@ -32,6 +32,7 @@ class _ChipFilterSectionState<T extends Enum>
             style: Theme.of(context).textTheme.titleMedium,
           ),
         ),
+        const SizedBox(height: 3),
         Wrap(
           spacing: 8.0,
           children: widget.values.map((T value) {
