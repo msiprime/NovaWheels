@@ -32,42 +32,46 @@ class ScaffoldWithNestedNavigation extends StatelessWidget {
     );
     return Scaffold(
       body: navigationShell,
-      bottomNavigationBar: GNav(
-        style: GnavStyle.oldSchool,
-        activeColor: AppColorsMain.colorPrimary,
-        gap: context.width * 0.0005,
-        curve: Curves.linear,
-        padding: EdgeInsets.symmetric(
-          horizontal: context.width * 0.039,
-          vertical: context.height * 0,
+      bottomNavigationBar: Container(
+        color: Colors.white,
+        height: 60,
+        child: GNav(
+          style: GnavStyle.oldSchool,
+          activeColor: AppColorsMain.colorPrimary,
+          gap: context.width * 0.0005,
+          curve: Curves.linear,
+          padding: EdgeInsets.symmetric(
+            horizontal: context.width * 0.039,
+            vertical: context.height * 0,
+          ),
+          iconSize: 20,
+          haptic: true,
+          color: AppColorsMain.grey,
+          selectedIndex: navigationShell.currentIndex,
+          tabs: [
+            GButton(
+              text: context.localization?.home ?? "",
+              icon: Icons.house_outlined,
+            ),
+            GButton(
+              text: "Store",
+              icon: Icons.store_outlined,
+            ),
+            GButton(
+              text: "Post Add",
+              icon: Icons.add_circle_outline,
+            ),
+            GButton(
+              text: context.localization?.profile ?? "",
+              icon: Icons.person_2_outlined,
+            ),
+            GButton(
+              text: context.localization?.setting ?? "",
+              icon: Icons.settings_outlined,
+            ),
+          ],
+          onTabChange: _goBranch,
         ),
-        iconSize: 20,
-        haptic: true,
-        color: AppColorsMain.grey,
-        selectedIndex: navigationShell.currentIndex,
-        tabs: [
-          GButton(
-            text: context.localization?.home ?? "",
-            icon: Icons.house_outlined,
-          ),
-          GButton(
-            text: "Store",
-            icon: Icons.store_outlined,
-          ),
-          GButton(
-            text: "Post Add",
-            icon: Icons.add_circle_outline,
-          ),
-          GButton(
-            text: context.localization?.profile ?? "",
-            icon: Icons.person_2_outlined,
-          ),
-          GButton(
-            text: context.localization?.setting ?? "",
-            icon: Icons.settings_outlined,
-          ),
-        ],
-        onTabChange: _goBranch,
       ),
     );
   }
