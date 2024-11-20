@@ -5,8 +5,35 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nova_wheels/core/base_component/image_picker_bloc/image_picker_bloc.dart';
 import 'package:nova_wheels/core/datasource/core_datasource.dart';
 
-class MultipleImagePickerWidget extends StatelessWidget {
-  const MultipleImagePickerWidget({super.key});
+class MultipleImagePickerWidget extends StatefulWidget {
+  const MultipleImagePickerWidget({
+    super.key,
+    required this.onImagesUpdated,
+  });
+
+  final Function(List<String?> imageUrls) onImagesUpdated;
+
+  @override
+  State<MultipleImagePickerWidget> createState() =>
+      _MultipleImagePickerWidgetState();
+}
+
+class _MultipleImagePickerWidgetState extends State<MultipleImagePickerWidget> {
+  final List<String?> _imageUrls = List.filled(5, null);
+
+  void _updateImageUrl(int index, String? imageUrl) {
+    setState(() {
+      _imageUrls[index] = imageUrl;
+    });
+    widget.onImagesUpdated(_imageUrls);
+  }
+
+  void _removeImageUrl(int index) {
+    setState(() {
+      _imageUrls[index] = null;
+    });
+    widget.onImagesUpdated(_imageUrls);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -14,27 +41,20 @@ class MultipleImagePickerWidget extends StatelessWidget {
       scrollDirection: Axis.horizontal,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          GeneralImagePicker(onImageUploaded: (imageUrl) {
-            print(imageUrl);
-          }),
-          16.gap,
-          GeneralImagePicker(onImageUploaded: (imageUrl) {
-            print(imageUrl);
-          }),
-          16.gap,
-          GeneralImagePicker(onImageUploaded: (imageUrl) {
-            print(imageUrl);
-          }),
-          16.gap,
-          GeneralImagePicker(onImageUploaded: (imageUrl) {
-            print(imageUrl);
-          }),
-          16.gap,
-          GeneralImagePicker(onImageUploaded: (imageUrl) {
-            print(imageUrl);
-          }),
-        ],
+        children: List.generate(
+          5,
+          (index) => Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            child: GeneralImagePicker(
+              onImageUploaded: (imageUrl) {
+                _updateImageUrl(index, imageUrl);
+              },
+              onImageRemoved: () {
+                _removeImageUrl(index);
+              },
+            ),
+          ),
+        ),
       ),
     );
   }
@@ -44,12 +64,13 @@ class GeneralImagePicker extends StatefulWidget {
   const GeneralImagePicker({
     super.key,
     required this.onImageUploaded,
+    required this.onImageRemoved,
     this.imageUrl,
   });
 
   final String? imageUrl;
-
   final Function(String? imageUrl) onImageUploaded;
+  final VoidCallback onImageRemoved;
 
   @override
   State<GeneralImagePicker> createState() => _GeneralImagePickerState();
@@ -80,6 +101,9 @@ class _GeneralImagePickerState extends State<GeneralImagePicker> {
         if (state is ImageUploadedToSupabase) {
           widget.onImageUploaded(state.imageUrl);
         }
+        if (state is ImageRemovedFromSupabase) {
+          widget.onImageRemoved();
+        }
       },
       builder: (context, state) {
         final String? currentImageUrl = (state is ImageUploadedToSupabase)
@@ -96,6 +120,7 @@ class _GeneralImagePickerState extends State<GeneralImagePicker> {
                   child: DottedBorder(
                     radius: const Radius.circular(12),
                     dashPattern: [6, 3],
+                    borderType: BorderType.RRect,
                     padding: const EdgeInsets.all(16),
                     color: Colors.grey.shade400,
                     child: currentImageUrl != null && currentImageUrl.isNotEmpty
@@ -119,11 +144,12 @@ class _GeneralImagePickerState extends State<GeneralImagePicker> {
                   state is UploadingImageToSupabase ||
                   state is RemovingImageFromSupabase)
                 Container(
-                  width: 100,
-                  height: 100,
+                  width: 80,
+                  height: 80,
                   decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
                     color: Colors.black.withOpacity(0.5),
-                    shape: BoxShape.circle,
+                    shape: BoxShape.rectangle,
                   ),
                   child: const Center(
                     child: CircularProgressIndicator(

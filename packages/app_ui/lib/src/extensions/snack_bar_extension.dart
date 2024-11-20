@@ -7,7 +7,7 @@ extension SnackBarExtension on BuildContext {
   void showSnackBar(
     String text, {
     bool dismissible = true,
-    Color color = AppColors.white,
+    Color color = AppColors.selectedBlue,
     Duration duration = const Duration(seconds: 4),
     SnackBarBehavior? behavior,
     SnackBarAction? snackBarAction,
