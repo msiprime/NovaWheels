@@ -68,6 +68,7 @@ dependencies:
   bloc_concurrency: ^0.2.5
   persistent_bottom_nav_bar: ^6.2.1
   google_fonts: ^6.2.1
+  flutter_gemini: ^2.0.5
 
 dev_dependencies:
   flutter_test:

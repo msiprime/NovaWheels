@@ -1,3 +1,5 @@
+import 'package:app_ui/app_ui.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -16,17 +18,44 @@ class SignOutButton extends StatelessWidget {
         }
       },
       builder: (context, state) {
-        return FilledButton(
-          onPressed: () {
-            context.read<SignInBloc>().add(const SignOutSubmitted());
-          },
-          child: (state.status == SignInStatus.loading)
-              ? const CircularProgressIndicator(
-                  color: Colors.white,
-                )
-              : const Text('Sign Out'),
+        return Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 70),
+          child: ListTile(
+            visualDensity: VisualDensity.compact,
+            tileColor: Colors.grey.shade200,
+            minVerticalPadding: 0,
+            minTileHeight: 35,
+            leading: const Icon(
+              Icons.logout,
+              color: Colors.grey,
+            ),
+            dense: true,
+            title: (state.status == SignInStatus.loading)
+                ? const CupertinoActivityIndicator()
+                : Center(
+                    child: const Text(
+                      'Log out',
+                      style: TextStyle(fontSize: 16, color: Colors.black
+                          // color: Colors.red,
+                          ),
+                    ),
+                  ),
+            onTap: () {
+              context.confirmAction(
+                noText: 'Cancel',
+                yesText: 'Log out',
+                fn: () {
+                  context.read<SignInBloc>().add(const SignOutSubmitted());
+                },
+                title: 'Log out',
+                content: 'Are you sure you want to log out?',
+              );
+            },
+          ),
         );
       },
     );
   }
 }
+
+//            context.read<SignInBloc>().add(const SignOutSubmitted());
