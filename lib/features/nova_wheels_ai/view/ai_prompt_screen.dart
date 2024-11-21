@@ -1,10 +1,10 @@
+import 'package:app_ui/app_ui.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gemini/flutter_gemini.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:nova_wheels/core/base_component/base/base_widgets/app_bar.dart';
-import 'package:nova_wheels/core/base_component/base/base_widgets/app_textfield.dart';
 import 'package:nova_wheels/features/nova_wheels_ai/blocs/gemini_bloc.dart';
 
 class AiPromptScreen extends StatelessWidget {
@@ -84,15 +84,12 @@ class _GeminiTextFieldState extends State<GeminiTextField> {
       child: Row(
         children: [
           Expanded(
-            child: AppTextField(
-              labelText: 'What is the spec of Tesla Model S?',
+            child: AppTextField.roundedBorder(
+              hintText: 'What is the spec of Tesla Model S?',
               controller: widget.controller,
               onChanged: (value) {
-                context
-                    .read<GeminiBloc>()
-                    .add(GeminiTextFieldChanged(value ?? ''));
+                context.read<GeminiBloc>().add(GeminiTextFieldChanged(value));
               },
-              hintText: 'Write a story about a magic backpack.',
             ),
           ),
           IconButton(

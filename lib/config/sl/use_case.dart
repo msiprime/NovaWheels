@@ -69,4 +69,9 @@ Future<void> _initUseCases() async {
   sl.registerLazySingleton(
     () => DeleteStoreUseCase(sl.call()),
   );
+
+  /// Post vehicle usecase
+  sl.registerLazySingleton(
+    () => PostVehicleUseCase(sl.call()),
+  );
 }

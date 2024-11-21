@@ -4,7 +4,7 @@ part of 'post_vehicle_bloc.dart';
 sealed class PostVehicleEvent {}
 
 class VehiclePostRequested extends PostVehicleEvent {
-  final VehicleEntity vehicleEntity;
+  final VehicleRequestEntity vehicleEntity;
 
   VehiclePostRequested({
     required this.vehicleEntity,

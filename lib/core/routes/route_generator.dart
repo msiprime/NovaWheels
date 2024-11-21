@@ -6,7 +6,7 @@ import 'package:nova_wheels/core/routes/place_holder_screen.dart';
 import 'package:nova_wheels/core/routes/routes.dart';
 import 'package:nova_wheels/features/home/presentation/pages/home_screen.dart';
 import 'package:nova_wheels/features/landing/presentation/pages/landing_screen.dart';
-import 'package:nova_wheels/features/nova_wheels_ai/pages/ai_prompt_screen.dart';
+import 'package:nova_wheels/features/nova_wheels_ai/view/ai_prompt_screen.dart';
 import 'package:nova_wheels/features/onboarding/presentation/pages/onboarding_view.dart';
 import 'package:nova_wheels/features/settings/presentation/pages/settings_screen.dart';
 import 'package:nova_wheels/features/sign_in/presentation/pages/request_otp_page.dart';
