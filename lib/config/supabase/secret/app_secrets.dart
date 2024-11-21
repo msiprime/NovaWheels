@@ -1,6 +1,9 @@
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class AppSecrets {
+  static String get geminiApiKey =>
+      dotenv.env['GEMINI_API_KEY_PAID'] ?? 'default';
+
   static String get supaBaseUrl => dotenv.env['SUPABASE_URL'] ?? 'default_url';
 
   static String get supaAnonKey =>

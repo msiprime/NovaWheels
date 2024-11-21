@@ -4,6 +4,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:nova_wheels/core/base_component/base/base_bloc/base_bloc.dart';
 import 'package:nova_wheels/core/base_component/base/base_bloc/base_event.dart';
 import 'package:nova_wheels/core/base_component/base/base_bloc/base_state.dart';
+import 'package:nova_wheels/core/base_component/base/base_widgets/app_bar.dart';
 import 'package:nova_wheels/core/base_component/base/base_widgets/base_markdown.dart';
 import 'package:nova_wheels/shared/values/text_styles.dart';
 
@@ -23,7 +24,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     return SafeArea(
       child: BlocBuilder<BaseBloc, BaseState>(builder: (context, state) {
         return Scaffold(
-          appBar: AppBar(),
+          appBar: NovaWheelsAppBar(title: _appLocalizations?.setting ?? ""),
           body: SingleChildScrollView(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
