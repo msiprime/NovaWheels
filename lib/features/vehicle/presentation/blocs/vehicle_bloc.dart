@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/foundation.dart' show immutable;
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:nova_wheels/features/vehicle/domain/entities/input/vehicle_post_input.dart';
 import 'package:nova_wheels/features/vehicle/domain/entities/vehicle_entity.dart';
 import 'package:nova_wheels/features/vehicle/domain/use_cases/store_vehicle_usecase.dart';
 import 'package:nova_wheels/features/vehicle/domain/use_cases/vehicle_usecase.dart';

@@ -10,3 +10,9 @@ final class VehicleByStoreFetched extends VehicleEvent {
 
   VehicleByStoreFetched({required this.storeId});
 }
+
+final class VehiclePostRequested extends VehicleEvent {
+  final VehicleRequestEntity vehicle;
+
+  VehiclePostRequested({required this.vehicle});
+}

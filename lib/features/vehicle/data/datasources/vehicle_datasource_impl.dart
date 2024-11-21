@@ -1,6 +1,7 @@
 import 'package:nova_wheels/core/base_component/failure/failures.dart';
 import 'package:nova_wheels/features/vehicle/data/datasources/vehicle_datasource.dart';
 import 'package:nova_wheels/features/vehicle/data/models/vehicle_model.dart';
+import 'package:shared/shared.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class VehicleDataSourceImpl implements VehicleDataSource {
@@ -42,6 +43,26 @@ class VehicleDataSourceImpl implements VehicleDataSource {
     } on PostgrestException catch (e) {
       throw Failure(e.message);
     } on Exception catch (e) {
+      throw Failure(e.toString());
+    }
+  }
+
+  @override
+  Future<Map<String, dynamic>> insertVehicle(
+      Map<String, dynamic> vehicle) async {
+    try {
+      final response = await supabaseClient
+          .from('vehicles')
+          .upsert(vehicle, onConflict: 'id')
+          .select()
+          .single();
+
+      return response;
+    } on PostgrestException catch (e) {
+      logE('error in exception datasource impl method $e');
+      throw Failure(e.message);
+    } catch (e) {
+      logE('error in exception datasource impl method $e');
       throw Failure(e.toString());
     }
   }

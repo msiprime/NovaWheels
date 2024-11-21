@@ -31,6 +31,11 @@ Future<void> _initBlocs() async {
       vehicleUseCase: sl.call(),
     ),
   );
+  sl.registerFactory(
+    () => PostVehicleBloc(
+      postVehicleUseCase: sl.call(),
+    ),
+  );
 
   /// Store bloc
   // fetch store

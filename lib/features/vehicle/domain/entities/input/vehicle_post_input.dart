@@ -1,14 +1,13 @@
-class VehicleEntity {
-  final String id;
+class VehicleRequestEntity {
   final String storeId;
   final String title;
   final String? description;
   final bool isForRent;
   final bool isForSale;
-  final double? rentPrice;
-  final double? salePrice;
-  final String brand;
-  final String model;
+  final String? rentPrice;
+  final String? salePrice;
+  final String? brand;
+  final String? model;
   final String? year;
   final String? mileage;
   final String? fuelType;
@@ -18,24 +17,45 @@ class VehicleEntity {
   final List<String>? images;
   final String? location;
 
-  const VehicleEntity({
-    required this.id,
+  VehicleRequestEntity({
     required this.storeId,
     required this.title,
     this.description,
-    required this.isForRent,
-    required this.isForSale,
+    this.isForRent = false,
+    this.isForSale = false,
     this.rentPrice,
     this.salePrice,
-    required this.brand,
-    required this.model,
+    this.brand,
+    this.model,
     this.year,
     this.mileage,
     this.fuelType,
     this.transmission,
-    required this.status,
+    this.status = 'available',
     this.rentalStatus,
     this.images,
     this.location,
   });
+
+  Map<String, dynamic> toJson() {
+    return {
+      'store_id': storeId,
+      'title': title,
+      'description': description,
+      'is_for_rent': isForRent,
+      'is_for_sale': isForSale,
+      'rent_price': isForRent ? rentPrice : null,
+      'sale_price': isForSale ? salePrice : null,
+      'brand': brand,
+      'model': model,
+      'year': year,
+      'mileage': mileage,
+      'fuel_type': fuelType,
+      'transmission': transmission,
+      'status': status,
+      'rental_status': rentalStatus,
+      'images': images,
+      'location': location,
+    };
+  }
 }
