@@ -24,11 +24,11 @@ class PostVehicleBloc extends Bloc<PostVehicleEvent, PostVehicleState> {
       VehiclePostRequested event, Emitter<PostVehicleState> emit) async {
     emit(PostVehicleLoading());
     try {
-      // final result = await _postVehicleUseCase(event.vehicleEntity);
-      // result.fold(
-      //   (failure) => emit(PostVehicleError(message: failure.message)),
-      //   (vehicle) => emit(PostVehicleLoaded(vehicle: vehicle)),
-      // );
+      final result = await _postVehicleUseCase(event.vehicleEntity);
+      result.fold(
+        (failure) => emit(PostVehicleError(message: failure.message)),
+        (vehicle) => emit(PostVehicleLoaded(vehicle: vehicle)),
+      );
     } catch (e) {
       logE('error in exception bloc method $e');
       emit(PostVehicleError(message: e.toString()));

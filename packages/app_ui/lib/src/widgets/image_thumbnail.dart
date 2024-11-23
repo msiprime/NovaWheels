@@ -10,6 +10,7 @@ class ImageAttachmentThumbnail extends StatelessWidget {
   /// {@macro image_attachment_thumbnail}
   const ImageAttachmentThumbnail({
     required this.imageUrl,
+    this.scale = 1.0,
     super.key,
     this.width,
     this.height,
@@ -23,6 +24,10 @@ class ImageAttachmentThumbnail extends StatelessWidget {
     this.borderRadius,
     this.errorBuilder = _defaultErrorBuilder,
   });
+
+  /// The image scaling factor.
+
+  final double scale;
 
   /// The image url to show.
   final String imageUrl;
@@ -85,6 +90,7 @@ class ImageAttachmentThumbnail extends StatelessWidget {
     final height = this.height;
 
     return NetworkImageAttachment(
+      scale: scale,
       url: imageUrl,
       fit: fit,
       width: width,
@@ -103,6 +109,7 @@ class ImageAttachmentThumbnail extends StatelessWidget {
 
 class NetworkImageAttachment extends StatelessWidget {
   const NetworkImageAttachment({
+    required this.scale,
     required this.url,
     required this.errorBuilder,
     required this.withAdaptiveColors,
@@ -130,10 +137,12 @@ class NetworkImageAttachment extends StatelessWidget {
   final bool withPlaceholder;
   final bool withAdaptiveColors;
   final ThumbnailErrorBuilder errorBuilder;
+  final double scale;
 
   @override
   Widget build(BuildContext context) {
     return CachedNetworkImage(
+      scale: scale,
       imageUrl: url,
       cacheKey: url,
       memCacheHeight: memCacheHeight,
@@ -162,8 +171,8 @@ class NetworkImageAttachment extends StatelessWidget {
           : (context, __) => ShimmerPlaceholder.rectangle(
                 height: height,
                 width: width,
-                highlightColorLight: Colors.grey[300]!,
-                baseColorLight: Colors.grey[100]!,
+                highlightColorLight: Colors.grey[300],
+                baseColorLight: Colors.grey[100],
                 withAdaptiveColors: withAdaptiveColors,
                 borderRadius: borderRadius,
               ),

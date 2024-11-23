@@ -3,16 +3,13 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:nova_wheels/config/sl/injection_container.dart';
-import 'package:nova_wheels/core/base_component/base/base_widgets/app_primary_button.dart';
 import 'package:nova_wheels/features/store/domain/entities/store_entity.dart';
 import 'package:nova_wheels/features/store/presentation/user/user_store_fetch/bloc/user_store_fetch_bloc.dart';
-import 'package:nova_wheels/features/store/presentation/user/user_store_update/view/user_store_update_page.dart';
-import 'package:nova_wheels/features/store/presentation/user/user_store_update/widget/store_deletion_widget.dart';
-import 'package:nova_wheels/features/store/shared/widget/small_advertisement_card.dart';
+import 'package:nova_wheels/features/store/presentation/user/user_store_fetch/widget/store_advertisement_tab.dart';
+import 'package:nova_wheels/features/store/presentation/user/user_store_fetch/widget/store_details_tab.dart';
+import 'package:nova_wheels/features/store/presentation/user/user_store_fetch/widget/store_statistic_tab.dart';
 import 'package:nova_wheels/features/store/shared/widget/verification_chip.dart';
-import 'package:nova_wheels/features/vehicle/presentation/blocs/vehicle_bloc.dart';
 
 class UserStoreDetails extends StatelessWidget {
   final StoreEntity store;
@@ -49,7 +46,7 @@ class UserStoreDetails extends StatelessWidget {
                     length: 3,
                     child: CustomScrollView(
                       slivers: [
-                        StoreAppBar(store: success.stores.first),
+                        _StoreAppBar(store: success.stores.first),
                         SliverPersistentHeader(
                           pinned: true,
                           delegate: _SliverTabBarDelegate(
@@ -60,12 +57,12 @@ class UserStoreDetails extends StatelessWidget {
                           child: TabBarView(
                             children: [
                               // Tab 1: Advertisements
-                              _StoreAdvertisementsTab(
+                              StoreAdvertisementsTab(
                                   store: success.stores.first),
                               // Tab 2: Statistics
-                              _StoreStatisticsTab(store: success.stores.first),
+                              StoreStatisticsTab(store: success.stores.first),
                               // Tab 3: Store Details
-                              _StoreDetailsTab(store: success.stores.first),
+                              StoreDetailsTab(store: success.stores.first),
                             ],
                           ),
                         ),
@@ -93,9 +90,8 @@ class UserStoreDetails extends StatelessWidget {
   }
 }
 
-class StoreAppBar extends StatelessWidget {
-  const StoreAppBar({
-    super.key,
+class _StoreAppBar extends StatelessWidget {
+  const _StoreAppBar({
     required this.store,
   });
 
@@ -113,207 +109,6 @@ class StoreAppBar extends StatelessWidget {
         titlePadding: const EdgeInsets.only(left: 16, bottom: 0),
         background: _ProfileAndCoverSpace(store: store),
       ),
-    );
-  }
-}
-
-class _StoreAdvertisementsTab extends StatelessWidget {
-  const _StoreAdvertisementsTab({
-    required this.store,
-  });
-
-  final StoreEntity store;
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Expanded(
-              child: ListView.builder(
-                itemCount: 10,
-                itemBuilder: (context, index) => Container(
-                  height: 300,
-                  margin: const EdgeInsets.symmetric(vertical: 8.0),
-                  color: Colors.blueGrey[100 * ((index % 8) + 1)],
-                  child: Center(child: Text('Advertisement $index')),
-                ),
-              ),
-            )
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class _StoreStatisticsTab extends StatelessWidget {
-  const _StoreStatisticsTab({
-    required this.store,
-  });
-
-  final StoreEntity store;
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Card(
-          elevation: 4,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(24.0),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Summary',
-                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                        fontWeight: FontWeight.bold,
-                      ),
-                ),
-                const SizedBox(height: 16),
-                _buildStatisticRow('Total Cars:', '50'),
-                _buildStatisticRow('Cars for Rent:', '20'),
-                _buildStatisticRow('Cars for Sale:', '30'),
-                _buildStatisticRow('Services Available:', '5'),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildStatisticRow(String title, String value) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 4.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            title,
-            style: const TextStyle(fontSize: 16),
-          ),
-          Text(
-            value,
-            style: const TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _StoreDetailsTab extends StatelessWidget {
-  const _StoreDetailsTab({
-    required this.store,
-  });
-
-  final StoreEntity store;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: Card(
-        elevation: 4,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(24.0),
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                _buildHeader(
-                  context,
-                  title: 'Store Owner',
-                  value: store.ownerId ?? 'Unknown',
-                ),
-                const Divider(thickness: 1),
-                const SizedBox(height: 16),
-                _buildSection(
-                  context,
-                  title: 'Description',
-                  content: store.description ?? 'No description available.',
-                ),
-                const SizedBox(height: 16),
-                _buildSection(
-                  context,
-                  title: 'Contact Information',
-                  content:
-                      store.phoneNumber ?? 'No contact information available.',
-                ),
-                const SizedBox(height: 20),
-                AppSecondaryButton(
-                  height: 40,
-                  onPressed: () {
-                    context.pushNamed(
-                      UserStoreUpdatePage.routeName,
-                      extra: store.id,
-                    );
-                  },
-                  title: "Update Store",
-                ),
-                const SizedBox(height: 16),
-                StoreDeletionWidget(storeId: store.id),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildHeader(BuildContext context,
-      {required String title, required String value}) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          title,
-          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                fontWeight: FontWeight.bold,
-              ),
-        ),
-        const SizedBox(height: 8),
-        Text(
-          value,
-          style: Theme.of(context).textTheme.titleMedium,
-        ),
-      ],
-    );
-  }
-
-  Widget _buildSection(BuildContext context,
-      {required String title, required String content}) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          title,
-          style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                fontWeight: FontWeight.bold,
-              ),
-        ),
-        const SizedBox(height: 8),
-        Text(
-          content,
-          style: Theme.of(context).textTheme.titleMedium,
-        ),
-      ],
     );
   }
 }
@@ -341,41 +136,6 @@ class _SliverTabBarDelegate extends SliverPersistentHeaderDelegate {
   @override
   bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) {
     return false;
-  }
-}
-
-class UserStoreAdvertisement extends StatelessWidget {
-  const UserStoreAdvertisement({
-    super.key,
-    required this.storeId,
-  });
-
-  final String storeId;
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) =>
-          sl.get<VehicleBloc>()..add(VehicleByStoreFetched(storeId: storeId)),
-      child: AppScaffold(
-        body: BlocBuilder<VehicleBloc, VehicleState>(
-          builder: (context, state) {
-            return switch (state) {
-              VehicleInitial() =>
-                const Center(child: CircularProgressIndicator()),
-              VehicleLoading() =>
-                const Center(child: CircularProgressIndicator()),
-              VehicleError() => Center(child: Text('message')),
-              VehicleLoaded() => SmallAdvertisementCard(
-                  title: state.vehicles.first.model ?? '',
-                  coverPhoto: state.vehicles.first.images?.coverPhoto ?? '',
-                  price: state.vehicles.first.price.toString(),
-                ),
-            };
-          },
-        ),
-      ),
-    );
   }
 }
 
@@ -538,6 +298,21 @@ class _ProfileAndCoverSpace extends StatelessWidget {
             right: 10,
             top: 270,
             child: SlimVerificationLabel(isVerified: store.isVerified),
+          ),
+          Positioned(
+            left: 150,
+            top: 264,
+            child: SizedBox(
+              width: 170,
+              child: Text(
+                store.name,
+                style: context.titleLarge?.copyWith(
+                  fontWeight: FontWeight.w500,
+                ),
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
           ),
         ],
       ),
