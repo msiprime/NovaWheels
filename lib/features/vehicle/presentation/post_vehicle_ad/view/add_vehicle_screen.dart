@@ -1,9 +1,11 @@
 import 'package:app_ui/app_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:nova_wheels/config/sl/injection_container.dart';
 import 'package:nova_wheels/core/base_component/base/base_widgets/app_bar.dart';
 import 'package:nova_wheels/core/base_component/base/base_widgets/app_primary_button.dart';
+import 'package:nova_wheels/core/routes/routes.dart';
 import 'package:nova_wheels/features/vehicle/domain/entities/input/vehicle_post_input.dart';
 import 'package:nova_wheels/features/vehicle/presentation/post_vehicle_ad/bloc/post_vehicle_bloc.dart';
 import 'package:nova_wheels/features/vehicle/presentation/post_vehicle_ad/widget/chip_filter_section.dart';
@@ -74,6 +76,7 @@ class _AddVehicleViewState extends State<AddVehicleView> {
                 context.showSnackBar(state.message);
               } else if (state is PostVehicleLoaded) {
                 context.showSnackBar('Vehicle posted successfully');
+                context.pushReplacementNamed(Routes.home);
               }
             },
             builder: (context, state) {
@@ -167,7 +170,11 @@ class _AddVehicleViewState extends State<AddVehicleView> {
                         context.showSnackBar('Please select fuel type');
                         return;
                       }
-                      logE(' Title: ${titleController.text}, '
+                      finalImageUrls = finalImageUrls
+                          .where((url) => url.isNotEmpty)
+                          .toList();
+
+                      logI(' Title: ${titleController.text}, '
                           '\n Description: ${descriptionController.text}, '
                           '\n Is for rent: $isForRent, '
                           '\n Is for sale: $isForSale, '

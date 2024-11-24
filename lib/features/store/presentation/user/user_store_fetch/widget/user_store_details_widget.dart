@@ -2,14 +2,12 @@ import 'package:app_ui/app_ui.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nova_wheels/config/sl/injection_container.dart';
 import 'package:nova_wheels/features/store/domain/entities/store_entity.dart';
-import 'package:nova_wheels/features/store/presentation/user/user_store_fetch/bloc/user_store_fetch_bloc.dart';
 import 'package:nova_wheels/features/store/presentation/user/user_store_fetch/widget/store_advertisement_tab.dart';
 import 'package:nova_wheels/features/store/presentation/user/user_store_fetch/widget/store_details_tab.dart';
 import 'package:nova_wheels/features/store/presentation/user/user_store_fetch/widget/store_statistic_tab.dart';
 import 'package:nova_wheels/features/store/shared/widget/verification_chip.dart';
+import 'package:shared/shared.dart';
 
 class UserStoreDetails extends StatelessWidget {
   final StoreEntity store;
@@ -21,58 +19,37 @@ class UserStoreDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => UserStoreFetchBloc(
-          fetchUserStoreUseCase: sl.call(),
-          fetchUserStoreByIdUseCase: sl.call())
-        ..add(UserStoreByIdFetched(store.id)),
-      child: BlocBuilder<UserStoreFetchBloc, UserStoreFetchState>(
-        builder: (context, state) {
-          return RefreshIndicator(
-            onRefresh: () async {
-              context
-                  .read<UserStoreFetchBloc>()
-                  .add(UserStoreByIdFetched(store.id));
-            },
-            child: switch (state) {
-              UserStoreFetchInitial() =>
-                const Center(child: CircularProgressIndicator()),
-              UserStoreFetchLoading() =>
-                const Center(child: CircularProgressIndicator()),
-              UserStoreFetchFailure() => Center(child: Text('message')),
-              UserStoreFetchSuccess success => AppScaffold(
-                  safeArea: true,
-                  body: DefaultTabController(
-                    length: 3,
-                    child: CustomScrollView(
-                      slivers: [
-                        _StoreAppBar(store: success.stores.first),
-                        SliverPersistentHeader(
-                          pinned: true,
-                          delegate: _SliverTabBarDelegate(
-                            _buildTabBarSection(),
-                          ),
-                        ),
-                        SliverFillRemaining(
-                          child: TabBarView(
-                            children: [
-                              // Tab 1: Advertisements
-                              StoreAdvertisementsTab(
-                                  store: success.stores.first),
-                              // Tab 2: Statistics
-                              StoreStatisticsTab(store: success.stores.first),
-                              // Tab 3: Store Details
-                              StoreDetailsTab(store: success.stores.first),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
+    logE('UserStoreDetails ${store.id}');
+
+    return AppScaffold(
+      safeArea: true,
+      body: DefaultTabController(
+        length: 3,
+        child: CustomScrollView(
+          slivers: [
+            _StoreAppBar(store: store),
+            SliverPersistentHeader(
+              pinned: true,
+              delegate: _SliverTabBarDelegate(
+                _buildTabBarSection(),
+              ),
+            ),
+            SliverFillRemaining(
+              child: TabBarView(
+                children: [
+                  // Tab 1: Advertisements
+                  StoreAdvertisementsTab(
+                    store: store,
                   ),
-                ),
-            },
-          );
-        },
+                  // Tab 2: Statistics
+                  StoreStatisticsTab(store: store),
+                  // Tab 3: Store Details
+                  StoreDetailsTab(store: store),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -139,118 +116,6 @@ class _SliverTabBarDelegate extends SliverPersistentHeaderDelegate {
   }
 }
 
-class StoreDetailsCard extends StatelessWidget {
-  final StoreEntity store;
-
-  const StoreDetailsCard({super.key, required this.store});
-
-  @override
-  Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Card(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
-          ),
-          elevation: 4,
-          shadowColor: Colors.black26,
-          child: Container(
-            decoration: BoxDecoration(
-              color: Colors.green.shade50,
-              borderRadius: BorderRadius.circular(12),
-            ),
-            padding: const EdgeInsets.all(16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                _buildDetailRow(
-                  label: 'Address',
-                  value: store.address ?? 'Not provided',
-                  icon: Icons.location_on,
-                  context: context,
-                ),
-                _buildDetailRow(
-                  label: 'Phone',
-                  value: store.phoneNumber ?? 'Not provided',
-                  icon: Icons.phone,
-                  context: context,
-                ),
-                _buildDetailRow(
-                  label: 'Email',
-                  value: store.email ?? 'Not provided',
-                  icon: Icons.email,
-                  context: context,
-                ),
-                _buildDetailRow(
-                  label: 'Created At',
-                  value:
-                      store.createdAt?.timeZoneOffset.toString() ?? 'Unknown',
-                  icon: Icons.calendar_today,
-                  context: context,
-                ),
-                _buildDetailRow(
-                  label: 'Facebook',
-                  value: store.facebook ?? 'Not linked',
-                  icon: Icons.facebook,
-                  context: context,
-                ),
-                _buildDetailRow(
-                  label: 'Instagram',
-                  value: store.instagram ?? 'Not linked',
-                  icon: Icons.camera_alt,
-                  context: context,
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildDetailRow({
-    required String label,
-    required String value,
-    required IconData icon,
-    required BuildContext context,
-  }) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Icon(
-            icon,
-            color: context.theme.primaryColor.withOpacity(0.8),
-          ),
-          const SizedBox(width: 8),
-          Expanded(
-            child: RichText(
-              text: TextSpan(
-                text: '$label: ',
-                style: context.titleMedium?.copyWith(
-                  fontWeight: FontWeight.bold,
-                  color: context.theme.primaryColor,
-                ),
-                children: [
-                  TextSpan(
-                    text: value,
-                    style: context.titleMedium?.copyWith(
-                      fontWeight: FontWeight.normal,
-                      color: Colors.black87,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
 class _ProfileAndCoverSpace extends StatelessWidget {
   const _ProfileAndCoverSpace({
     required this.store,
@@ -291,9 +156,11 @@ class _ProfileAndCoverSpace extends StatelessWidget {
             ),
           )
               .animate()
-              .rotate(delay: 2100.ms, duration: 500.ms)
-              .scale(delay: 400.ms)
-              .slide(delay: 500.ms),
+              .rotate(
+                  delay: NumDurationExtension(2100).microseconds,
+                  duration: NumDurationExtension(500).microseconds)
+              .scale(delay: NumDurationExtension(400).microseconds)
+              .slide(delay: NumDurationExtension(500).microseconds),
           Positioned(
             right: 10,
             top: 270,
