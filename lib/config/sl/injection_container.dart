@@ -41,8 +41,9 @@ import 'package:nova_wheels/features/vehicle/data/repositories/vehicle_repo_impl
 import 'package:nova_wheels/features/vehicle/domain/repositories/vehicle_repo.dart';
 import 'package:nova_wheels/features/vehicle/domain/use_cases/post_vehicle_usecase.dart';
 import 'package:nova_wheels/features/vehicle/domain/use_cases/store_vehicle_usecase.dart';
+import 'package:nova_wheels/features/vehicle/domain/use_cases/stream_of_store_vehicles.dart';
 import 'package:nova_wheels/features/vehicle/domain/use_cases/vehicle_usecase.dart';
-import 'package:nova_wheels/features/vehicle/presentation/blocs/vehicle_bloc.dart';
+import 'package:nova_wheels/features/vehicle/presentation/fetch_vehicle_post/bloc/fetch_vehicle_bloc.dart';
 import 'package:nova_wheels/features/vehicle/presentation/post_vehicle_ad/bloc/post_vehicle_bloc.dart';
 import 'package:nova_wheels/shared/remote_datasource/network/rest_client.dart'
     show RestClient;

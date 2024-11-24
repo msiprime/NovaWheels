@@ -54,7 +54,7 @@ class VehicleRequestEntity {
       'transmission': transmission,
       'status': status,
       'rental_status': rentalStatus,
-      'images': images,
+      'images': images ?? [],
       'location': location,
     };
   }

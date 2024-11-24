@@ -26,13 +26,13 @@ class StoreFrontWidget extends StatelessWidget {
       onTap: () {
         switch (type) {
           case FetchStoreType.allStores:
-            context.goNamed(
+            context.pushNamed(
               Routes.generalStoreDetails,
               extra: store,
             );
             break;
           case FetchStoreType.userStores:
-            context.goNamed(
+            context.pushNamed(
               Routes.userStoreDetails,
               extra: store,
             );

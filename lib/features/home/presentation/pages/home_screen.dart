@@ -1,7 +1,10 @@
 import 'package:app_ui/app_ui.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:nova_wheels/config/sl/injection_container.dart';
 import 'package:nova_wheels/features/home/shared/drawer/nova_wheels_drawer.dart';
 import 'package:nova_wheels/features/home/shared/images/banners_urls.dart';
+import 'package:nova_wheels/features/vehicle/presentation/fetch_vehicle_post/bloc/fetch_vehicle_bloc.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -47,9 +50,66 @@ class HomeScreen extends StatelessWidget {
               scale: 0.5,
             ),
             20.gap,
+
+            VehicleCheck(),
           ],
         ),
       ),
+    );
+  }
+}
+
+class VehicleCheck extends StatelessWidget {
+  const VehicleCheck({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) => FetchVehicleBloc(
+        streamOfStoreVehiclesUsecase: sl.call(),
+        storeVehicleUsecase: sl.call(),
+        vehicleUseCase: sl.call(),
+      ),
+      child: DummyView(),
+    );
+  }
+}
+
+class DummyView extends StatelessWidget {
+  const DummyView({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        FilledButton(
+          onPressed: () {
+            context.read<FetchVehicleBloc>().add(
+                  VehicleByStoreFetched(
+                      storeId: "ab9b74ab-0d57-44b5-84f3-aba6550ec0c8"),
+                );
+          },
+          child: Text('Fetch Car By Store'),
+        ),
+        BlocBuilder<FetchVehicleBloc, FetchVehicleState>(
+          builder: (context, state) {
+            switch (state) {
+              case FetchVehicleInitial _:
+                return Text('Vehicle Initial');
+              case FetchVehicleLoading _:
+                return CircularProgressIndicator();
+              case FetchVehicleLoaded _:
+                return Text('Vehicle Loaded');
+              case FetchVehicleError _:
+                return Text('Vehicle Error');
+              default:
+                return Text('Vehicle Error');
+            }
+          },
+        ),
+      ],
     );
   }
 }

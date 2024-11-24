@@ -1,9 +1,11 @@
-import 'package:nova_wheels/features/vehicle/data/models/vehicle_model.dart';
-
 abstract interface class VehicleDataSource {
-  Future<List<VehicleModel>> fetchAllVehicles();
+  Future<List<Map<String, dynamic>>> fetchAllVehicles();
 
-  Future<List<VehicleModel>> fetchAllVehiclesByStore({
+  Future<List<Map<String, dynamic>>> fetchAllVehiclesByStore({
+    required String storeId,
+  });
+
+  Stream<List<Map<String, dynamic>>> streamAllVehiclesByStore({
     required String storeId,
   });
 
