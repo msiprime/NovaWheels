@@ -24,6 +24,11 @@ if (flutterVersionName == null) {
 }
 
 android {
+    // pl code
+    testOptions {
+        execution "ANDROIDX_TEST_ORCHESTRATOR"
+    }
+
     namespace = "com.example.nova_wheels"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
@@ -34,6 +39,10 @@ android {
     }
 
     defaultConfig {
+        // patrol code
+        testInstrumentationRunner "pl.leancode.patrol.PatrolJUnitRunner"
+        testInstrumentationRunnerArguments clearPackageData: "true"
+
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         applicationId = "com.example.nova_wheels"
         // You can update the following values to match your application needs.
@@ -51,6 +60,18 @@ android {
             // Signing with the debug keys for now, so `flutter run --release` works.
             signingConfig = signingConfigs.debug
         }
+        debug {
+            minifyEnabled false
+            shrinkResources false
+        }
+    }
+    dependencies {
+        // Adding androidTestUtil dependency for orchestrator
+        androidTestUtil "androidx.test:orchestrator:1.4.2"
+
+        // Other dependencies can go here as well
+        // For example:
+        // androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
     }
 }
 

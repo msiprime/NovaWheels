@@ -196,7 +196,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
           child: AppTextField(
             onChanged: (value) {
               context.read<SignUpBloc>().add(
-                    FirstNameChangeEvent(
+                    FullNameChangeEvent(
                       firstName: value ?? "",
                     ),
                   );

@@ -4,8 +4,8 @@ class SignUpEvent {
   const SignUpEvent();
 }
 
-class FirstNameChangeEvent extends SignUpEvent {
-  const FirstNameChangeEvent({
+class FullNameChangeEvent extends SignUpEvent {
+  const FullNameChangeEvent({
     required this.firstName,
   });
 

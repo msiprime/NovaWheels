@@ -17,7 +17,7 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
     required this.resendOTPUseCase,
   }) : super(const SignUpState()) {
     on<SignUpSubmitted>(_onSignUpSubmitted);
-    on<FirstNameChangeEvent>(_onFirstNameChangeEvent);
+    on<FullNameChangeEvent>(_onFirstNameChangeEvent);
     on<EmailChangeEvent>(_onEmailChangeEvent);
     on<PasswordChangeEvent>(_onPasswordChangeEvent);
     on<BirthDateChangeEvent>(_onBirthDateChangeEvent);
@@ -34,7 +34,7 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
   final ResendOTPUseCase resendOTPUseCase;
 
   FutureOr<void> _onFirstNameChangeEvent(
-    FirstNameChangeEvent event,
+    FullNameChangeEvent event,
     Emitter<SignUpState> emit,
   ) async {
     emit(state.copyWith(

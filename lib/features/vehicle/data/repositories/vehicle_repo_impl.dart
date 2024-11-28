@@ -63,29 +63,24 @@ class VehicleRepoImpl implements VehicleRepo {
     required String storeId,
   }) {
     try {
-      // Get the stream from the data source
       final response =
           vehicleDataSource.streamAllVehiclesByStore(storeId: storeId);
 
-      // Map the stream to emit Either<Failure, List<VehicleResponseEntity>>
       return response
           .map<Either<Failure, List<VehicleResponseEntity>>>((snapshot) {
         try {
-          // Transform the raw data into VehicleResponseEntity list
           final vehicles = snapshot
               .map((vehicle) => VehicleResponseEntity.fromJson(vehicle))
               .toList();
-          return Right(vehicles); // Wrap success in Right
+          logE('vehicles in repo impl $vehicles');
+          return Right(vehicles);
         } catch (e) {
-          // Catch transformation errors and emit Failure
           return Left(Failure(e.toString()));
         }
       }).handleError((error) {
-        // Handle errors emitted by the data source's stream
         return Left(Failure(error.toString()));
       });
     } catch (e) {
-      // If an error occurs while setting up the stream, emit it immediately
       return Stream.value(Left(Failure(e.toString())));
     }
   }
