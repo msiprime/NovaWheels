@@ -51,7 +51,6 @@ class VehicleDataSourceImpl implements VehicleDataSource {
   Future<Map<String, dynamic>> insertVehicle(
       Map<String, dynamic> vehicle) async {
     try {
-      logE('vehicle in datasource being posted:  $vehicle');
       final response = await supabaseClient
           .from('vehicles')
           .upsert(vehicle, onConflict: 'id')
@@ -78,6 +77,11 @@ class VehicleDataSourceImpl implements VehicleDataSource {
           .eq('store_id', storeId)
           .select()
           .asStream();
+
+      logI(storeId);
+      response.listen((data) {
+        logI('data in datasource impl $data');
+      });
       return response;
     } on PostgrestException catch (e) {
       throw Failure(e.message);

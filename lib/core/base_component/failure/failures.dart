@@ -1,9 +1,14 @@
-class Failure {
+import 'package:equatable/equatable.dart';
+
+class Failure extends Equatable {
   final String message;
 
-  Failure([this.message = 'An unexpected error occurred,']);
+  const Failure([this.message = 'An unexpected error occurred,']);
+
+  @override
+  List<Object?> get props => [message];
 }
 
 class ServerFailure extends Failure {
-  ServerFailure([super.message]);
+  const ServerFailure([super.message]);
 }

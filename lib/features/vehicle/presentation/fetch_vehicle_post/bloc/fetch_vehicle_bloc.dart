@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:flutter/foundation.dart' show immutable;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nova_wheels/features/vehicle/domain/entities/input/vehicle_post_input.dart';
@@ -22,9 +23,10 @@ class FetchVehicleBloc extends Bloc<FetchVehicleEvent, FetchVehicleState> {
     required StreamOfStoreVehiclesUsecase streamOfStoreVehiclesUsecase,
   })  : _streamOfStoreVehicleUsecase = streamOfStoreVehiclesUsecase,
         super(FetchVehicleInitial()) {
-    on<FetchVehicleEvent>(_onAllVehiclesFetched);
+    on<FetchVehicleEvent>(_onAllVehiclesFetched, transformer: droppable());
     on<VehicleByStoreFetched>(_onVehicleByStoreFetched);
-    on<StreamOfVehicleByStoreFetched>(_onStreamOfVehicleByStoreFetched);
+    on<StreamOfVehicleByStoreFetched>(_onStreamOfVehicleByStoreFetched,
+        transformer: droppable());
   }
 
   FutureOr<void> _onAllVehiclesFetched(event, emit) async {
