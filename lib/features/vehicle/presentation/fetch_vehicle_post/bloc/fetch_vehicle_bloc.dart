@@ -8,6 +8,7 @@ import 'package:nova_wheels/features/vehicle/domain/entities/input/vehicle_repon
 import 'package:nova_wheels/features/vehicle/domain/use_cases/store_vehicle_usecase.dart';
 import 'package:nova_wheels/features/vehicle/domain/use_cases/stream_of_store_vehicles.dart';
 import 'package:nova_wheels/features/vehicle/domain/use_cases/vehicle_usecase.dart';
+import 'package:shared/shared.dart';
 
 part 'fetch_vehicle_event.dart';
 part 'fetch_vehicle_state.dart';
@@ -78,7 +79,11 @@ class FetchVehicleBloc extends Bloc<FetchVehicleEvent, FetchVehicleState> {
         stream,
         onData: (result) => result.fold(
           (failure) => FetchVehicleError(message: failure.message),
-          (vehicles) => FetchVehicleLoaded(vehicles: vehicles),
+          (vehicles) {
+            /// printing the fetched vehicles
+            logD('Vehicle fetched in bloc: $vehicles');
+            return FetchVehicleLoaded(vehicles: vehicles);
+          },
         ),
         onError: (error, stackTrace) =>
             FetchVehicleError(message: error.toString()),

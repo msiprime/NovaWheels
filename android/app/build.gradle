@@ -24,10 +24,7 @@ if (flutterVersionName == null) {
 }
 
 android {
-    // pl code
-    testOptions {
-        execution "ANDROIDX_TEST_ORCHESTRATOR"
-    }
+
 
     namespace = "com.example.nova_wheels"
     compileSdk = flutter.compileSdkVersion
@@ -65,16 +62,22 @@ android {
             shrinkResources false
         }
     }
-    dependencies {
-        // Adding androidTestUtil dependency for orchestrator
-        androidTestUtil "androidx.test:orchestrator:1.4.2"
-
-        // Other dependencies can go here as well
-        // For example:
-        // androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    // pl code
+    testOptions {
+        execution "ANDROIDX_TEST_ORCHESTRATOR"
     }
+
 }
 
 flutter {
     source = "../.."
+}
+
+dependencies {
+    // Adding androidTestUtil dependency for orchestrator
+    androidTestUtil "androidx.test:orchestrator:1.4.2"
+
+    // Other dependencies can go here as well
+    // For example:
+    // androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 }
