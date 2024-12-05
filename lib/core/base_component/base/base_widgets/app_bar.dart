@@ -20,11 +20,10 @@ class NovaWheelsAppBar extends StatelessWidget implements PreferredSizeWidget {
   });
 
   @override
-  Size get preferredSize => Size.fromHeight(AppBar().preferredSize.height + 1);
+  Size get preferredSize => Size.fromHeight(AppBar().preferredSize.height - 15);
 
   @override
   Widget build(BuildContext context) {
-    // final Color selectedBlue = Color(0xff007AFF);
     ThemeData theme = Theme.of(context);
 
     return Column(

@@ -77,4 +77,15 @@ Future<void> _initUseCases() async {
   sl.registerLazySingleton(
     () => PostVehicleUseCase(sl.call()),
   );
+
+  /// profile usecase
+  sl.registerLazySingleton(
+    () => ProfileDataUsecase(profileRepository: sl.call()),
+  );
+
+  sl.registerLazySingleton(
+    () => UpdateProfileDataUsecase(
+      profileRepository: sl.call(),
+    ),
+  );
 }

@@ -13,6 +13,13 @@ Future<void> _initDataSources() async {
     ),
   );
 
+  /// user profile data source
+  sl.registerLazySingleton<ProfileDataSource>(
+    () => ProfileDataSourceImpl(
+      supabaseClient: sl.call(),
+    ),
+  );
+
   /// vehicle data source
   sl.registerLazySingleton<VehicleDataSource>(
     () => VehicleDataSourceImpl(

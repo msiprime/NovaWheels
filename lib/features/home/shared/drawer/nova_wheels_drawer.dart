@@ -4,6 +4,8 @@ import 'package:go_router/go_router.dart';
 import 'package:nova_wheels/core/base_component/base/base_widgets/sign_out_button.dart';
 import 'package:nova_wheels/core/routes/routes.dart';
 import 'package:nova_wheels/features/nova_wheels_ai/view/ai_prompt_screen.dart';
+import 'package:nova_wheels/features/profile/presentation/blocs/profile_selector.dart';
+import 'package:nova_wheels/features/profile/presentation/pages/profile_page.dart';
 
 class NovaWheelsDrawer extends StatelessWidget {
   const NovaWheelsDrawer({super.key});
@@ -18,28 +20,29 @@ class NovaWheelsDrawer extends StatelessWidget {
             decoration: BoxDecoration(
               color: Theme.of(context).primaryColor.withOpacity(0.6),
             ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                CircleAvatar(
-                  radius: 40,
-                  backgroundColor: Colors.white,
-                  child: Icon(
-                    Icons.person,
-                    size: 40,
-                    color: Theme.of(context).primaryColor,
+            child: ProfileEntitySelector(
+              (profileEntity) => Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ClipOval(
+                    clipBehavior: Clip.antiAlias,
+                    child: ImageAttachmentThumbnail(
+                      height: 80,
+                      width: 80,
+                      imageUrl: profileEntity?.avatarUrl ?? '',
+                    ),
                   ),
-                ),
-                const SizedBox(height: 12),
-                Text(
-                  'John Doe',
-                  style: context.titleMedium?.copyWith(color: Colors.white),
-                ),
-                Text(
-                  'johndoe@example.com',
-                  style: context.bodySmall?.copyWith(color: Colors.white70),
-                ),
-              ],
+                  const SizedBox(height: 12),
+                  Text(
+                    profileEntity?.fullName ?? 'John Doe',
+                    style: context.titleMedium?.copyWith(color: Colors.white),
+                  ),
+                  Text(
+                    profileEntity?.email ?? 'Email not set',
+                    style: context.bodySmall?.copyWith(color: Colors.white70),
+                  ),
+                ],
+              ),
             ),
           ),
           Expanded(
@@ -58,6 +61,13 @@ class NovaWheelsDrawer extends StatelessWidget {
                   title: const Text('Vehicles'),
                   onTap: () {
                     // Navigate to vehicles screen
+                  },
+                ),
+                ListTile(
+                  leading: const Icon(Icons.person),
+                  title: const Text('Profile'),
+                  onTap: () {
+                    context.pushNamed(ProfilePage.routeName);
                   },
                 ),
                 ListTile(

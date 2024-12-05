@@ -17,7 +17,6 @@ class ImagePickerBloc extends Bloc<ImagePickerEvent, ImagePickerState> {
   }) : super(ImagePickerInitial()) {
     on<PickImageEvent>(_onPickImage);
     on<MultiplePickImageEvent>(_onMultiplePickImage);
-
     on<RemoveImageEvent>(_onRemoveImage);
     on<RemoveMultipleImagesEvent>(_onRemoveMultipleImages);
   }

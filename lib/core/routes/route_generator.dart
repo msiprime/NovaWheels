@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:nova_wheels/core/routes/error_screen.dart';
 import 'package:nova_wheels/core/routes/navbar.dart';
-import 'package:nova_wheels/core/routes/place_holder_screen.dart';
 import 'package:nova_wheels/core/routes/routes.dart';
 import 'package:nova_wheels/features/home/presentation/pages/home_screen.dart';
 import 'package:nova_wheels/features/landing/presentation/pages/landing_screen.dart';
 import 'package:nova_wheels/features/nova_wheels_ai/view/ai_prompt_screen.dart';
 import 'package:nova_wheels/features/onboarding/presentation/pages/onboarding_view.dart';
+import 'package:nova_wheels/features/profile/presentation/pages/profile_page.dart';
 import 'package:nova_wheels/features/settings/presentation/pages/settings_screen.dart';
 import 'package:nova_wheels/features/sign_in/presentation/pages/request_otp_page.dart';
 import 'package:nova_wheels/features/sign_in/presentation/pages/reset_password_page.dart';
@@ -168,9 +168,9 @@ class RouteGenerator {
           StatefulShellBranch(
             routes: [
               GoRoute(
-                name: Routes.profile,
-                path: Routes.profile,
-                builder: (context, state) => const PlaceHolderScreen(),
+                name: ProfilePage.routeName,
+                path: ProfilePage.routeName,
+                builder: (context, state) => const ProfilePage(),
               ),
             ],
           ),

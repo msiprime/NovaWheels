@@ -2,6 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nova_wheels/config/sl/injection_container.dart' as di;
 import 'package:nova_wheels/core/base_component/base/base_bloc/base_bloc.dart';
 import 'package:nova_wheels/features/landing/presentation/blocs/landing_bloc.dart';
+import 'package:nova_wheels/features/profile/presentation/blocs/profile_bloc.dart';
 import 'package:nova_wheels/features/sign_in/presentation/bloc/sign_in_bloc.dart';
 import 'package:nova_wheels/features/sign_up/presentation/bloc/sign_up_bloc.dart';
 import 'package:nova_wheels/features/vehicle/presentation/fetch_vehicle_post/bloc/fetch_vehicle_bloc.dart';
@@ -12,10 +13,8 @@ class GlobalBlocProviders {
     BlocProvider(create: (_) => di.sl<LandingBloc>()),
     BlocProvider(create: (_) => di.sl<SignUpBloc>()),
     BlocProvider(create: (_) => di.sl<SignInBloc>()),
+    BlocProvider(
+        create: (_) => di.sl<ProfileBloc>()..add(GetProfileDataEvent())),
     BlocProvider(create: (_) => di.sl<FetchVehicleBloc>()),
-
-    // BlocProvider(
-    //     create: (_) => di.sl<FetchStoreBloc>()
-    //       ..add(StoreFetched(type: FetchStoreType.allStores))),
   ];
 }

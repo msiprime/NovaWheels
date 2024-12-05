@@ -41,10 +41,6 @@ class UserStoreDetails extends StatelessWidget {
                   VehiclesByStoreIdView(
                     storeId: store.id,
                   ),
-                  // StoreAdvertisementsTab(
-                  //   store: store,
-                  // ),
-                  // Tab 2: Statistics
                   StoreStatisticsTab(store: store),
                   // Tab 3: Store Details
                   StoreDetailsTab(store: store),

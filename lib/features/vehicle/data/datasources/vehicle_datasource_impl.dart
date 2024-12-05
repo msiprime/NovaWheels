@@ -71,6 +71,12 @@ class VehicleDataSourceImpl implements VehicleDataSource {
   Stream<List<Map<String, dynamic>>> streamAllVehiclesByStore(
       {required String storeId}) {
     try {
+      // return Stream.value(storeId).switchMap((id) => supabaseClient
+      //     .from('vehicles')
+      //     .select()
+      //     .eq('store_id', id)
+      //     .asStream());
+
       final response = supabaseClient
           .from('vehicles')
           .select()
@@ -90,3 +96,12 @@ class VehicleDataSourceImpl implements VehicleDataSource {
     }
   }
 }
+
+//return Stream.value(storeId)
+//             .switchMap((id) =>
+//             supabaseClient
+//                 .from('vehicles')
+//                 .select()
+//                 .eq('store_id', id)
+//                 .asStream()
+//         )

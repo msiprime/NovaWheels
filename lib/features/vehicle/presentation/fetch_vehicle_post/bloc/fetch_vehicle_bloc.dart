@@ -26,8 +26,10 @@ class FetchVehicleBloc extends Bloc<FetchVehicleEvent, FetchVehicleState> {
         super(FetchVehicleInitial()) {
     on<FetchVehicleEvent>(_onAllVehiclesFetched, transformer: droppable());
     on<VehicleByStoreFetched>(_onVehicleByStoreFetched);
-    on<StreamOfVehicleByStoreFetched>(_onStreamOfVehicleByStoreFetched,
-        transformer: droppable());
+    on<StreamOfVehicleByStoreFetched>(
+      _onStreamOfVehicleByStoreFetched,
+      transformer: droppable(),
+    );
   }
 
   FutureOr<void> _onAllVehiclesFetched(event, emit) async {
