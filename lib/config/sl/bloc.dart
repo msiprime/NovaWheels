@@ -25,7 +25,7 @@ Future<void> _initBlocs() async {
 
   /// vehicle bloc
 
-  sl.registerFactory(
+  sl.registerLazySingleton(
     () => FetchVehicleBloc(
       streamOfStoreVehiclesUsecase: sl.call(),
       storeVehicleUsecase: sl.call(),
@@ -48,8 +48,19 @@ Future<void> _initBlocs() async {
       deleteStoreUseCase: sl.call(),
     ),
   );
-  // /// Image Picker Cubit
+
+  /// Image Picker Cubit
   // sl.registerLazySingleton(
-  //   () => ImagePickerBloc(),
+  //   () => ImagePickerBloc(
+  //     imageType: ImageType.,
+  //   ),
   // );
+
+  /// profile
+  sl.registerLazySingleton(
+    () => ProfileBloc(
+      profileDataUsecase: sl.call(),
+      updateProfileDataUsecase: sl.call(),
+    )..add(GetProfileDataEvent()),
+  );
 }

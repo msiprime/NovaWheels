@@ -23,13 +23,10 @@ class CreateStoreScreen extends StatefulWidget {
 }
 
 class _CreateStoreScreenState extends State<CreateStoreScreen> {
-  // late final CreateStoreCubit _createStoreCubit;
-
   @override
   void initState() {
     initTextFormControllers();
     _formKey = GlobalKey<FormState>();
-
     super.initState();
   }
 
@@ -41,7 +38,6 @@ class _CreateStoreScreenState extends State<CreateStoreScreen> {
   }
 
   late final GlobalKey<FormState> _formKey;
-
   late final TextEditingController _storeNameController;
   late final TextEditingController _storeDescriptionController;
   late final TextEditingController _storeAddressController;

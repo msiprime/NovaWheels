@@ -13,6 +13,13 @@ Future<void> _initRepositories() async {
     ),
   );
 
+  /// user profile repository
+  sl.registerLazySingleton<ProfileRepository>(
+    () => ProfileRepositoryImp(
+      profileDataSource: sl.call(),
+    ),
+  );
+
   /// vehicle repository
   sl.registerLazySingleton<VehicleRepo>(
     () => VehicleRepoImpl(

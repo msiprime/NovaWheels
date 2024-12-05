@@ -1,12 +1,12 @@
 const List<String> rentACarBannerImages = [
-  "https://i.ibb.co.com/P62fbsV/rent-a-car-banner1.jpg",
-  "https://i.ibb.co.com/X3WCFCt/rent-a-car-banner2.jpg",
-  "https://i.ibb.co.com/9s8V45n/rent-a-car-banner3.jpg",
-  "https://i.ibb.co.com/LrqMpZb/rent-a-car-banner4.jpg",
+  'https://i.ibb.co.com/r7qvbzk/rent-a-car-banner1-min.jpg',
+  'https://i.ibb.co.com/Tq8mthz/rent-a-car-banner2-min.jpg',
+  'https://i.ibb.co.com/q9Y1Wx4/rent-a-car-banner3-min.jpg',
+  'https://i.ibb.co.com/rpMtR0y/rent-a-car-banner4-min.jpg',
 ];
 
 const List<String> buyCarBannerImages = [
-  "https://i.ibb.co.com/dQn6FHT/rent-a-car-banner5.jpg",
-  "https://i.ibb.co.com/1zPP0gD/rent-a-car-banner6.jpg",
-  "https://i.ibb.co.com/zfJKb27/rent-a-car-banner7.jpg",
+  'https://i.ibb.co.com/LzRNGSb/rent-a-car-banner5-min.jpg',
+  'https://i.ibb.co.com/YpqV0Lf/rent-a-car-banner6-min.jpg',
+  'https://i.ibb.co.com/LpD9zZF/rent-a-car-banner7-min.jpg',
 ];
