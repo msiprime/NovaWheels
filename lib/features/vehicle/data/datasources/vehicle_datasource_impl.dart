@@ -95,6 +95,27 @@ class VehicleDataSourceImpl implements VehicleDataSource {
       throw Failure(e.toString());
     }
   }
+
+  @override
+  Future<Map<String, dynamic>> fetchVehicleById({
+    required String id,
+  }) async {
+    try {
+      final response = await supabaseClient
+          .from('vehicles')
+          .select()
+          .eq('id', id)
+          .select()
+          .single();
+      return response;
+    } on PostgrestException catch (e) {
+      throw Failure(e.message);
+    } on Exception catch (e) {
+      throw Failure(e.toString());
+    } catch (e) {
+      throw Failure(e.toString());
+    }
+  }
 }
 
 //return Stream.value(storeId)

@@ -12,6 +12,19 @@ class VehicleRepoImpl implements VehicleRepo {
   VehicleRepoImpl({required this.vehicleDataSource});
 
   @override
+  Future<Either<Failure, VehicleResponseEntity>> fetchVehicleById({
+    required String id,
+  }) async {
+    try {
+      final response = await vehicleDataSource.fetchVehicleById(id: id);
+      final vehicle = VehicleResponseEntity.fromJson(response);
+      return Right(vehicle);
+    } catch (e) {
+      return Left(Failure(e.toString()));
+    }
+  }
+
+  @override
   Future<Either<Failure, List<VehicleResponseEntity>>>
       fetchAllVehicles() async {
     try {
@@ -28,8 +41,9 @@ class VehicleRepoImpl implements VehicleRepo {
   }
 
   @override
-  Future<Either<Failure, List<VehicleResponseEntity>>> fetchAllVehiclesByStore(
-      {required String storeId}) async {
+  Future<Either<Failure, List<VehicleResponseEntity>>> fetchAllVehiclesByStore({
+    required String storeId,
+  }) async {
     try {
       final response =
           await vehicleDataSource.fetchAllVehiclesByStore(storeId: storeId);

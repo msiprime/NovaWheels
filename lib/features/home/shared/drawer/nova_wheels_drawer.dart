@@ -22,7 +22,7 @@ class NovaWheelsDrawer extends StatelessWidget {
             ),
             child: ProfileEntitySelector(
               (profileEntity) => Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+                // mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   ClipOval(
                     clipBehavior: Clip.antiAlias,
@@ -32,13 +32,19 @@ class NovaWheelsDrawer extends StatelessWidget {
                       imageUrl: profileEntity?.avatarUrl ?? '',
                     ),
                   ),
-                  const SizedBox(height: 12),
+                  const SizedBox(height: 6),
                   Text(
                     profileEntity?.fullName ?? 'John Doe',
                     style: context.titleMedium?.copyWith(color: Colors.white),
                   ),
+                  const SizedBox(height: 4),
+
+                  // Text(
+                  //   profileEntity?.email ?? 'Email not set',
+                  //   style: context.bodySmall?.copyWith(color: Colors.white70),
+                  // ),
                   Text(
-                    profileEntity?.email ?? 'Email not set',
+                    profileEntity?.mobileNumber ?? '',
                     style: context.bodySmall?.copyWith(color: Colors.white70),
                   ),
                 ],

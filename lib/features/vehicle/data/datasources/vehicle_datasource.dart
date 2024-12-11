@@ -1,6 +1,8 @@
 abstract interface class VehicleDataSource {
   Future<List<Map<String, dynamic>>> fetchAllVehicles();
 
+  Future<Map<String, dynamic>> fetchVehicleById({required String id});
+
   Future<List<Map<String, dynamic>>> fetchAllVehiclesByStore({
     required String storeId,
   });

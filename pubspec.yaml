@@ -46,7 +46,7 @@ dependencies:
   internet_connection_checker_plus: ^2.5.2
   flutter_dotenv: ^5.1.0
   flutter_animate: ^4.5.0
-  supabase_flutter: ^2.6.0
+  supabase_flutter: ^2.8.1
   jiffy: ^6.3.1
   blurhash: ^1.1.1
   flutter_image_compress: ^2.3.0
@@ -68,12 +68,13 @@ dependencies:
   bloc_concurrency: ^0.2.5
   persistent_bottom_nav_bar: ^6.2.1
   google_fonts: ^6.2.1
-  flutter_gemini: ^2.0.5
+  flutter_gemini: 2.0.5
   bloc_test: ^9.1.7
   mockito: ^5.4.4
   mocktail: ^1.0.4
-  patrol: ^3.13.0
+  patrol: ^3.13.1
   rxdart: ^0.28.0
+  font_awesome_flutter: ^10.8.0
 
 dev_dependencies:
   integration_test:
