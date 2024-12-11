@@ -20,7 +20,7 @@ class ChangeSetting extends StatelessWidget {
         children: [
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: AppValues.halfPadding),
-            child: Text("বাংলা"),
+            child: Text("English"),
           ),
           CupertinoSwitch(
               value: state.locale == const Locale('en'),

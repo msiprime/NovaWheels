@@ -2,6 +2,7 @@ import 'package:app_ui/app_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:nova_wheels/features/home/shared/drawer/nova_wheels_drawer.dart';
 import 'package:nova_wheels/features/home/shared/images/banners_urls.dart';
+import 'package:nova_wheels/features/vehicle/presentation/vehicle_details/view/vehicle_details_page.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -18,36 +19,52 @@ class HomeScreen extends StatelessWidget {
       drawer: NovaWheelsDrawer(),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Text(
-              'Best Car Deals at One Place!',
-              style: context.labelLarge,
-            ),
-            5.gap,
-            AppCarouselSlider(
-              imageUrls: rentACarBannerImages,
-              height: 150,
-              scale: 0.5,
-            ),
-            // categories row
-            10.gap,
-            CategoriesRow(),
-            5.gap,
-            Text(
-              'Explore the best deals on cars from top dealerships',
-              style: context.labelLarge,
-            ),
-            5.gap,
-            AppCarouselSlider(
-              imageUrls: buyCarBannerImages,
-              height: 150,
-              scale: 0.5,
-            ),
-            20.gap,
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Text(
+                'Best Car Deals at One Place!',
+                style: context.labelLarge,
+              ),
+              5.gap,
+              AppCarouselSlider(
+                imageUrls: rentACarBannerImages,
+                height: 150,
+                scale: 0.5,
+              ),
+              // categories row
+              10.gap,
+              CategoriesRow(),
+              5.gap,
+              Text(
+                'Explore the best deals on cars from top dealerships',
+                style: context.labelLarge,
+              ),
+              5.gap,
+              AppCarouselSlider(
+                imageUrls: buyCarBannerImages,
+                height: 150,
+                scale: 0.5,
+              ),
+              20.gap,
+
+              FilledButton(
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            // settings: RouteSettings(name: 'VehicleDetailsPage', arguments: null),
+                            maintainState: true,
+                            fullscreenDialog: false,
+                            allowSnapshotting: true,
+                            barrierDismissible: false,
+                            builder: (context) => VehicleDetailsPage()));
+                  },
+                  child: Text('Vehicle Details Page Design')),
+            ],
+          ),
         ),
       ),
     );

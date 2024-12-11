@@ -6,6 +6,10 @@ import 'package:nova_wheels/features/vehicle/domain/entities/input/vehicle_repon
 abstract interface class VehicleRepo {
   Future<Either<Failure, List<VehicleResponseEntity>>> fetchAllVehicles();
 
+  Future<Either<Failure, VehicleResponseEntity>> fetchVehicleById({
+    required String id,
+  });
+
   Future<Either<Failure, List<VehicleResponseEntity>>> fetchAllVehiclesByStore({
     required String storeId,
   });
