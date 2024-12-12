@@ -15,7 +15,7 @@ class VehicleResponseEntity {
   final String? transmission;
   final String status;
   final String? rentalStatus;
-  final List<String>? images;
+  final List<String> images;
   final String? location;
   final DateTime createdAt;
   final DateTime updatedAt;
@@ -37,7 +37,7 @@ class VehicleResponseEntity {
     this.transmission,
     this.status = 'available',
     this.rentalStatus,
-    this.images,
+    this.images = const [],
     this.location,
     required this.createdAt,
     required this.updatedAt,
