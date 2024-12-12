@@ -37,6 +37,32 @@ class AppCarouselSlider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (imageUrls.isEmpty) {
+      return Container(
+        height: height,
+        decoration: BoxDecoration(
+          color: Colors.grey[300],
+          borderRadius: BorderRadius.circular(radius),
+        ),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Icon(
+                Icons.image_not_supported_outlined,
+                color: Colors.grey,
+                size: 40,
+              ),
+              Text(
+                'No images available',
+                style: context.titleMedium,
+              ),
+            ],
+          ),
+        ),
+      );
+    }
+
     return Stack(
       alignment: Alignment.center,
       children: [
@@ -59,11 +85,11 @@ class AppCarouselSlider extends StatelessWidget {
                     scale: scale,
                     imageUrl: imageUrls[index],
                     borderRadius: !bottomRadiusEnabled
-                        ? const BorderRadius.only(
-                            topLeft: Radius.circular(8),
-                            topRight: Radius.circular(8),
+                        ? BorderRadius.only(
+                            topLeft: Radius.circular(radius),
+                            topRight: Radius.circular(radius),
                           )
-                        : const BorderRadius.all(Radius.circular(8)),
+                        : BorderRadius.all(Radius.circular(radius)),
                   ),
                 ),
               );

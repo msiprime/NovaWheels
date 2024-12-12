@@ -2,7 +2,7 @@ import 'package:app_ui/app_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:nova_wheels/features/vehicle/domain/entities/vehicle_entity.dart';
+import 'package:nova_wheels/features/vehicle/domain/entities/input/vehicle_reponse_entity.dart';
 import 'package:nova_wheels/shared/utils/extensions/context_extension.dart';
 import 'package:nova_wheels/shared/values/app_assets_path.dart';
 
@@ -147,7 +147,7 @@ class _VehicleDetailsPageState extends State<VehicleDetailsPage> {
     );
   }
 
-  Column _buildOverviewSection(VehicleEntity vehicle) {
+  Column _buildOverviewSection(VehicleResponseEntity vehicle) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -184,7 +184,7 @@ class _VehicleDetailsPageState extends State<VehicleDetailsPage> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             const Text("Updated At", style: TextStyle(color: Colors.grey)),
-            Text(vehicle.updatedAt ?? ""),
+            Text(""),
           ],
         ),
         const SizedBox(height: 16),
@@ -193,7 +193,7 @@ class _VehicleDetailsPageState extends State<VehicleDetailsPage> {
     );
   }
 
-  Widget _buildBedBathAreaSection(VehicleEntity propertyAd) {
+  Widget _buildBedBathAreaSection(VehicleResponseEntity propertyAd) {
     return Row(
       children: [
         IconAndCount(
@@ -219,7 +219,7 @@ class _VehicleDetailsPageState extends State<VehicleDetailsPage> {
   }
 
   Column _buildAddressSection(
-      VehicleEntity propertyEntity, BuildContext context) {
+      VehicleResponseEntity propertyEntity, BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -248,7 +248,7 @@ class _VehicleDetailsPageState extends State<VehicleDetailsPage> {
     );
   }
 
-  _buildProfileSection(BuildContext context, VehicleEntity vehicle) {
+  _buildProfileSection(BuildContext context, VehicleResponseEntity vehicle) {
     return widget.userInfo != null
         ? SizedBox(
             width: double.infinity,
@@ -308,7 +308,7 @@ class _VehicleDetailsPageState extends State<VehicleDetailsPage> {
         : const SizedBox();
   }
 
-  _buildMoreInfoSection(VehicleEntity vehicle) {
+  _buildMoreInfoSection(VehicleResponseEntity vehicle) {
     return const Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

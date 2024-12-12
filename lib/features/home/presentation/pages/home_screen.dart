@@ -60,7 +60,10 @@ class HomeScreen extends StatelessWidget {
                             fullscreenDialog: false,
                             allowSnapshotting: true,
                             barrierDismissible: false,
-                            builder: (context) => VehicleDetailsPage()));
+                            builder: (context) => VehicleDetailsPage(
+                                  vehicleId:
+                                      '7f5c8629-c43b-4b4d-be26-06451e915e0c',
+                                )));
                   },
                   child: Text('Vehicle Details Page Design')),
             ],
