@@ -53,17 +53,19 @@ class HomeScreen extends StatelessWidget {
               FilledButton(
                   onPressed: () {
                     Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            // settings: RouteSettings(name: 'VehicleDetailsPage', arguments: null),
-                            maintainState: true,
-                            fullscreenDialog: false,
-                            allowSnapshotting: true,
-                            barrierDismissible: false,
-                            builder: (context) => VehicleDetailsPage(
-                                  vehicleId:
-                                      '7f5c8629-c43b-4b4d-be26-06451e915e0c',
-                                )));
+                      context,
+                      MaterialPageRoute(
+                        // settings: RouteSettings(name: 'VehicleDetailsPage', arguments: null),
+                        maintainState: true,
+                        fullscreenDialog: false,
+                        allowSnapshotting: true,
+                        barrierDismissible: false,
+                        builder: (context) => VehicleDetailsPage(
+                          vehicleId: '7f5c8629-c43b-4b4d-be26-06451e915e0c',
+                          storeId: '430d0cdd-355d-4441-859c-4c8091137152',
+                        ),
+                      ),
+                    );
                   },
                   child: Text('Vehicle Details Page Design')),
             ],

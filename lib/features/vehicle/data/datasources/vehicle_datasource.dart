@@ -12,4 +12,11 @@ abstract interface class VehicleDataSource {
   });
 
   Future<Map<String, dynamic>> insertVehicle(Map<String, dynamic> vehicle);
+
+  //////////////
+
+  // New method for buy or rent operation
+  Future<Map<String, dynamic>> buyOrRentVehicle(
+    Map<String, dynamic> vehicleBuyOrRentRequest,
+  );
 }

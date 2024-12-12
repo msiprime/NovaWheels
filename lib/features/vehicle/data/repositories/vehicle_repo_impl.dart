@@ -1,6 +1,8 @@
 import 'package:dartz/dartz.dart';
 import 'package:nova_wheels/core/base_component/failure/failures.dart';
 import 'package:nova_wheels/features/vehicle/data/datasources/vehicle_datasource.dart';
+import 'package:nova_wheels/features/vehicle/data/models/request/vehicle_buy_rent_request_model.dart';
+import 'package:nova_wheels/features/vehicle/domain/entities/input/vehicle_buy_rent_request_entity.dart';
 import 'package:nova_wheels/features/vehicle/domain/entities/input/vehicle_post_input.dart';
 import 'package:nova_wheels/features/vehicle/domain/entities/input/vehicle_reponse_entity.dart';
 import 'package:nova_wheels/features/vehicle/domain/repositories/vehicle_repo.dart';
@@ -96,6 +98,20 @@ class VehicleRepoImpl implements VehicleRepo {
       });
     } catch (e) {
       return Stream.value(Left(Failure(e.toString())));
+    }
+  }
+
+  @override
+  Future<Either<Failure, VehicleBuyRentRequestEntity>> buyOrRentVehicle(
+      VehicleBuyRentRequestEntity vehicleRequest) async {
+    try {
+      final vehicleJson = vehicleRequest.toMap();
+      final response = await vehicleDataSource.buyOrRentVehicle(vehicleJson);
+      final VehicleBuyRentRequestModel vehicleModel =
+          VehicleBuyRentRequestModel.fromMap(response);
+      return Right(vehicleModel.toEntity());
+    } catch (e) {
+      return Left(Failure(e.toString()));
     }
   }
 }

@@ -1,0 +1,4 @@
+enum VehicleRequestType {
+  rent,
+  buy,
+}

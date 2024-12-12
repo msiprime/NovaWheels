@@ -22,6 +22,8 @@ import 'package:nova_wheels/features/store/presentation/user/user_store_fetch/vi
 import 'package:nova_wheels/features/store/presentation/user/user_store_fetch/widget/user_store_details_widget.dart';
 import 'package:nova_wheels/features/store/presentation/user/user_store_update/view/user_store_update_page.dart';
 import 'package:nova_wheels/features/store/shared/widget/general_store_details_widget.dart';
+import 'package:nova_wheels/features/vehicle/domain/enum/vehicle_request_type_enum.dart';
+import 'package:nova_wheels/features/vehicle/presentation/vehicle_buy_rent_request/view/vehicle_buy_request_form.dart';
 
 import '../../features/vehicle/presentation/post_vehicle_ad/view/add_vehicle_screen.dart';
 
@@ -98,16 +100,34 @@ class RouteGenerator {
           StatefulShellBranch(
             routes: [
               GoRoute(
-                  name: Routes.home,
-                  path: Routes.home,
-                  builder: (context, state) => const HomeScreen(),
-                  routes: [
-                    GoRoute(
-                      path: AiPromptScreen.routeName,
-                      name: AiPromptScreen.routeName,
-                      builder: (context, state) => const AiPromptScreen(),
-                    ),
-                  ]),
+                name: Routes.home,
+                path: Routes.home,
+                builder: (context, state) => const HomeScreen(),
+                routes: [
+                  GoRoute(
+                    path: AiPromptScreen.routeName,
+                    name: AiPromptScreen.routeName,
+                    builder: (context, state) => const AiPromptScreen(),
+                  ),
+                  GoRoute(
+                      path: VehicleBuyRentRequestForm.routeName,
+                      name: VehicleBuyRentRequestForm.routeName,
+                      builder: (context, state) {
+                        final extraDataMap =
+                            state.extra as Map<String, dynamic>;
+                        final requestType =
+                            extraDataMap['requestType'] as VehicleRequestType;
+                        final vehicleId = extraDataMap['vehicleId'] as String;
+                        final storeId = extraDataMap['storeId'] as String;
+
+                        return VehicleBuyRentRequestForm(
+                          requestType: requestType,
+                          storeId: storeId,
+                          vehicleId: vehicleId,
+                        );
+                      }),
+                ],
+              ),
             ],
           ),
           StatefulShellBranch(
