@@ -116,6 +116,40 @@ class VehicleDataSourceImpl implements VehicleDataSource {
       throw Failure(e.toString());
     }
   }
+
+  @override
+  Future<Map<String, dynamic>> buyOrRentVehicle(
+      Map<String, dynamic> vehicleBuyRentRequest) async {
+    try {
+      final isForRent = vehicleBuyRentRequest['is_for_rent'] ?? false;
+      final isForSale = vehicleBuyRentRequest['is_for_sale'] ?? false;
+
+      if (isForRent && !isForSale) {
+        final response = await supabaseClient
+            .from('vehicles')
+            .upsert(vehicleBuyRentRequest, onConflict: 'id')
+            .select()
+            .single();
+        return response;
+      } else if (!isForRent && isForSale) {
+        final response = await supabaseClient
+            .from('vehicles')
+            .upsert(vehicleBuyRentRequest, onConflict: 'id')
+            .select()
+            .single();
+        return response;
+      } else {
+        throw Exception(
+            'Invalid vehicle request, must be either for rent or sale.');
+      }
+    } on PostgrestException catch (e) {
+      logE('Error in buyOrRentVehicle: $e');
+      throw Failure(e.message);
+    } on Exception catch (e) {
+      logE('Error in buyOrRentVehicle: $e');
+      throw Failure(e.toString());
+    }
+  }
 }
 
 //return Stream.value(storeId)
