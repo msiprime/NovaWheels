@@ -22,7 +22,8 @@ class StoreFrontWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final bool isVerified = store.isVerified;
 
-    return GestureDetector(
+    return Tappable.faded(
+      fadeStrength: FadeStrength.sm,
       onTap: () {
         switch (type) {
           case FetchStoreType.allStores:

@@ -1,10 +1,12 @@
 import 'package:app_ui/app_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:nova_wheels/config/sl/injection_container.dart';
 import 'package:nova_wheels/features/store/domain/entities/store_entity.dart';
 import 'package:nova_wheels/features/store/shared/widget/small_advertisement_card.dart';
 import 'package:nova_wheels/features/vehicle/presentation/fetch_vehicle_post/bloc/fetch_vehicle_bloc.dart';
+import 'package:nova_wheels/features/vehicle/presentation/vehicle_details/view/vehicle_details_page.dart';
 import 'package:shared/shared.dart';
 
 class StoreAdvertisementsTab extends StatelessWidget {
@@ -52,14 +54,26 @@ class VehiclesByStoreIdView extends StatelessWidget {
                   child: ListView.separated(
                     separatorBuilder: (context, index) => 16.gap,
                     itemCount: success.vehicles.length,
-                    itemBuilder: (context, index) => SmallAdvertisementCard(
-                      title: success.vehicles[index].title,
-                      coverPhoto:
-                          (success.vehicles[index].images?.isNotEmpty == true)
-                              ? success.vehicles[index].images!.first
-                              : '',
-                      isForSale: success.vehicles[index].isForSale,
-                      salePrice: success.vehicles[index].salePrice,
+                    itemBuilder: (context, index) => Tappable.faded(
+                      fadeStrength: FadeStrength.sm,
+                      onTap: () {
+                        context.pushNamed(
+                          VehicleDetailsPage.routeName,
+                          extra: {
+                            'vehicleId': success.vehicles[index].id,
+                            'storeId': storeId,
+                          },
+                        );
+                      },
+                      child: SmallAdvertisementCard(
+                        title: success.vehicles[index].title,
+                        coverPhoto:
+                            (success.vehicles[index].images.isNotEmpty == true)
+                                ? success.vehicles[index].images.first
+                                : '',
+                        isForSale: success.vehicles[index].isForSale,
+                        salePrice: success.vehicles[index].salePrice,
+                      ),
                     ),
                   ),
                 );

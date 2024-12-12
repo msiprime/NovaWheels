@@ -24,6 +24,7 @@ import 'package:nova_wheels/features/store/presentation/user/user_store_update/v
 import 'package:nova_wheels/features/store/shared/widget/general_store_details_widget.dart';
 import 'package:nova_wheels/features/vehicle/domain/enum/vehicle_request_type_enum.dart';
 import 'package:nova_wheels/features/vehicle/presentation/vehicle_buy_rent_request/view/vehicle_buy_request_form.dart';
+import 'package:nova_wheels/features/vehicle/presentation/vehicle_details/view/vehicle_details_page.dart';
 
 import '../../features/vehicle/presentation/post_vehicle_ad/view/add_vehicle_screen.dart';
 
@@ -157,6 +158,22 @@ class RouteGenerator {
                                 storeId: state.extra as String,
                               ),
                             ),
+                            GoRoute(
+                                path: VehicleDetailsPage.routeName,
+                                name: VehicleDetailsPage.routeName,
+                                builder: (context, state) {
+                                  final extraDataMap =
+                                      state.extra as Map<String, dynamic>;
+                                  final vehicleId =
+                                      extraDataMap['vehicleId'] as String;
+                                  final storeId =
+                                      extraDataMap['storeId'] as String;
+
+                                  return VehicleDetailsPage(
+                                    vehicleId: vehicleId,
+                                    storeId: storeId,
+                                  );
+                                }),
                           ],
                         ),
                       ],

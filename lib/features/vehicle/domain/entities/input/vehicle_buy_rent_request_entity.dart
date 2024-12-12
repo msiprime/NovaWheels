@@ -29,7 +29,7 @@ class VehicleBuyRentRequestEntity {
 
   Map<String, dynamic> toMap() {
     return {
-      'id': id,
+      // 'id': id,
       'vehicle_id': vehicleId,
       'user_id': userId,
       'store_id': storeId,
@@ -38,8 +38,8 @@ class VehicleBuyRentRequestEntity {
       'mobile_number': mobileNumber,
       'email': email,
       'second_mobile_number': secondMobileNumber,
-      'request_date': requestDate,
-      'status': status,
+      // 'request_date': requestDate,
+      'status': 'pending',
       'additional_details': additionalDetails,
     };
   }

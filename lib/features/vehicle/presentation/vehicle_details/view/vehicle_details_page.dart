@@ -18,6 +18,7 @@ import 'package:nova_wheels/features/vehicle/presentation/widgets/vehicle_status
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class VehicleDetailsPage extends StatelessWidget {
+  static const String routeName = 'vehicle-details';
   const VehicleDetailsPage({
     super.key,
     required this.vehicleId,
