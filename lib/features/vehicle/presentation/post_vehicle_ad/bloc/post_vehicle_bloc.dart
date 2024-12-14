@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nova_wheels/features/vehicle/domain/entities/input/vehicle_post_input.dart';
@@ -13,16 +14,18 @@ part 'post_vehicle_state.dart';
 class PostVehicleBloc extends Bloc<PostVehicleEvent, PostVehicleState> {
   final PostVehicleUseCase _postVehicleUseCase;
 
-  PostVehicleBloc({required PostVehicleUseCase postVehicleUseCase})
-      : _postVehicleUseCase = postVehicleUseCase,
+  PostVehicleBloc({
+    required PostVehicleUseCase postVehicleUseCase,
+  })  : _postVehicleUseCase = postVehicleUseCase,
         super(PostVehicleInitial()) {
-    on<PostVehicleEvent>((event, emit) {});
     on<VehiclePostRequested>(_onVehiclePostRequested);
   }
 
   FutureOr<void> _onVehiclePostRequested(
-      VehiclePostRequested event, Emitter<PostVehicleState> emit) async {
-    emit(PostVehicleLoading());
+    VehiclePostRequested event,
+    Emitter<PostVehicleState> emit,
+  ) async {
+    // emit(PostVehicleLoading());
     try {
       final result = await _postVehicleUseCase(event.vehicleEntity);
       result.fold(

@@ -7,6 +7,8 @@ import 'package:nova_wheels/features/nova_wheels_ai/view/ai_prompt_screen.dart';
 import 'package:nova_wheels/features/profile/presentation/blocs/profile_selector.dart';
 import 'package:nova_wheels/features/profile/presentation/pages/profile_page.dart';
 
+import '../../../vehicle/presentation/fetch_vehicle_post/view/all_public_vehicle_screen.dart';
+
 class NovaWheelsDrawer extends StatelessWidget {
   const NovaWheelsDrawer({super.key});
 
@@ -66,6 +68,7 @@ class NovaWheelsDrawer extends StatelessWidget {
                   leading: const Icon(Icons.directions_car),
                   title: const Text('Vehicles'),
                   onTap: () {
+                    context.pushNamed(AllPublicVehicleScreen.routeName);
                     // Navigate to vehicles screen
                   },
                 ),

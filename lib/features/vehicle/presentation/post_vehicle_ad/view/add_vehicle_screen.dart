@@ -49,7 +49,7 @@ class _AddVehicleViewState extends State<AddVehicleView> {
   late final TextEditingController locationController;
   late final TextEditingController storeIdController;
   late final TextEditingController vehicleTypeController;
-  List<String> finalImageUrls = [];
+  final List<String> finalImageUrls = [];
 
   @override
   void initState() {
@@ -91,7 +91,17 @@ class _AddVehicleViewState extends State<AddVehicleView> {
                     height: 100,
                     child: MultipleImagePickerWidget(
                       onImagesUpdated: (imageUrls) {
-                        finalImageUrls = imageUrls.map((e) => e ?? '').toList();
+                        finalImageUrls.clear();
+                        imageUrls.map((e) {
+                          if (e != null) {
+                            if (finalImageUrls.contains(e)) {
+                              return;
+                            } else {
+                              finalImageUrls.add(e);
+                            }
+                          }
+                        }).toList();
+                        logI(finalImageUrls);
                       },
                     ),
                   ),
@@ -117,9 +127,7 @@ class _AddVehicleViewState extends State<AddVehicleView> {
                     onSelected: (storeId) {
                       if (storeId == null) {
                         storeIdController.text = '';
-                        logE('No store selected');
                       } else {
-                        logE(storeId);
                         storeIdController.text = storeId;
                       }
                     },
@@ -170,29 +178,13 @@ class _AddVehicleViewState extends State<AddVehicleView> {
                         context.showSnackBar('Please select fuel type');
                         return;
                       }
-                      finalImageUrls = finalImageUrls
-                          .where((url) => url.isNotEmpty)
-                          .toList();
-
-                      logI(' Title: ${titleController.text}, '
-                          '\n Description: ${descriptionController.text}, '
-                          '\n Is for rent: $isForRent, '
-                          '\n Is for sale: $isForSale, '
-                          '\n Rent Price: ${rentPriceController.text}, '
-                          '\n Sell Price: ${sellPriceController.text}, '
-                          '\n Brand: ${brandController.text}, '
-                          '\n Model: ${modelController.text}, '
-                          '\n Year: ${yearController.text}, '
-                          '\n Location: ${locationController.text}, '
-                          '\n Fuel Type: ${fuelTypeController.text}, '
-                          '\n Transmission Type: ${transmissionTypeController.text}, '
-                          '\n Images: $finalImageUrls'
-                          '\n Vehicle Type: ${vehicleTypeController.text}');
-
-                      // Proceed with your post request or API call here
-
+                      // finalImageUrls = finalImageUrls
+                      //     .where((url) => url.isNotEmpty)
+                      //     .toList();
+                      logE(finalImageUrls);
                       context.read<PostVehicleBloc>().add(VehiclePostRequested(
-                              vehicleEntity: VehicleRequestEntity(
+                          images: List<String>.from(finalImageUrls),
+                          vehicleEntity: VehicleRequestEntity(
                             status: 'available',
                             title: titleController.text,
                             description: descriptionController.text,
@@ -201,15 +193,13 @@ class _AddVehicleViewState extends State<AddVehicleView> {
                             rentPrice: rentPriceController.text,
                             salePrice: sellPriceController.text,
                             storeId: storeIdController.text,
-                            images: finalImageUrls,
+                            images: List<String>.from(finalImageUrls),
                             year: yearController.text,
                             location: locationController.text,
                             fuelType: fuelTypeController.text,
                             brand: brandController.text,
                             model: modelController.text,
                           )));
-
-                      //clear all the fields
 
                       titleController.clear();
                       descriptionController.clear();

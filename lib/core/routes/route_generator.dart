@@ -23,6 +23,7 @@ import 'package:nova_wheels/features/store/presentation/user/user_store_fetch/vi
 import 'package:nova_wheels/features/store/presentation/user/user_store_fetch/widget/user_store_details_widget.dart';
 import 'package:nova_wheels/features/store/presentation/user/user_store_update/view/user_store_update_page.dart';
 import 'package:nova_wheels/features/vehicle/domain/enum/vehicle_request_type_enum.dart';
+import 'package:nova_wheels/features/vehicle/presentation/fetch_vehicle_post/view/all_public_vehicle_screen.dart';
 import 'package:nova_wheels/features/vehicle/presentation/vehicle_buy_rent_request/view/vehicle_buy_request_form.dart';
 import 'package:nova_wheels/features/vehicle/presentation/vehicle_details/view/vehicle_details_page.dart';
 
@@ -109,6 +110,11 @@ class RouteGenerator {
                     path: AiPromptScreen.routeName,
                     name: AiPromptScreen.routeName,
                     builder: (context, state) => const AiPromptScreen(),
+                  ),
+                  GoRoute(
+                    path: AllPublicVehicleScreen.routeName,
+                    name: AllPublicVehicleScreen.routeName,
+                    builder: (context, state) => const AllPublicVehicleScreen(),
                   ),
                   GoRoute(
                       path: VehicleBuyRentRequestForm.routeName,
