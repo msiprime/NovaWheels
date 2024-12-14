@@ -111,8 +111,9 @@ class StoreDataSourceImpl implements StoreDataSource {
   }
 
   @override
-  Future<Either<Failure, List<Map<String, dynamic>>>> fetchUserStoreById(
-      {required String storeId}) async {
+  Future<Either<Failure, List<Map<String, dynamic>>>> fetchUserStoreById({
+    required String storeId,
+  }) async {
     try {
       final response = await supabaseClient
           .from('stores')
@@ -146,6 +147,69 @@ class StoreDataSourceImpl implements StoreDataSource {
 
       if (response.isEmpty) {
         return Left(ServerFailure('Failed to update store'));
+      }
+
+      return Right(response);
+    } on PostgrestException catch (e) {
+      return Left(ServerFailure(e.message));
+    } on Exception catch (e) {
+      return Left(ServerFailure(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<Map<String, dynamic>>>> vehicleRequestByStore({
+    required String storeId,
+  }) async {
+    try {
+      final response = await supabaseClient
+          .from('vehicle_requests')
+          .select()
+          .eq('store_id', storeId);
+
+      if (response.isEmpty) {
+        return Left(ServerFailure('No Request In Store!'));
+      }
+
+      return Right(response);
+    } on PostgrestException catch (e) {
+      return Left(ServerFailure(e.message));
+    } on Exception catch (e) {
+      return Left(ServerFailure(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<Map<String, dynamic>>>> fetchStoreById(
+      {required String storeId}) async {
+    try {
+      final response =
+          await supabaseClient.from('stores').select().eq('id', storeId);
+
+      if (response.isEmpty) {
+        return Left(ServerFailure('No Store Found!'));
+      }
+
+      return Right(response);
+    } on PostgrestException catch (e) {
+      return Left(ServerFailure(e.message));
+    } on Exception catch (e) {
+      return Left(ServerFailure(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, Map<String, dynamic>>> updateRequestStatus({
+    required String requestId,
+    required String status,
+  }) async {
+    try {
+      final response = await supabaseClient
+          .from('vehicle_requests')
+          .update({'status': status}).eq('id', requestId);
+
+      if (response.isEmpty) {
+        return Left(ServerFailure('No Store Found!'));
       }
 
       return Right(response);

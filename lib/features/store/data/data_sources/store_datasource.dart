@@ -7,19 +7,40 @@ abstract interface class StoreDataSource {
     required StoreCreationParams storeCreationParams,
   });
 
+  /// Fetch User Stores
   Future<Either<Failure, List<Map<String, dynamic>>>> fetchUserStores();
 
+  /// Fetch User Store by Id
   Future<Either<Failure, List<Map<String, dynamic>>>> fetchUserStoreById({
     required String storeId,
   });
 
+  /// Fetch Store by Id
+  Future<Either<Failure, List<Map<String, dynamic>>>> fetchStoreById({
+    required String storeId,
+  });
+
+  /// Update Store
   Future<Either<Failure, Map<String, dynamic>>> updateStore({
     required Map<String, dynamic> storeJson,
   });
 
+  /// Fetch Public Stores
   Future<Either<Failure, List<Map<String, dynamic>>>> fetchPublicStores();
 
+  /// Delete Store by Id
   Future<Either<Failure, List<Map<String, dynamic>>>> deleteStoreById({
     required String storeId,
+  });
+
+  /// Fetch Vehicle Request by Store
+  Future<Either<Failure, List<Map<String, dynamic>>>> vehicleRequestByStore({
+    required String storeId,
+  });
+
+  /// Update Request Status
+  Future<Either<Failure, Map<String, dynamic>>> updateRequestStatus({
+    required String requestId,
+    required String status,
   });
 }

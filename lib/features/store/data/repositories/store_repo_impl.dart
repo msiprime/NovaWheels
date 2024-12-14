@@ -5,6 +5,8 @@ import 'package:nova_wheels/features/store/data/models/store_model.dart';
 import 'package:nova_wheels/features/store/domain/entities/store_entity.dart';
 import 'package:nova_wheels/features/store/domain/params/store_creation_params.dart';
 import 'package:nova_wheels/features/store/domain/repositories/store_repo.dart';
+import 'package:nova_wheels/features/vehicle/data/models/request/vehicle_buy_rent_request_model.dart';
+import 'package:nova_wheels/features/vehicle/domain/entities/input/vehicle_buy_rent_request_entity.dart';
 
 class StoreRepoImpl implements StoreRepo {
   final StoreDataSource storeDataSource;
@@ -78,7 +80,7 @@ class StoreRepoImpl implements StoreRepo {
   }
 
   @override
-  Future<Either<Failure, List<StoreEntity>>> fetchStoreById(
+  Future<Either<Failure, List<StoreEntity>>> fetchUserStoreById(
       {required String storeId}) async {
     final response = await storeDataSource.fetchUserStoreById(storeId: storeId);
 
@@ -119,6 +121,63 @@ class StoreRepoImpl implements StoreRepo {
       (mapResponse) {
         final storeModel = StoreModel.fromJson(mapResponse);
         return Right(storeModel.toEntity());
+      },
+    );
+  }
+
+  @override
+  Future<Either<Failure, List<VehicleBuyRentRequestEntity>>>
+      vehicleRequestByStore({
+    required String storeId,
+  }) async {
+    final response =
+        await storeDataSource.vehicleRequestByStore(storeId: storeId);
+
+    return response.fold(
+      (failure) => Left(failure),
+      (listMapResponse) {
+        final List<VehicleBuyRentRequestEntity> listOfVehicleRequest =
+            listMapResponse
+                .map(
+                    (map) => VehicleBuyRentRequestModel.fromMap(map).toEntity())
+                .toList();
+        return Right(listOfVehicleRequest);
+      },
+    );
+  }
+
+  @override
+  Future<Either<Failure, List<StoreEntity>>> fetchStoreById({
+    required String storeId,
+  }) async {
+    final response = await storeDataSource.fetchStoreById(storeId: storeId);
+
+    return response.fold(
+      (failure) => Left(failure),
+      (listMapResponse) {
+        final List<StoreEntity> listStoreModel = listMapResponse
+            .map((map) => StoreModel.fromJson(map).toEntity())
+            .toList();
+        return Right(listStoreModel);
+      },
+    );
+  }
+
+  @override
+  Future<Either<Failure, VehicleBuyRentRequestEntity>> updateRequestStatus({
+    required String requestId,
+    required String status,
+  }) async {
+    final response = await storeDataSource.updateRequestStatus(
+      requestId: requestId,
+      status: status,
+    );
+    return response.fold(
+      (failure) => Left(failure),
+      (listMapResponse) {
+        final VehicleBuyRentRequestEntity updatedVehicleRequest =
+            VehicleBuyRentRequestModel.fromMap(listMapResponse).toEntity();
+        return Right(updatedVehicleRequest);
       },
     );
   }
