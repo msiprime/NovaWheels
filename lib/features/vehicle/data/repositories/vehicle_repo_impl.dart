@@ -106,6 +106,7 @@ class VehicleRepoImpl implements VehicleRepo {
       VehicleBuyRentRequestEntity vehicleRequest) async {
     try {
       final vehicleJson = vehicleRequest.toMap();
+      logE('vehicle json in repo impl $vehicleJson');
       final response = await vehicleDataSource.buyOrRentVehicle(vehicleJson);
       final VehicleBuyRentRequestModel vehicleModel =
           VehicleBuyRentRequestModel.fromMap(response);

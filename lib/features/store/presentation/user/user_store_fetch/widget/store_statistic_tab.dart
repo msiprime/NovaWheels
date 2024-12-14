@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nova_wheels/features/store/domain/entities/store_entity.dart';
+import 'package:nova_wheels/features/store/presentation/vehicle_request_for_store/view/store_dashboard.dart';
 
 class StoreStatisticsTab extends StatelessWidget {
   const StoreStatisticsTab({
@@ -14,30 +15,42 @@ class StoreStatisticsTab extends StatelessWidget {
     return Center(
       child: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Card(
-          elevation: 4,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(24.0),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Summary',
-                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                        fontWeight: FontWeight.bold,
-                      ),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Card(
+                elevation: 4,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16),
                 ),
-                const SizedBox(height: 16),
-                _buildStatisticRow('Total Cars:', '50'),
-                _buildStatisticRow('Cars for Rent:', '20'),
-                _buildStatisticRow('Cars for Sale:', '30'),
-                _buildStatisticRow('Services Available:', '5'),
-              ],
-            ),
+                child: Padding(
+                  padding: const EdgeInsets.all(24.0),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Summary',
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                              fontWeight: FontWeight.bold,
+                            ),
+                      ),
+                      const SizedBox(height: 16),
+                      _buildStatisticRow('Total Cars:', '50'),
+                      _buildStatisticRow('Cars for Rent:', '20'),
+                      _buildStatisticRow('Cars for Sale:', '30'),
+                      _buildStatisticRow('Services Available:', '5'),
+                    ],
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 250,
+                child: StoreDashboardPage(
+                  storeId: store.id,
+                ),
+              )
+            ],
           ),
         ),
       ),

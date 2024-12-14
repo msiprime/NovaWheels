@@ -37,7 +37,7 @@ import 'package:nova_wheels/features/store/domain/repositories/store_repo.dart';
 import 'package:nova_wheels/features/store/domain/use_cases/create_store_usecase.dart';
 import 'package:nova_wheels/features/store/domain/use_cases/delete_store_usecase.dart';
 import 'package:nova_wheels/features/store/domain/use_cases/fetch_all_stores_usecase.dart';
-import 'package:nova_wheels/features/store/domain/use_cases/fetch_store_by_id_usecase.dart';
+import 'package:nova_wheels/features/store/domain/use_cases/fetch_user_store_by_id_usecase.dart';
 import 'package:nova_wheels/features/store/domain/use_cases/fetch_user_store_usecase.dart';
 import 'package:nova_wheels/features/store/domain/use_cases/update_store_usecase.dart';
 import 'package:nova_wheels/features/store/presentation/user/user_store_update/bloc/update_store_bloc.dart';
@@ -48,6 +48,7 @@ import 'package:nova_wheels/features/vehicle/domain/repositories/vehicle_repo.da
 import 'package:nova_wheels/features/vehicle/domain/use_cases/post_vehicle_usecase.dart';
 import 'package:nova_wheels/features/vehicle/domain/use_cases/store_vehicle_usecase.dart';
 import 'package:nova_wheels/features/vehicle/domain/use_cases/stream_of_store_vehicles.dart';
+import 'package:nova_wheels/features/vehicle/domain/use_cases/vehicle_by_id_usecase.dart';
 import 'package:nova_wheels/features/vehicle/domain/use_cases/vehicle_usecase.dart';
 import 'package:nova_wheels/features/vehicle/presentation/fetch_vehicle_post/bloc/fetch_vehicle_bloc.dart';
 import 'package:nova_wheels/features/vehicle/presentation/post_vehicle_ad/bloc/post_vehicle_bloc.dart';

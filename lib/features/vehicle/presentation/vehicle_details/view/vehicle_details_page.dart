@@ -5,13 +5,14 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:nova_wheels/core/base_component/base/base_widgets/app_bar.dart';
 import 'package:nova_wheels/features/profile/presentation/extension/date_time_extension.dart';
+import 'package:nova_wheels/features/store/presentation/store_by_id/view/store_by_id_widget.dart';
 import 'package:nova_wheels/features/vehicle/data/datasources/vehicle_datasource_impl.dart';
 import 'package:nova_wheels/features/vehicle/data/repositories/vehicle_repo_impl.dart';
 import 'package:nova_wheels/features/vehicle/domain/entities/input/vehicle_reponse_entity.dart';
 import 'package:nova_wheels/features/vehicle/domain/enum/vehicle_request_type_enum.dart';
 import 'package:nova_wheels/features/vehicle/domain/use_cases/vehicle_by_id_usecase.dart';
 import 'package:nova_wheels/features/vehicle/presentation/vehicle_buy_rent_request/view/vehicle_buy_request_form.dart';
-import 'package:nova_wheels/features/vehicle/presentation/vehicle_details/cubit/vehicle_details_cubit.dart';
+import 'package:nova_wheels/features/vehicle/presentation/vehicle_details/cubit/vehicle_details_cubit/vehicle_details_cubit.dart';
 import 'package:nova_wheels/features/vehicle/presentation/vehicle_details/widget/vehicle_details_states_widget.dart';
 import 'package:nova_wheels/features/vehicle/presentation/widgets/availability_chip.dart';
 import 'package:nova_wheels/features/vehicle/presentation/widgets/vehicle_status_chip.dart';
@@ -19,6 +20,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 
 class VehicleDetailsPage extends StatelessWidget {
   static const String routeName = 'vehicle-details';
+
   const VehicleDetailsPage({
     super.key,
     required this.vehicleId,
@@ -32,9 +34,6 @@ class VehicleDetailsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        // BlocProvider<VehicleBuyRentCubit>(
-        //   create: (context) => VehicleBuyRentCubit(),
-        // ),
         BlocProvider<VehicleDetailsCubit>(
           create: (context) => VehicleDetailsCubit(
             vehicleByIdUsecase: VehicleByIdUsecase(
@@ -168,6 +167,8 @@ class _VehicleLoaded extends StatelessWidget {
                         const Divider(height: 32),
                         // AvailabilityWidget(vehicle: vehicle),
                         GalleryWidget(vehicle: vehicle),
+                        Center(
+                            child: StoreByIdWidget(storeId: vehicle.storeId)),
                       ],
                     ),
                   ),

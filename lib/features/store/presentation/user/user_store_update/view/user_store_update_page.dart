@@ -8,7 +8,7 @@ import 'package:nova_wheels/core/base_component/base/base_widgets/app_bar.dart';
 import 'package:nova_wheels/core/base_component/base/base_widgets/app_primary_button.dart';
 import 'package:nova_wheels/features/store/domain/entities/store_entity.dart';
 import 'package:nova_wheels/features/store/domain/use_cases/delete_store_usecase.dart';
-import 'package:nova_wheels/features/store/domain/use_cases/fetch_store_by_id_usecase.dart';
+import 'package:nova_wheels/features/store/domain/use_cases/fetch_user_store_by_id_usecase.dart';
 import 'package:nova_wheels/features/store/domain/use_cases/fetch_user_store_usecase.dart';
 import 'package:nova_wheels/features/store/domain/use_cases/update_store_usecase.dart';
 import 'package:nova_wheels/features/store/presentation/user/user_store_fetch/bloc/user_store_fetch_bloc.dart';

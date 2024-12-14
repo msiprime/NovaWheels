@@ -4,7 +4,8 @@ class VehicleBuyRentRequestEntity {
   final String userId;
   final String storeId;
   final String requestType;
-  final List<int>? rentDays;
+  final String? startDate; // Start date for rent requests
+  final String? endDate; // End date for rent requests
   final String mobileNumber;
   final String email;
   final String? secondMobileNumber;
@@ -18,7 +19,8 @@ class VehicleBuyRentRequestEntity {
     required this.userId,
     required this.storeId,
     required this.requestType,
-    this.rentDays,
+    this.startDate,
+    this.endDate,
     required this.mobileNumber,
     required this.email,
     this.secondMobileNumber,
@@ -34,7 +36,8 @@ class VehicleBuyRentRequestEntity {
       'user_id': userId,
       'store_id': storeId,
       'request_type': requestType,
-      'rent_days': rentDays,
+      'start_date': startDate,
+      'end_date': endDate,
       'mobile_number': mobileNumber,
       'email': email,
       'second_mobile_number': secondMobileNumber,
@@ -51,8 +54,8 @@ class VehicleBuyRentRequestEntity {
       userId: map['user_id'],
       storeId: map['store_id'],
       requestType: map['request_type'],
-      rentDays:
-          map['rent_days'] != null ? List<int>.from(map['rent_days']) : null,
+      startDate: map['start_date'],
+      endDate: map['end_date'],
       mobileNumber: map['mobile_number'],
       email: map['email'],
       secondMobileNumber: map['second_mobile_number'],

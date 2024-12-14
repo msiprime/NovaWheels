@@ -120,6 +120,7 @@ class VehicleDataSourceImpl implements VehicleDataSource {
   @override
   Future<Map<String, dynamic>> buyOrRentVehicle(
       Map<String, dynamic> vehicleBuyRentRequest) async {
+    logE('vehicleBuyRentRequest: $vehicleBuyRentRequest');
     try {
       final response = await supabaseClient
           .from('vehicle_requests')

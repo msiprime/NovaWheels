@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nova_wheels/features/shimmers/vehicle_details_shimmer.dart';
-import 'package:nova_wheels/features/vehicle/presentation/vehicle_details/cubit/vehicle_details_cubit.dart';
+import 'package:nova_wheels/features/vehicle/presentation/vehicle_details/cubit/vehicle_details_cubit/vehicle_details_cubit.dart';
 
 /// Shimmer loading widget
 /// When the vehicle details are loading

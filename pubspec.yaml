@@ -75,6 +75,8 @@ dependencies:
   patrol: ^3.13.1
   rxdart: ^0.28.0
   font_awesome_flutter: ^10.8.0
+  syncfusion_flutter_datagrid: ^28.1.33
+  syncfusion_flutter_datepicker: ^28.1.33
 
 dev_dependencies:
   integration_test:

@@ -25,7 +25,8 @@ class FetchVehicleBloc extends Bloc<FetchVehicleEvent, FetchVehicleState> {
   })  : _streamOfStoreVehicleUsecase = streamOfStoreVehiclesUsecase,
         super(FetchVehicleInitial()) {
     on<FetchVehicleEvent>(_onAllVehiclesFetched, transformer: droppable());
-    on<VehicleByStoreFetched>(_onVehicleByStoreFetched);
+    on<VehicleByStoreFetched>(_onVehicleByStoreFetched,
+        transformer: restartable());
     on<StreamOfVehicleByStoreFetched>(
       _onStreamOfVehicleByStoreFetched,
       transformer: droppable(),
