@@ -55,4 +55,9 @@ abstract interface class StoreRepo {
     required String storeId,
     required String requestId,
   });
+
+  Future<Either<Failure, VehicleBuyRentRequestEntity>>
+      vehicleStatusFromRequest({
+    required String vehicleId,
+  });
 }

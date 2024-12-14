@@ -201,9 +201,7 @@ class StoreDataSourceImpl implements StoreDataSource {
     required String requestId,
     required String status,
   }) async {
-    logE('requestId: $requestId, status: $status');
     try {
-      logE('idk what the fuck is going on');
       final response = await supabaseClient
           .from('vehicle_requests')
           .update({'status': status})
@@ -240,6 +238,28 @@ class StoreDataSourceImpl implements StoreDataSource {
       }
 
       return Right(response);
+    } on PostgrestException catch (e) {
+      return Left(ServerFailure(e.message));
+    } on Exception catch (e) {
+      return Left(ServerFailure(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, Map<String, dynamic>>> vehicleStatusFromRequest({
+    required String vehicleId,
+  }) async {
+    try {
+      final response = await supabaseClient
+          .from('vehicle_requests')
+          .select()
+          .eq('vehicle_id', vehicleId);
+
+      if (response.isEmpty) {
+        return Left(ServerFailure('Server Error Found!'));
+      }
+
+      return Right(response.first);
     } on PostgrestException catch (e) {
       return Left(ServerFailure(e.message));
     } on Exception catch (e) {

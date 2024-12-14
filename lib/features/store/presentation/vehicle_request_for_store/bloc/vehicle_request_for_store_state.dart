@@ -13,6 +13,13 @@ final class VehicleRequestForStoreSuccess extends VehicleRequestForStoreState {
   VehicleRequestForStoreSuccess(this.requests);
 }
 
+final class VehicleRequestDetailsByVehicleIdSuccess
+    extends VehicleRequestForStoreState {
+  final VehicleBuyRentRequestEntity requests;
+
+  VehicleRequestDetailsByVehicleIdSuccess(this.requests);
+}
+
 final class VehicleRequestForStoreError extends VehicleRequestForStoreState {
   final String errorMessage;
 

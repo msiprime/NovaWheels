@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:nova_wheels/features/store/domain/entities/store_entity.dart';
-import 'package:nova_wheels/features/store/shared/widget/small_advertisement_card.dart';
 import 'package:nova_wheels/features/vehicle/data/datasources/vehicle_datasource_impl.dart';
 import 'package:nova_wheels/features/vehicle/data/repositories/vehicle_repo_impl.dart';
 import 'package:nova_wheels/features/vehicle/domain/entities/input/vehicle_reponse_entity.dart';
@@ -13,6 +12,7 @@ import 'package:nova_wheels/features/vehicle/domain/use_cases/store_vehicle_usec
 import 'package:nova_wheels/features/vehicle/domain/use_cases/stream_of_store_vehicles.dart';
 import 'package:nova_wheels/features/vehicle/domain/use_cases/vehicle_usecase.dart';
 import 'package:nova_wheels/features/vehicle/presentation/fetch_vehicle_post/bloc/fetch_vehicle_bloc.dart';
+import 'package:nova_wheels/features/vehicle/presentation/fetch_vehicle_post/view/all_public_vehicle_screen.dart';
 import 'package:nova_wheels/features/vehicle/presentation/vehicle_details/view/vehicle_details_page.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -110,13 +110,8 @@ class _VehiclesByStoreIdViewState extends State<VehiclesByStoreIdView> {
                             },
                           );
                         },
-                        child: SmallAdvertisementCard(
-                          title: vehicle.title,
-                          coverPhoto: (vehicle.images.isNotEmpty == true)
-                              ? vehicle.images.first
-                              : '',
-                          isForSale: vehicle.isForSale,
-                          salePrice: vehicle.salePrice,
+                        child: SmallAdvertisementCard2(
+                          vehicle: vehicle,
                         ),
                       );
                     },
