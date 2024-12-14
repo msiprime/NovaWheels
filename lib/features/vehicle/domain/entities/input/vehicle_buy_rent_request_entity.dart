@@ -1,11 +1,13 @@
-class VehicleBuyRentRequestEntity {
+import 'package:equatable/equatable.dart';
+
+class VehicleBuyRentRequestEntity extends Equatable {
   final String? id;
   final String vehicleId;
   final String userId;
   final String storeId;
   final String requestType;
-  final String? startDate; // Start date for rent requests
-  final String? endDate; // End date for rent requests
+  final String? startDate;
+  final String? endDate;
   final String mobileNumber;
   final String email;
   final String? secondMobileNumber;
@@ -13,7 +15,7 @@ class VehicleBuyRentRequestEntity {
   final String status;
   final String? additionalDetails;
 
-  VehicleBuyRentRequestEntity({
+  const VehicleBuyRentRequestEntity({
     this.id,
     required this.vehicleId,
     required this.userId,
@@ -64,4 +66,21 @@ class VehicleBuyRentRequestEntity {
       additionalDetails: map['additional_details'],
     );
   }
+
+  @override
+  List<Object?> get props => [
+        id,
+        vehicleId,
+        userId,
+        storeId,
+        requestType,
+        startDate,
+        endDate,
+        mobileNumber,
+        email,
+        secondMobileNumber,
+        requestDate,
+        status,
+        additionalDetails,
+      ];
 }

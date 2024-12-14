@@ -213,4 +213,23 @@ class StoreRepoImpl implements StoreRepo {
       },
     );
   }
+
+  @override
+  Future<Either<Failure, VehicleBuyRentRequestEntity>>
+      vehicleStatusFromRequest({
+    required String vehicleId,
+  }) async {
+    final response =
+        await storeDataSource.vehicleStatusFromRequest(vehicleId: vehicleId);
+
+    return response.fold(
+      (failure) => Left(failure),
+      (listMapResponse) {
+        final VehicleBuyRentRequestEntity vehicleStatusRequest =
+            VehicleBuyRentRequestModel.fromMap(listMapResponse).toEntity();
+
+        return Right(vehicleStatusRequest);
+      },
+    );
+  }
 }

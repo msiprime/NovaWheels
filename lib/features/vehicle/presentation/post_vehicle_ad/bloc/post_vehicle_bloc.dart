@@ -25,7 +25,7 @@ class PostVehicleBloc extends Bloc<PostVehicleEvent, PostVehicleState> {
     VehiclePostRequested event,
     Emitter<PostVehicleState> emit,
   ) async {
-    // emit(PostVehicleLoading());
+    emit(PostVehicleLoading());
     try {
       final result = await _postVehicleUseCase(event.vehicleEntity);
       result.fold(

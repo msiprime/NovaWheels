@@ -50,4 +50,8 @@ abstract interface class StoreDataSource {
     required String requestId,
     required String storeId,
   });
+
+  Future<Either<Failure, Map<String, dynamic>>> vehicleStatusFromRequest({
+    required String vehicleId,
+  });
 }

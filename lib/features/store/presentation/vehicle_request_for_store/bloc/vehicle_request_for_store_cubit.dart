@@ -11,6 +11,20 @@ class VehicleRequestForStoreCubit extends Cubit<VehicleRequestForStoreState> {
   VehicleRequestForStoreCubit(this.store)
       : super(VehicleRequestForStoreInitial());
 
+  Future<void> fetchStatusForVehicle({required String vehicleId}) async {
+    emit(VehicleRequestForStoreLoading());
+    try {
+      final requests =
+          await store.vehicleStatusFromRequest(vehicleId: vehicleId);
+      requests.fold(
+        (l) => emit(VehicleRequestForStoreError(l.message)),
+        (r) => emit(VehicleRequestDetailsByVehicleIdSuccess(r)),
+      );
+    } catch (e) {
+      emit(VehicleRequestForStoreError(e.toString()));
+    }
+  }
+
   Future<void> fetchRequests(String storeId) async {
     emit(VehicleRequestForStoreLoading());
     try {
