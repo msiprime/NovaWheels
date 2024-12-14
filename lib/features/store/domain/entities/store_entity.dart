@@ -34,4 +34,12 @@ class StoreEntity {
     this.coverImage,
     this.profilePicture,
   });
+
+  bool get hasSocialLinks {
+    return website != null ||
+        email != null ||
+        instagram != null ||
+        facebook != null ||
+        twitter != null;
+  }
 }

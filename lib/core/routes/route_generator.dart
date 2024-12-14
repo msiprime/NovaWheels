@@ -17,11 +17,11 @@ import 'package:nova_wheels/features/sign_up/presentation/pages/sign_up_screen.d
 import 'package:nova_wheels/features/sign_up/presentation/widgets/otp_verification_widget.dart';
 import 'package:nova_wheels/features/store/domain/entities/store_entity.dart';
 import 'package:nova_wheels/features/store/presentation/public/public_store/view/public_store_screen.dart';
+import 'package:nova_wheels/features/store/presentation/public/public_store/widget/public_store_details_view.dart';
 import 'package:nova_wheels/features/store/presentation/user/user_store_create/view/create_store_screen.dart';
 import 'package:nova_wheels/features/store/presentation/user/user_store_fetch/view/user_stores_screen.dart';
 import 'package:nova_wheels/features/store/presentation/user/user_store_fetch/widget/user_store_details_widget.dart';
 import 'package:nova_wheels/features/store/presentation/user/user_store_update/view/user_store_update_page.dart';
-import 'package:nova_wheels/features/store/shared/widget/general_store_details_widget.dart';
 import 'package:nova_wheels/features/vehicle/domain/enum/vehicle_request_type_enum.dart';
 import 'package:nova_wheels/features/vehicle/presentation/vehicle_buy_rent_request/view/vehicle_buy_request_form.dart';
 import 'package:nova_wheels/features/vehicle/presentation/vehicle_details/view/vehicle_details_page.dart';
