@@ -7,6 +7,7 @@ import 'package:nova_wheels/features/store/domain/params/store_creation_params.d
 import 'package:nova_wheels/features/store/domain/repositories/store_repo.dart';
 import 'package:nova_wheels/features/vehicle/data/models/request/vehicle_buy_rent_request_model.dart';
 import 'package:nova_wheels/features/vehicle/domain/entities/input/vehicle_buy_rent_request_entity.dart';
+import 'package:shared/shared.dart';
 
 class StoreRepoImpl implements StoreRepo {
   final StoreDataSource storeDataSource;
@@ -126,27 +127,6 @@ class StoreRepoImpl implements StoreRepo {
   }
 
   @override
-  Future<Either<Failure, List<VehicleBuyRentRequestEntity>>>
-      vehicleRequestByStore({
-    required String storeId,
-  }) async {
-    final response =
-        await storeDataSource.vehicleRequestByStore(storeId: storeId);
-
-    return response.fold(
-      (failure) => Left(failure),
-      (listMapResponse) {
-        final List<VehicleBuyRentRequestEntity> listOfVehicleRequest =
-            listMapResponse
-                .map(
-                    (map) => VehicleBuyRentRequestModel.fromMap(map).toEntity())
-                .toList();
-        return Right(listOfVehicleRequest);
-      },
-    );
-  }
-
-  @override
   Future<Either<Failure, List<StoreEntity>>> fetchStoreById({
     required String storeId,
   }) async {
@@ -164,7 +144,30 @@ class StoreRepoImpl implements StoreRepo {
   }
 
   @override
-  Future<Either<Failure, VehicleBuyRentRequestEntity>> updateRequestStatus({
+  Future<Either<Failure, List<VehicleBuyRentRequestEntity>>>
+      vehicleRequestByStore({
+    required String storeId,
+  }) async {
+    final response =
+        await storeDataSource.vehicleRequestByStore(storeId: storeId);
+
+    return response.fold(
+      (failure) => Left(failure),
+      (listMapResponse) {
+        final List<VehicleBuyRentRequestEntity> listOfVehicleRequest =
+            listMapResponse
+                .map(
+                  (map) => VehicleBuyRentRequestModel.fromMap(map).toEntity(),
+                )
+                .toList();
+        return Right(listOfVehicleRequest);
+      },
+    );
+  }
+
+  @override
+  Future<Either<Failure, List<VehicleBuyRentRequestEntity>>>
+      updateRequestStatus({
     required String requestId,
     required String status,
   }) async {
@@ -175,9 +178,38 @@ class StoreRepoImpl implements StoreRepo {
     return response.fold(
       (failure) => Left(failure),
       (listMapResponse) {
-        final VehicleBuyRentRequestEntity updatedVehicleRequest =
-            VehicleBuyRentRequestModel.fromMap(listMapResponse).toEntity();
+        logE('listMapResponse: $listMapResponse');
+        final List<VehicleBuyRentRequestEntity> updatedVehicleRequest =
+            listMapResponse
+                .map((e) => VehicleBuyRentRequestModel.fromMap(e).toEntity())
+                .toList();
+
         return Right(updatedVehicleRequest);
+      },
+    );
+  }
+
+  @override
+  Future<Either<Failure, List<VehicleBuyRentRequestEntity>>>
+      deleteVehicleRequestFromStore({
+    required String storeId,
+    required String requestId,
+  }) async {
+    final response = await storeDataSource.deleteVehicleRequestFromStore(
+      storeId: storeId,
+      requestId: requestId,
+    );
+
+    return response.fold(
+      (failure) => Left(failure),
+      (listMapResponse) {
+        final List<VehicleBuyRentRequestEntity> listOfVehicleRequest =
+            listMapResponse
+                .map(
+                  (map) => VehicleBuyRentRequestModel.fromMap(map).toEntity(),
+                )
+                .toList();
+        return Right(listOfVehicleRequest);
       },
     );
   }

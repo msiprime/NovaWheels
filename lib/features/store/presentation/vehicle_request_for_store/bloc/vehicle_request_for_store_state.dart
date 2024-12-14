@@ -18,3 +18,22 @@ final class VehicleRequestForStoreError extends VehicleRequestForStoreState {
 
   VehicleRequestForStoreError(this.errorMessage);
 }
+
+/// Update status
+
+// final class VehicleRequestUpdateStatusLoading
+//     extends VehicleRequestForStoreState {}
+
+final class VehicleRequestUpdateStatusSuccess
+    extends VehicleRequestForStoreState {
+  final List<VehicleBuyRentRequestEntity> requests;
+
+  VehicleRequestUpdateStatusSuccess(this.requests);
+}
+
+// final class VehicleRequestUpdateStatusError
+//     extends VehicleRequestForStoreState {
+//   final String errorMessage;
+//
+//   VehicleRequestUpdateStatusError(this.errorMessage);
+// }

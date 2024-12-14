@@ -46,4 +46,18 @@ class ProfileRepositoryImp implements ProfileRepository {
       return Left(Failure(e.toString()));
     }
   }
+
+  @override
+  Future<Either<Failure, ProfileEntity>> getProfileDataById({
+    required String profileId,
+  }) async {
+    try {
+      final profileData =
+          await profileDataSource.fetchProfileById(profileId: profileId);
+
+      return Right(profileData.toEntity());
+    } catch (e) {
+      return Left(Failure(e.toString()));
+    }
+  }
 }

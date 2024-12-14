@@ -43,8 +43,16 @@ abstract interface class StoreRepo {
   });
 
   /// Update Request Status
-  Future<Either<Failure, VehicleBuyRentRequestEntity>> updateRequestStatus({
+  Future<Either<Failure, List<VehicleBuyRentRequestEntity>>>
+      updateRequestStatus({
     required String requestId,
     required String status,
+  });
+
+  /// Fetch Vehicle Request by Store
+  Future<Either<Failure, List<VehicleBuyRentRequestEntity>>>
+      deleteVehicleRequestFromStore({
+    required String storeId,
+    required String requestId,
   });
 }

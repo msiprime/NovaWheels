@@ -23,4 +23,46 @@ class VehicleRequestForStoreCubit extends Cubit<VehicleRequestForStoreState> {
       emit(VehicleRequestForStoreError(e.toString()));
     }
   }
+
+  Future<void> deleteRequest({
+    required String storeId,
+    required String requestId,
+  }) async {
+    emit(VehicleRequestForStoreLoading());
+    try {
+      final requests = await store.deleteVehicleRequestFromStore(
+        storeId: storeId,
+        requestId: requestId,
+      );
+      requests.fold(
+        (l) => emit(VehicleRequestForStoreError(l.message)),
+        (r) {
+          fetchRequests(storeId);
+        },
+      );
+    } catch (e) {
+      emit(VehicleRequestForStoreError(e.toString()));
+    }
+  }
+
+  Future<void> updateRequestStatus({
+    required String requestId,
+    required String status,
+  }) async {
+    emit(VehicleRequestForStoreLoading());
+    try {
+      final updatedRequest = await store.updateRequestStatus(
+        requestId: requestId,
+        status: status,
+      );
+      updatedRequest.fold(
+        (l) => emit(VehicleRequestForStoreError(l.message)),
+        // todo: fix the shady code
+        // todo: fix the update not rebuilding the ui
+        (r) => emit(VehicleRequestUpdateStatusSuccess(r)),
+      );
+    } catch (e) {
+      emit(VehicleRequestForStoreError(e.toString()));
+    }
+  }
 }

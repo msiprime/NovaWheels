@@ -6,4 +6,9 @@ extension DateTimeEx on DateTime {
   String get mDY {
     return DateFormat('MMMM d, yyyy').format(this);
   }
+
+  /// convert to December 14, 2021 12:00 AM
+  String get mDYhms {
+    return DateFormat('MMMM d, yyyy hh:mm a').format(this);
+  }
 }

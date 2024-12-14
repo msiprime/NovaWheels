@@ -40,7 +40,7 @@ class UserStoreDetails extends StatelessWidget {
                   // Tab 1: Advertisements
                   StoreAdvertisementsTab(store: store),
                   // Tab 2: Statistics
-                  StoreStatisticsTab(store: store),
+                  StoreDashboardTab(store: store),
                   // Tab 3: Store Details
                   StoreDetailsTab(store: store),
                 ],
@@ -58,7 +58,7 @@ class UserStoreDetails extends StatelessWidget {
       indicatorColor: Colors.blue,
       tabs: [
         Tab(text: 'Advertisements'),
-        Tab(text: 'Statistics'),
+        Tab(text: 'Dashboard'),
         Tab(text: 'Store Details'),
       ],
     );
