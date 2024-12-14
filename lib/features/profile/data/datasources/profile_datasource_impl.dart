@@ -91,4 +91,25 @@ class ProfileDataSourceImpl implements ProfileDataSource {
       throw Exception('Failed to update profile oh shit: ${e.toString()}');
     }
   }
+
+  @override
+  Future<ProfileModel> fetchProfileById({
+    required String profileId,
+  }) async {
+    try {
+      final response = await supabaseClient
+          .from('profiles')
+          .select()
+          .eq('id', profileId)
+          .single();
+
+      if (response.isEmpty) {
+        throw Exception('Failed to fetch profile: $response');
+      }
+
+      return ProfileModel.fromJson(response);
+    } catch (e) {
+      throw Exception('Failed to fetch profile: $e');
+    }
+  }
 }

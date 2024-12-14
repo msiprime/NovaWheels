@@ -3,6 +3,7 @@ import 'package:nova_wheels/core/base_component/failure/failures.dart';
 import 'package:nova_wheels/features/store/data/data_sources/store_datasource.dart';
 import 'package:nova_wheels/features/store/domain/params/store_creation_params.dart';
 import 'package:nova_wheels/shared/utils/logger.dart';
+import 'package:shared/shared.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class StoreDataSourceImpl implements StoreDataSource {
@@ -180,8 +181,9 @@ class StoreDataSourceImpl implements StoreDataSource {
   }
 
   @override
-  Future<Either<Failure, List<Map<String, dynamic>>>> fetchStoreById(
-      {required String storeId}) async {
+  Future<Either<Failure, List<Map<String, dynamic>>>> fetchStoreById({
+    required String storeId,
+  }) async {
     try {
       final response =
           await supabaseClient.from('stores').select().eq('id', storeId);
@@ -199,17 +201,46 @@ class StoreDataSourceImpl implements StoreDataSource {
   }
 
   @override
-  Future<Either<Failure, Map<String, dynamic>>> updateRequestStatus({
+  Future<Either<Failure, List<Map<String, dynamic>>>> updateRequestStatus({
     required String requestId,
     required String status,
   }) async {
+    logE('requestId: $requestId, status: $status');
     try {
+      logE('idk what the fuck is going on');
       final response = await supabaseClient
           .from('vehicle_requests')
-          .update({'status': status}).eq('id', requestId);
+          .update({'status': status})
+          .eq('id', requestId)
+          .select();
+      return Right(response);
+    } on PostgrestException catch (e) {
+      logE(e.details);
+      logE(e.message);
+      logE(e.code);
+      logE(e.hint);
+      logE(e.toJson());
+      return Left(ServerFailure(e.message));
+    } on Exception catch (e) {
+      return Left(ServerFailure(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<Map<String, dynamic>>>>
+      deleteVehicleRequestFromStore({
+    required String requestId,
+    required String storeId,
+  }) async {
+    try {
+      final response =
+          await supabaseClient.from('vehicle_requests').delete().match({
+        'id': requestId,
+        'store_id': storeId,
+      }).select();
 
       if (response.isEmpty) {
-        return Left(ServerFailure('No Store Found!'));
+        return Left(ServerFailure('Server Error Found!'));
       }
 
       return Right(response);

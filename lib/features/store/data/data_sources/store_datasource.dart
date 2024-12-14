@@ -39,8 +39,15 @@ abstract interface class StoreDataSource {
   });
 
   /// Update Request Status
-  Future<Either<Failure, Map<String, dynamic>>> updateRequestStatus({
+  Future<Either<Failure, List<Map<String, dynamic>>>> updateRequestStatus({
     required String requestId,
     required String status,
+  });
+
+  /// delete Request Status
+  Future<Either<Failure, List<Map<String, dynamic>>>>
+      deleteVehicleRequestFromStore({
+    required String requestId,
+    required String storeId,
   });
 }

@@ -10,7 +10,7 @@ class UpdateVehicleBuyRentRequestUsecase {
     required StoreRepo storeRepository,
   }) : _storeRepository = storeRepository;
 
-  Future<Either<Failure, VehicleBuyRentRequestEntity>> call({
+  Future<Either<Failure, List<VehicleBuyRentRequestEntity>>> call({
     required String requestId,
     required String status,
   }) async {
