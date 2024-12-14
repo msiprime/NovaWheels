@@ -7,9 +7,11 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 
 class RequesterProfileWidget extends StatelessWidget {
   final String profileId;
+  final String text;
 
   const RequesterProfileWidget({
     super.key,
+    this.text = "Requested By:",
     required this.profileId,
   });
 
@@ -23,15 +25,20 @@ class RequesterProfileWidget extends StatelessWidget {
           ),
         ),
       )..fetchProfileDataById(id: profileId),
-      child: RequesterProfileView(),
+      child: RequesterProfileView(
+        text: text,
+      ),
     );
   }
 }
 
 class RequesterProfileView extends StatelessWidget {
   const RequesterProfileView({
+    required this.text,
     super.key,
   });
+
+  final String text;
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +61,7 @@ class RequesterProfileView extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "Requested By:",
+                text,
                 style: TextStyle(
                   fontWeight: FontWeight.w600,
                   fontSize: 14,

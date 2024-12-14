@@ -55,7 +55,6 @@ class UserStoresView extends StatelessWidget {
                     UserStoreFetchInitial() =>
                       const Center(child: Text('Initializing...')),
                     UserStoreFetchLoading() =>
-                      //TODO: create shimmer loading here
                       const Center(child: CircularProgressIndicator()),
                     UserStoreFetchSuccess storeSuccess => Expanded(
                         child: ListView.separated(
