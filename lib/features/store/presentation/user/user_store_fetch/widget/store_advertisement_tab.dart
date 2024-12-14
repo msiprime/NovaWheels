@@ -46,9 +46,6 @@ class StoreAdvertisementsTab extends StatelessWidget {
         )..add(
             StreamOfVehicleByStoreFetched(storeId: store.id),
           ),
-        //..add(
-        //             VehicleByStoreFetched(storeId: store.id),
-        //           ),
         child: VehiclesByStoreIdView(storeId: store.id),
       ),
     );

@@ -5,6 +5,7 @@ import 'package:flutter/foundation.dart' show immutable;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:nova_wheels/core/datasource/core_datasource.dart';
+import 'package:shared/shared.dart';
 
 part 'image_picker_event.dart';
 part 'image_picker_state.dart';
@@ -79,6 +80,7 @@ class ImagePickerBloc extends Bloc<ImagePickerEvent, ImagePickerState> {
         if (imageUrl.isNotEmpty) {
           imageUrls.add(imageUrl);
         }
+        logE(imageUrls);
       }
       emit(MultipleImagesUploadedToSupabase(imageUrls));
     } catch (e) {
@@ -91,12 +93,6 @@ class ImagePickerBloc extends Bloc<ImagePickerEvent, ImagePickerState> {
     List<String?> filePaths = globalFilePaths ?? [];
 
     emit(RemovingImageFromSupabase());
-    // for (final filePath in filePaths) {
-    //   await CoreDataSource.deleteImageFromSupabase(
-    //     filePath: filePath ?? '',
-    //     imageType: imageType,
-    //   );
-    // }
 
     await CoreDataSource.deleteBatchImagesFromSupabase(
       filePaths: filePaths.map((e) => e ?? '').toList(),

@@ -14,7 +14,7 @@ class VehicleRequestEntity {
   final String? transmission;
   final String status;
   final String? rentalStatus;
-  final List<String>? images;
+  final List<String?>? images;
   final String? location;
 
   VehicleRequestEntity({

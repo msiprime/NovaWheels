@@ -2,7 +2,6 @@ import 'package:dartz/dartz.dart';
 import 'package:nova_wheels/core/base_component/failure/failures.dart';
 import 'package:nova_wheels/features/store/data/data_sources/store_datasource.dart';
 import 'package:nova_wheels/features/store/domain/params/store_creation_params.dart';
-import 'package:nova_wheels/shared/utils/logger.dart';
 import 'package:shared/shared.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -55,9 +54,6 @@ class StoreDataSourceImpl implements StoreDataSource {
           .from('stores')
           .select()
           .eq('owner_id', supabaseClient.auth.currentUser!.id);
-
-      Log.debug('response from datasource {user stores}: $response');
-
       if (response.isEmpty) {
         return Left(ServerFailure('No Store Found!'));
       }
