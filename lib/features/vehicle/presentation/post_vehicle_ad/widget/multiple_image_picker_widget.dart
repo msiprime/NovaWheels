@@ -87,6 +87,7 @@ class _GeneralImagePickerState extends State<GeneralImagePicker> {
 
   @override
   void dispose() {
+    context.read<ImagePickerBloc>().add(ResetImagePickerEvent());
     vehicleImageBloc.close();
     super.dispose();
   }

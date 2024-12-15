@@ -20,10 +20,17 @@ class ImagePickerBloc extends Bloc<ImagePickerEvent, ImagePickerState> {
     on<MultiplePickImageEvent>(_onMultiplePickImage);
     on<RemoveImageEvent>(_onRemoveImage);
     on<RemoveMultipleImagesEvent>(_onRemoveMultipleImages);
+    on<ResetImagePickerEvent>(_onResetImagePicker);
   }
 
   String? globalFilePath;
   List<String?>? globalFilePaths;
+
+  FutureOr<void> _onResetImagePicker(ResetImagePickerEvent event, emit) {
+    globalFilePath = null;
+    globalFilePaths = [];
+    emit(ImagePickerInitial());
+  }
 
   FutureOr<void> _onPickImage(PickImageEvent event, emit) async {
     emit(ImagePickerLoading());
