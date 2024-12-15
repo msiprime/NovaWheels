@@ -1,7 +1,6 @@
 import 'package:nova_wheels/core/base_component/failure/exceptions.dart';
 import 'package:nova_wheels/features/profile/data/datasources/profile_datasource.dart';
 import 'package:nova_wheels/features/profile/data/models/profile_model.dart';
-import 'package:nova_wheels/shared/local_storage/cache_service.dart';
 import 'package:nova_wheels/shared/utils/logger.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -20,11 +19,11 @@ class ProfileDataSourceImpl implements ProfileDataSource {
       throw Exception('User is not authenticated');
     }
 
-    final fcmToken = await CacheService.instance.retrieveFcmToken();
+    // final fcmToken = await CacheService.instance.retrieveFcmToken();
     try {
       await supabaseClient
           .from('profiles')
-          .update({'fcm_token': fcmToken})
+          .update({'fcm_token': ''})
           .eq('id', currentUser.id)
           .single();
     } catch (e) {

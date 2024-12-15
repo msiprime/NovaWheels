@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:nova_wheels/config/sl/injection_container.dart';
 import 'package:nova_wheels/core/base_component/base/base_widgets/app_bar.dart';
 import 'package:nova_wheels/core/base_component/base/base_widgets/app_primary_button.dart';
+import 'package:nova_wheels/core/base_component/image_picker_bloc/image_picker_bloc.dart';
 import 'package:nova_wheels/core/routes/routes.dart';
 import 'package:nova_wheels/features/vehicle/domain/entities/input/vehicle_post_input.dart';
 import 'package:nova_wheels/features/vehicle/presentation/post_vehicle_ad/bloc/post_vehicle_bloc.dart';
@@ -26,6 +27,27 @@ class PostVehicleAdScreen extends StatelessWidget {
       create: (context) => sl.get<PostVehicleBloc>(),
       child: AddVehicleView(),
     );
+  }
+}
+
+class BridgetBetweenStatefulShell extends StatelessWidget {
+  const BridgetBetweenStatefulShell({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        // maintainState: false,
+        fullscreenDialog: true,
+        // allowSnapshotting: true,
+        barrierDismissible: true,
+        builder: (context) {
+          return AddVehicleView();
+        },
+      ),
+    );
+    return const Placeholder();
   }
 }
 
@@ -74,8 +96,10 @@ class _AddVehicleViewState extends State<AddVehicleView> {
             listener: (context, state) {
               if (state is PostVehicleError) {
                 context.showSnackBar(state.message);
-              } else if (state is PostVehicleLoaded) {
+              }
+              if (state is PostVehicleLoaded) {
                 context.showSnackBar('Vehicle posted successfully');
+                context.read<ImagePickerBloc>().add(ResetImagePickerEvent());
                 context.pushReplacementNamed(Routes.home);
               }
             },
@@ -146,7 +170,6 @@ class _AddVehicleViewState extends State<AddVehicleView> {
                         context.showSnackBar('Please select a store');
                         return;
                       }
-                      // Determine if it's for rent or for sale
                       bool isForRent =
                           vehicleTypeController.text == VehicleType.rent.name;
                       bool isForSale =

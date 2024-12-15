@@ -22,3 +22,5 @@ final class MultiplePickImageEvent extends ImagePickerEvent {
 final class RemoveImageEvent extends ImagePickerEvent {}
 
 final class RemoveMultipleImagesEvent extends ImagePickerEvent {}
+
+final class ResetImagePickerEvent extends ImagePickerEvent {}
